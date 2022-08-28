@@ -33,7 +33,7 @@ function Header() {
             setIsMenu(!isMenu);
             // isMobileMenu(false);
         }
-        console.log(user);
+        // console.log(user);
     };
 
     //logout function
@@ -173,12 +173,15 @@ function Header() {
                             exit={{ opacity: 0, scale: 0.6 }}
                             className="w-40 bg-primary shadow-xl rounded-lg flex flex-col absolute top-12 right-0 "
                         >
-                            <p
-                                className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 
+                            <Link to={'/profile/' + user.uid}>
+                                <p
+                                    className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 
                                                 transition-all duration-100 ease-in-out text-textColor text-base"
-                            >
-                                View Profile <FaUserEdit />
-                            </p>
+                                >
+                                    View Profile <FaUserEdit />
+                                </p>
+                            </Link>
+
                             {user && user.email === ROOT_USER_EMAIL && (
                                 <Link to={'/createItem'}>
                                     <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
