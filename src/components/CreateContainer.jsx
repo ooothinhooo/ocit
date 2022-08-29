@@ -9,6 +9,7 @@ import { saveItem, getAllFoodItems } from '../utils/firebaseFunctions';
 // import { getAllFoodItems } from './utils/firebaseFunctions';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
+import ListProducts from './ListProducts';
 
 function CreateContainer() {
     const [title, setTitle] = useState('');
@@ -20,7 +21,7 @@ function CreateContainer() {
     const [alertStatus, setAlertStatus] = useState('danger');
     const [msg, setMsg] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [{}, dispatch] = useStateValue();
+    const [{ foodItems }, dispatch] = useStateValue();
     const uploadImage = (e) => {
         setIsLoading(true);
         const imageFile = e.target.files[0];
@@ -132,7 +133,7 @@ function CreateContainer() {
         });
     };
     return (
-        <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="w-full h-screen flex items-center justify-center">
             <div className="w-[90%] md:w-[75%] border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                 {!fields && (
                     <motion.p

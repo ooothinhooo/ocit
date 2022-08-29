@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingBasket, FaUserEdit } from 'react-icons/fa';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { GrAddCircle } from 'react-icons/gr';
+import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../firebase.config.js';
@@ -72,7 +73,7 @@ function Header() {
                             Home
                         </li>
                         <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-                            Menu
+                            <a href="#menu">Menu</a>
                         </li>
                         <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
                             About Us
@@ -108,7 +109,7 @@ function Header() {
                             >
                                 <Link to={'/profile/' + user.uid}>
                                     <p
-                                        className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 
+                                        className="px-4 py-2 flex items-center gap-3 cursor-pointer bg-lightBlue rounded-md m-1 hover:bg-slate-100 
                                 transition-all duration-100 ease-in-out text-textColor text-base"
                                         onClick={() => setIsMenu(false)}
                                     >
@@ -120,7 +121,7 @@ function Header() {
                                 {user && user.email === ROOT_USER_EMAIL && (
                                     <Link to={'/createItem'}>
                                         <p
-                                            className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 
+                                            className="px-4 py-2 flex items-center gap-3 cursor-pointer  bg-lightBlue rounded-md  m-1 hover:bg-slate-100 
                                             transition-all duration-100 ease-in-out text-textColor text-base"
                                             onClick={() => setIsMenu(false)}
                                         >
@@ -128,9 +129,16 @@ function Header() {
                                         </p>
                                     </Link>
                                 )}
-
+                                {user && user.email === ROOT_USER_EMAIL && (
+                                    <Link to={'/viewproduct'}>
+                                        <p className="px-4 py-2 flex items-center gap-3 cursor-pointer bg-lightBlue rounded-md  m-1 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
+                                            Product List
+                                            <MdOutlineProductionQuantityLimits />
+                                        </p>
+                                    </Link>
+                                )}
                                 <p
-                                    className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 
+                                    className="px-4 py-2 flex items-center gap-3 bg-cardOverlay rounded-md cursor-pointer hover:bg-slate-100 
                                                 transition-all duration-100 ease-in-out text-textColor text-base"
                                     onClick={logout}
                                 >
@@ -186,6 +194,14 @@ function Header() {
                                 <Link to={'/createItem'}>
                                     <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
                                         New Item <GrAddCircle />
+                                    </p>
+                                </Link>
+                            )}
+                            {user && user.email === ROOT_USER_EMAIL && (
+                                <Link to={'/viewproduct'}>
+                                    <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
+                                        View Product List
+                                        <MdOutlineProductionQuantityLimits />
                                     </p>
                                 </Link>
                             )}

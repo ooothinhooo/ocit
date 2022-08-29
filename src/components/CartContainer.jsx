@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { AiOutlineClear } from 'react-icons/ai';
@@ -90,14 +91,16 @@ function CartContainer() {
                             <p className="text-gray-400 text-xl font-semibold">$ {TotalCartItem()}</p>
                         </div>
                         {user ? (
-                            <motion.button
-                                whileTap={{ scale: 0.75 }}
-                                type="button"
-                                className="w-full p-2 rounded-full bg-orange-400 text-gray-50 text-lg my-2 hover:shadow-lg 
+                            <Link to="/contact">
+                                <motion.button
+                                    whileTap={{ scale: 0.75 }}
+                                    type="button"
+                                    className="w-full p-2 rounded-full bg-orange-400 text-gray-50 text-lg my-2 hover:shadow-lg 
                          cursor-pointer"
-                            >
-                                Check Out
-                            </motion.button>
+                                >
+                                    Check Out
+                                </motion.button>
+                            </Link>
                         ) : (
                             <motion.button
                                 whileTap={{ scale: 0.75 }}

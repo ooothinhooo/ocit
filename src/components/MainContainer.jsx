@@ -20,6 +20,10 @@ function MainContainer() {
     return (
         <div className=" w-full h-auto flex flex-col  items-center  justify-center">
             <HomeContainer />
+            <div id="menu">
+                <MenuContainer />
+            </div>
+
             <section className="w-full my-6">
                 <div className="w-full flex items-center justify-between">
                     <p
@@ -31,7 +35,7 @@ function MainContainer() {
                     >
                         Featured Products
                     </p>
-
+                    {/* button <> */}
                     <div className="hidden md:flex gap-3 items-center">
                         <motion.div
                             whileTap={{ scale: 0.75 }}
@@ -57,7 +61,6 @@ function MainContainer() {
                 <RowContainer scrollValue={scrollValue} flag={true} data={foodItems} />
             </section>
             {/* <section className="w-full my-6"></section>  */}
-            <MenuContainer />
 
             {cartShow && <CartContainer />}
 

@@ -2,7 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Header, MainContainer, CreateContainer, UserProfile } from './components';
+import { Header, MainContainer, CreateContainer, UserProfile, ViewProductsList, Contact } from './components';
 import { getAllFoodItems } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
@@ -30,6 +30,8 @@ function App() {
                         <Route path="/*" element={<MainContainer />} />
                         <Route path="/createItem" element={<CreateContainer />} />
                         <Route path="/profile/:uid" element={<UserProfile />} />
+                        <Route path="/viewproduct" element={<ViewProductsList />} />
+                        <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </main>
             </div>

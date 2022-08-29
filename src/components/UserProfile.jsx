@@ -1,78 +1,65 @@
 import React from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
+import { Link } from 'react-router-dom';
+import Footer from './Footer';
+
 function UserProfile() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
     const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
 
     return (
-        <div class="bg-primary block py-10">
-            <div class="max-w-2xl mx-auto">
-                {/* <!--
-            ! ------------------------------------------------------------
-            ! Profile banner and avatar
-            ! ------------------------------------------------------------
-            !--> */}
-                <div class="w-full">
-                    <div class="w-full bg-blue-600 h-48 rounded-t-lg"></div>
-                    <div class="absolute -mt-20 ml-5">
-                        <div class=" h-36 w-40 rounded-lg shadow-md border-b border-primary">
-                            <img src={user.photoURL} alt="" class="h-full w-full" />
-                        </div>
+        <div className="border-b-gray-700">
+            <div className="bg-primary">
+                <div className="rounded-full flex justify-between">
+                    <div className="pl-4">
+                        <h1 className="text-white translate-y-2 font-medium text-xl"> {user.email}</h1>
                     </div>
+                    <p>
+                        <a>
+                            <h4 className="text-white -translate-y-2 pt-5 pr-5">
+                                <p className="font-black">Root: {user.email == ROOT_USER_EMAIL ? 'True' : 'False'}</p>
+                            </h4>
+                        </a>
+                    </p>
                 </div>
+                <hr />
+            </div>
 
-                {/* <!--
-            ! ------------------------------------------------------------
-            ! Profile general information
-            ! ------------------------------------------------------------
-            !--> */}
-                <div class=" rounded-b-lg p-5 pt-20 flex flex-col">
-                    <div class="mb-1 h-5 w-40">
-                        <p>
-                            UserName: <span> {user.displayName}</span>
-                        </p>
-                    </div>
+            <div className="bg-primary">
+                <div className="py-16 bg-primary">
+                    <div className="container m-auto px-6">
+                        <div className="lg:flex justify-between items-center">
+                            <div className="lg:w-6/12 lg:p-0 p-7">
+                                <h1 className="sm:text-5xl text-4xl text-white font-medium leading-tight mb-5 capitalize">
+                                    Hi, {user.displayName}
+                                </h1>
+                                <p className="text-xl text-zinc-200">ID: {user.uid}</p>
+                                <p className="text-xl text-zinc-200">Phone: {user.phoneNumber}</p>
 
-                    <div class="mb-1 h-5 w-46">
-                        <p>
-                            Email: <span> {user.email}</span>
-                        </p>
-                    </div>
-                    <div class="text-sm mt-2 text-black">
-                        <div class="flex flex-row  space-x-1 items-center">
-                            <div class="mb-1 h-5 w-20">Root:</div>
-                            {/* <div class="bg-blue-200 rounded-full h-1 w-1"></div> */}
-                            <div class="mb-1 h-5 w-20">
-                                {user.email === ROOT_USER_EMAIL ? <p>True</p> : <p>False</p>}
+                                <div className="py-5 flex gap-x-4">
+                                    <a className="text-white border px-5 py-2 border-white rounded-lg border-t-2 border-l-2">
+                                        {/* plpal */}
+                                    </a>
+                                    <a className="text-white border px-5 py-2 border-white rounded-lg border-t-2 border-l-2">
+                                        {/* Social Links */}
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="lg:w-4/12 rounded-full scale-100  ">
+                                <img
+                                    className="rounded-full"
+                                    alt="sahil logo"
+                                    width="350"
+                                    height="350"
+                                    src={user.photoURL}
+                                />
                             </div>
                         </div>
                     </div>
-                    {/* 
-                    <div class="pt-8 flex gap-8">
-                        <div class="flex flex-col">
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                            <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-20"></div>
-                        </div>
-                    </div> */}
-                    <div class="py-5 break-all bbcode">
-                        <div class="mb-1 bg-gray-200 border border-gray-300 h-5 w-44"></div>
-                        <div class="mb-1 bg-gray-200 border border-gray-300 w-full h-40"></div>
-                    </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

@@ -23,13 +23,6 @@ const heroData = [
         imageURL:
             'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/Images%2F1661700474511-project_ct178.png.png?alt=media&token=2fe892c2-4dc1-47f8-ae4a-5e7f083e0d2b',
     },
-    {
-        id: 4,
-        title: 'Fish Kebab',
-        decp: 'Fish ',
-        price: '9.25',
-        imageURL: R1,
-    },
 ];
 
 export default heroData;

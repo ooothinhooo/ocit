@@ -9,3 +9,7 @@ export { default as CartContainer } from './CartContainer';
 export { default as CartItem } from './CartItem';
 export { default as UserProfile } from './UserProfile';
 export { default as Footer } from './Footer';
+export { default as ListProducts } from './ListProducts';
+export { default as ViewProductsList } from './ViewProductsList';
+export { default as Contact }from './Contact';
+// export { default as Contact } from './Contact/Contact';

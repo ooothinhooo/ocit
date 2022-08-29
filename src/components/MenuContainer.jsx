@@ -7,7 +7,7 @@ import RowContainer from './RowContainer';
 import { useStateValue } from '../context/StateProvider';
 
 function MenuContainer() {
-    const [filter, setFilter] = useState('beef');
+    const [filter, setFilter] = useState('CT178');
     const [{ foodItems }, dispatch] = useStateValue();
     return (
         <section className="w-full my-6" id="menu">
