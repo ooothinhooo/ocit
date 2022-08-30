@@ -15,7 +15,7 @@ import Logo from '../img/logo.png';
 import Avatar from '../img/avatar.png';
 
 function Header() {
-    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com && baotinit01@gmail.com';
+    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com || baotinit01@gmail.com';
     const firebaseAuth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
