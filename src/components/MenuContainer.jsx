@@ -19,7 +19,11 @@ function MenuContainer() {
                 >
                     Product List
                 </p>
-                <div className="w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none">
+                <div
+                    className="w-full md:flex md:gap-8 mr-2 grid grid-cols-4 items-center justify-start 
+                lg:justify-center
+                 py-6 overflow-x-scroll lg:scrollbar-none"
+                >
                     {categories &&
                         categories.map((category) => (
                             <motion.div
@@ -27,15 +31,19 @@ function MenuContainer() {
                                 onClick={() => setFilter(category.urlParamName)}
                                 key={category?.id}
                                 className={`group  ${filter === category.urlParamName ? 'bg-cardNumBg' : 'bg-card'}
-                             w-24 min-w-[94px] h-28 cursor-pointer 
+                             md:w-24  md:h-28 w-16 h-18 p-2 m-2
+                             cursor-pointer
                              rounded-lg drop-shadow-xl flex flex-col 
                              gap-3 items-center justify-center 
                               hover:bg-cardNumBg `}
                             >
                                 <div
-                                    className={`w-10 h-10 rounded-full
-                                ${filter === category.urlParamName ? 'bg-card' : 'bg-cardNumBg'} group-hover:bg-card 
-                                 flex items-center justify-center`}
+                                    className={`md:w-10 md:h-10 h-5 w-5 rounded-full  
+                                ${filter === category.urlParamName ? 'bg-card' : 'bg-cardNumBg'}
+                                 group-hover:bg-card p-1
+                                 flex items-center justify-center
+                                
+                                 `}
                                 >
                                     <AiFillCode
                                         className={`${

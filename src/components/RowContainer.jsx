@@ -29,22 +29,25 @@ function RowContainer({ flag, data, scrollValue }) {
     return (
         <div
             ref={rowContainer}
-            className={`w-full flex items-center my-12 scroll-smooth ${
-                flag ? 'overflow-x-scroll scrollbar-none' : 'overflow-x-hidden flex-wrap justify-center '
+            className={`w-full flex items-center my-12 scroll-smooth scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 ${
+                flag ? 'overflow-x-scroll overflow-auto ' : 'overflow-x-hidden flex-wrap justify-center '
             }`}
         >
             {data && data.length > 0 ? (
                 data.map((item) => (
                     <div
                         key={item.id}
-                        className="w-300 h-[230px] min-w[300px]
+                        className="w-200 h-250 min-h-[180px] min-w[200px]
                         md:w-340  md:min-w-[240px] 
-                        my-12 h-auto bg-gray-100 p-2 m-2
+                        my-12 md:h-auto bg-gray-100 p-2 m-2
                         flex flex-col items-center justify-between
                         drop-shadow-xl hover:drop-shadow-xl rounded-lg"
                     >
                         <div className="w-full flex items-center justify-between ">
-                            <motion.div whileHover={{ scale: 1.5 }} className="w-40 h-40 drop-shadow-2xl">
+                            <motion.div
+                                whileHover={{ scale: 1.5 }}
+                                className="md:w-40 md:h-40 w-20 h-20 drop-shadow-2xl"
+                            >
                                 <img src={item?.imageURL} alt="" className="w-full h-full object-contain" />
                             </motion.div>
 
@@ -56,8 +59,8 @@ function RowContainer({ flag, data, scrollValue }) {
                                 <MdShoppingBasket className="text-white" />
                             </motion.div>
                         </div>
-                        <div className="w-full flex flex-col items-end justify-end -mt-8">
-                            <p className="text-textColor font-semibold text-base md:text-lg">{item?.title}</p>
+                        <div className="w-full flex flex-col items-end justify-end  -mt-8 ">
+                            <p className="text-textColor font-semibold text-sm md:text-lg">{item?.title}</p>
                             <p className="mt-1 text-sm text-gray-500 ">{item?.calories}</p>
                             <div className=" flex -items-center gap-8">
                                 <p className="text-lg text-headingColor font-semibold">
