@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @font-face {
     font-family: Gumela_Regular;
     src: url('./fonts/Gumela_Regular.otf');
 }
 
 *{
-    font-family: 'Gumela_Regular';
+    /* font-family: 'Gumela_Regular'; */
+    font-family: 'Poppins', sans-serif;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;

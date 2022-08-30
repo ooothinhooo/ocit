@@ -40,7 +40,7 @@ module.exports = {
                 620: '620px',
             },
             colors: {
-                primary: '#3B9AE1',
+                primary: '#F5EDDC',
                 // primary: '#F9F5EB',
                 // gray: '#8492a6',
                 lightBlue: '#21E1E1',
