@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 function UserProfile() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
-    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com || baotinit01@gmail.com';
+    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
 
     return (
         <div className="border-b-gray-700">
