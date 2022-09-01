@@ -6,10 +6,8 @@ import { categories } from '../utils/data';
 import Loader from './Loader';
 import { storage } from '../firebase.config';
 import { saveItem, getAllFoodItems } from '../utils/firebaseFunctions';
-// import { getAllFoodItems } from './utils/firebaseFunctions';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
-import ListProducts from './ListProducts';
 
 function CreateContainer() {
     const [title, setTitle] = useState('');
@@ -27,6 +25,7 @@ function CreateContainer() {
         const imageFile = e.target.files[0];
         // console.log(imageFile);
         const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+        // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
 

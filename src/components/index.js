@@ -12,4 +12,6 @@ export { default as Footer } from './Footer';
 export { default as ListProducts } from './ListProducts';
 export { default as ViewProductsList } from './ViewProductsList';
 export { default as Contact }from './Contact';
-// export { default as Contact } from './Contact/Contact';
+export { default as Tabs } from './Tabs';
+
+export { default as HeaderContainer } from './Display/HeaderContainer';

@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useStateValue } from '../context/StateProvider';
 
 import HomeContainer from './HomeContainer';
 import RowContainer from './RowContainer';
-
-import { useStateValue } from '../context/StateProvider';
 import MenuContainer from './MenuContainer';
 import CartContainer from './CartContainer';
 import Footer from './Footer';
+import Tabs from './Tabs';
 
 function MainContainer() {
     const [{ foodItems, cartShow }, dispatch] = useStateValue();
@@ -40,7 +40,7 @@ function MainContainer() {
                         <motion.div
                             whileTap={{ scale: 0.75 }}
                             className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 
-                            cursor-pointer transition-all ease-in-out cursor-pointer 
+                            cursor-pointer transition-all ease-in-out 
                             hover:shadow-lg 
                             flex items-center justify-center"
                             onClick={() => setScrollValue(-200)}
@@ -64,6 +64,7 @@ function MainContainer() {
 
             {cartShow && <CartContainer />}
 
+            {/* <Tabs /> */}
             <Footer />
         </div>
     );

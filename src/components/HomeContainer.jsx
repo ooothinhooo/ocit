@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Delivery from '../img/delivery.png';
 import HeroBg from '../img/heroBg.png';
-import heroData from '../utils/data';
 import { motion } from 'framer-motion';
 function HomeContainer() {
     function render() {
@@ -33,7 +32,7 @@ function HomeContainer() {
         ];
 
         const random = Math.floor(Math.random() * dataHome.length);
-        console.log(random, dataHome[random]);
+        // console.log(random, dataHome[random]);
 
         return (
             <div

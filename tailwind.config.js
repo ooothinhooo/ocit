@@ -1,5 +1,8 @@
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    // content: [
+    //     "./node_modules/flowbite/**/*.js"
+    // ]
     theme: {
         extend: {
             margin: {
@@ -40,8 +43,8 @@ module.exports = {
                 620: '620px',
             },
             colors: {
-                primary: '#F5EDDC',
-                // primary: '#F9F5EB',
+                // primary: '#F5EDDC',
+                primary: '#1a202c',
                 // gray: '#8492a6',
                 lightBlue: '#21E1E1',
                 lightGray: '#9ca0ab',
@@ -69,4 +72,5 @@ module.exports = {
         },
     },
     plugins: [require('tailwind-scrollbar')],
+    // plugins: [require('flowbite/plugin')],
 };
