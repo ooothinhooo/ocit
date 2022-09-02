@@ -74,7 +74,7 @@ function HomeContainer() {
                     Bạn Cần
                     <span className="text-orange-600 text-[3rem] lg:text-[5rem] ">Tôi Có</span>
                 </p>
-                <p className="text-base text-gray text-center md:text-left md:w-[80%]">
+                <p className="text-base text-white text-center md:text-left md:w-[80%]">
                     Liên hệ với tôi để nhận thêm nhiều thứ mới và tôi nhận làm một số bài thực hành và project cho một
                     số môn. Hãy liên hệ để thoả thuận và biết thêm nhiều chi tiết. Cảm ơn các bạn đã ghé qua
                 </p>
