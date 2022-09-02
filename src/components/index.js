@@ -15,3 +15,4 @@ export { default as Contact }from './Contact';
 export { default as Tabs } from './Tabs';
 
 export { default as HeaderContainer } from './Display/HeaderContainer';
+export { default as UpdateProduct } from './UpdateProduct';

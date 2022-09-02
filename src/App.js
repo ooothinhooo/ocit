@@ -10,32 +10,25 @@ import {
     ViewProductsList,
     Contact,
     HeaderContainer,
+    UpdateProduct,
 } from './components';
-import { getAllFoodItems, getAllItemsInFolder } from './utils/firebaseFunctions';
+import { getAllOCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
 function App() {
-    const [{ foodItems }, dispatch] = useStateValue();
+    const [{ OCIT }, dispatch] = useStateValue();
     const fetchData = async () => {
-        await getAllFoodItems().then((data) => {
+        await getAllOCIT().then((data) => {
             dispatch({
                 type: actionType.SET_FOOD_ITEMS,
-                foodItems: data,
-            });
-        });
-    };
-    const getdata = async () => {
-        await getAllItemsInFolder().then((data) => {
-            dispatch({
-                type: actionType.SET_FOOD_ITEMS,
-                foodItems: data,
+                OCIT: data,
             });
         });
     };
 
     useEffect(() => {
         fetchData();
-        getdata();
+        // getdata();
     }, []);
 
     return (
@@ -49,6 +42,7 @@ function App() {
                         <Route path="/createItem" element={<CreateContainer />} />
                         <Route path="/profile/:uid" element={<UserProfile />} />
                         <Route path="/viewproduct" element={<ViewProductsList />} />
+                        <Route path="/update/:uid" element={<UpdateProduct />} />
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </main>

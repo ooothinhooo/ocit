@@ -5,7 +5,7 @@ import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from '
 import { categories } from '../utils/data';
 import Loader from './Loader';
 import { storage } from '../firebase.config';
-import { saveItem, getAllFoodItems } from '../utils/firebaseFunctions';
+import { saveItem, getAllOCIT, makeid } from '../utils/firebaseFunctions';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 
@@ -19,12 +19,12 @@ function CreateContainer() {
     const [alertStatus, setAlertStatus] = useState('danger');
     const [msg, setMsg] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [{ foodItems }, dispatch] = useStateValue();
+    const [{ OCIT }, dispatch] = useStateValue();
     const uploadImage = (e) => {
         setIsLoading(true);
         const imageFile = e.target.files[0];
         // console.log(imageFile);
-        const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+        const storageRef = ref(storage, `app/ocit/${makeid(5)}-${imageFile.name}`);
         // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
@@ -90,6 +90,8 @@ function CreateContainer() {
                     imageURL: imagesAssets,
                     category: category,
                     calories: calories,
+                    description:
+                        ' This can be often used inside form elements to disable the submit button before all the form elements have been completed and validated.',
                     qty: 1,
                     price: price,
                 };
@@ -124,16 +126,16 @@ function CreateContainer() {
     };
 
     const fetchData = async () => {
-        await getAllFoodItems().then((data) => {
+        await getAllOCIT().then((data) => {
             dispatch({
                 type: actionType.SET_FOOD_ITEMS,
-                foodItems: data,
+                OCIT: data,
             });
         });
     };
     return (
         <div className="w-full h-screen flex items-center justify-center">
-            <div className="w-[90%] md:w-[75%] border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
+            <div className="w-[90%] md:w-[75%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                 {!fields && (
                     <motion.p
                         initial={{ opacity: 0, x: 200 }}
@@ -155,7 +157,7 @@ function CreateContainer() {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Give me a title ..."
                         className="w-full h-full text-lg bg-transparent font-semibold
-                        outline-none border-none placeholder:text-gray-400 text-textColor"
+                        outline-none border-none placeholder:text-gray-400 text-white"
                     />
                 </div>
                 <div className="w-full">
@@ -224,7 +226,7 @@ function CreateContainer() {
                             value={calories}
                             onChange={(e) => setCalories(e.target.value)}
                             required
-                            placeholder="Calories"
+                            placeholder="Loại Tài Liệu"
                             className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
                         />
                     </div>{' '}

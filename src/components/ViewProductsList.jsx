@@ -4,11 +4,11 @@ import ListProducts from './ListProducts';
 import RowContainer from './RowContainer';
 
 function ViewProductsList() {
-    const [{ foodItems, cartShow }, dispatch] = useStateValue();
+    const [{ OCIT, cartShow }, dispatch] = useStateValue();
 
     return (
         <div className="w-full">
-            <ListProducts flag={false} data={foodItems} />
+            <ListProducts flag={false} data={OCIT} />
         </div>
     );
 }

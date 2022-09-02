@@ -8,7 +8,7 @@ import { useStateValue } from '../context/StateProvider';
 
 function MenuContainer() {
     const [filter, setFilter] = useState('CT178');
-    const [{ foodItems }, dispatch] = useStateValue();
+    const [{ OCIT }, dispatch] = useStateValue();
     return (
         <section className="w-full my-6" id="menu">
             <div className="w-full flex flex-col items-center justify-center">
@@ -57,7 +57,7 @@ function MenuContainer() {
                 </div>
 
                 <div className="w-full">
-                    <RowContainer flag={false} data={foodItems?.filter((n) => n.category == filter)} />
+                    <RowContainer flag={false} data={OCIT?.filter((n) => n.category == filter)} />
                 </div>
             </div>
         </section>

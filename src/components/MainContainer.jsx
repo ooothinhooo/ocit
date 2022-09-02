@@ -11,7 +11,7 @@ import Footer from './Footer';
 import Tabs from './Tabs';
 
 function MainContainer() {
-    const [{ foodItems, cartShow }, dispatch] = useStateValue();
+    const [{ OCIT, cartShow }, dispatch] = useStateValue();
 
     const [scrollValue, setScrollValue] = useState(0);
 
@@ -57,8 +57,8 @@ function MainContainer() {
                     </div>
                 </div>
                 {/* component */}
-                {/* <RowContainer flag={true} data={foodItems?.filter((n) => n.category === 'chicken')} /> */}
-                <RowContainer scrollValue={scrollValue} flag={true} data={foodItems} />
+                {/* <RowContainer flag={true} data={OCIT?.filter((n) => n.category === 'chicken')} /> */}
+                <RowContainer scrollValue={scrollValue} flag={true} data={OCIT} />
             </section>
             {/* <section className="w-full my-6"></section>  */}
 
