@@ -55,7 +55,6 @@ function HeaderContainer() {
     };
 
     const handleSetisMenu = () => {
-        console.log(!isMenu);
         setIsMenu(!isMenu);
     };
     return (

@@ -78,7 +78,7 @@ Mọi thông tin chi tiết liên hệ qua email ${user.email}`;
                         </div>
                     </div>
                     <button type="submit" className="mt-5 rounded-md bg-black px-10 py-2 text-white">
-                        <Link to="/">Xác Nhận</Link>
+                        <Link to="/xincamon">Xác Nhận</Link>
                     </button>
                 </form>
             </div>

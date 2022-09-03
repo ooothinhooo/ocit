@@ -12,6 +12,7 @@ import {
     HeaderContainer,
     UpdateProduct,
 } from './components';
+import { Thanks } from './pages';
 import { getAllOCIT, getArr, pushArr } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/viewproduct" element={<ViewProductsList />} />
                         <Route path="/update/:uid" element={<UpdateProduct />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/xincamon" element={<Thanks />} />
                     </Routes>
                 </main>
             </div>
