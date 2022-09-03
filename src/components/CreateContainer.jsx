@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { motion } from 'framer-motion';
-import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from 'react-icons/md';
+import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
+import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
+import { GiMoneyStack } from 'react-icons/gi';
 import { categories } from '../utils/data';
 import Loader from './Loader';
 import { storage } from '../firebase.config';
@@ -11,8 +13,10 @@ import { actionType } from '../context/reducer';
 
 function CreateContainer() {
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [calories, setCalories] = useState('');
     const [price, setPrice] = useState('');
+    const [code, setCode] = useState('');
     const [category, setCategory] = useState(null);
     const [imagesAssets, setImagesAssets] = useState(null);
     const [fields, setFields] = useState(true);
@@ -85,15 +89,17 @@ function CreateContainer() {
                 }, 4000);
             } else {
                 const data = {
-                    id: `${Date.now()}`,
+                    id: `${category.split(' ').join('')}${title.split(' ').join('')}${price}${code
+                        .split(' ')
+                        .join('')}`,
                     title: title,
                     imageURL: imagesAssets,
                     category: category,
                     calories: calories,
-                    description:
-                        ' This can be often used inside form elements to disable the submit button before all the form elements have been completed and validated.',
+                    description: description,
                     qty: 1,
                     price: price,
+                    code: code,
                 };
                 saveItem(data);
                 setIsLoading(false);
@@ -134,8 +140,8 @@ function CreateContainer() {
         });
     };
     return (
-        <div className="w-full h-screen flex items-center justify-center">
-            <div className="w-[90%] md:w-[75%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
+        <div className="w-full h-screen flex items-center justify-center -mt-20  bg-primary">
+            <div className="w-[90%] md:w-[50%] mr-2  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                 {!fields && (
                     <motion.p
                         initial={{ opacity: 0, x: 200 }}
@@ -149,7 +155,7 @@ function CreateContainer() {
                     </motion.p>
                 )}
                 <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-                    <MdFastfood className="text-xl text-gray-700" />
+                    <MdFastfood className="text-xl text-textRed" />
                     <input
                         type="text"
                         required
@@ -180,6 +186,63 @@ function CreateContainer() {
                             ))}
                     </select>
                 </div>
+
+                <input
+                    type="text"
+                    id="message"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Description ..."
+                ></input>
+                <div className="w-full py-2 border-b border-gray-700 flex items-center gap-2">
+                    <BsFileEarmarkPdf className="text-textRed text-2xl" />
+                    <input
+                        type="text"
+                        value={calories}
+                        onChange={(e) => setCalories(e.target.value)}
+                        required
+                        placeholder="Loại Tài Liệu"
+                        className="w-full h-full text-xl bg-transparent outline-none border-none text-white placeholder:text-gray-400"
+                    />
+                </div>
+                <div className="w-full flex flex-col md:flex-row items-center gap-3 text-white">
+                    <div className="w-full py-2 border-b  border-gray-300 flex items-center gap-2">
+                        <GiMoneyStack className="text-textRed text-2xl" />
+                        <input
+                            type="text"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                            placeholder="Price"
+                            className="w-full h-full text-xl bg-transparent outline-none border-none placeholder:text-gray-400"
+                        />
+                    </div>{' '}
+                    <div className="w-full py-2 border-b  border-gray-300 flex items-center gap-2">
+                        <BsCodeSquare className="text-textRed text-2xl" />
+                        <input
+                            type="text"
+                            value={code}
+                            onChange={(e) => setCode(e.target.value)}
+                            required
+                            placeholder="Code"
+                            className="w-full h-full text-xl bg-transparent outline-none border-none placeholder:text-gray-400"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex items-center w-full">
+                    <button
+                        type="button"
+                        className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+                        onClick={saveDetails}
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+            <div className="w-[90%] md:w-[40%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                 <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-420 cursor-pointer rounded-lg">
                     {isLoading ? (
                         <Loader />
@@ -217,40 +280,6 @@ function CreateContainer() {
                             )}
                         </>
                     )}
-                </div>
-                <div className="w-full flex flex-col md:flex-row items-center gap-3 ">
-                    <div className="w-full py-2 border-b border-gray-700 flex items-center gap-2">
-                        <MdFoodBank className="text-gray-700 text-2xl" />
-                        <input
-                            type="text"
-                            value={calories}
-                            onChange={(e) => setCalories(e.target.value)}
-                            required
-                            placeholder="Loại Tài Liệu"
-                            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
-                        />
-                    </div>{' '}
-                    <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-                        <MdAttachMoney className="text-gray-700 text-2xl" />
-                        <input
-                            type="text"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            required
-                            placeholder="Price"
-                            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
-                        />
-                    </div>
-                </div>
-
-                <div className="flex items-center w-full">
-                    <button
-                        type="button"
-                        className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
-                        onClick={saveDetails}
-                    >
-                        Save
-                    </button>
                 </div>
             </div>
         </div>

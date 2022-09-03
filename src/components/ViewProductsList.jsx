@@ -7,7 +7,7 @@ function ViewProductsList() {
     const [{ OCIT, cartShow }, dispatch] = useStateValue();
 
     return (
-        <div className="w-full">
+        <div className="w-full h-[75vh]">
             <ListProducts flag={false} data={OCIT} />
         </div>
     );

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { motion } from 'framer-motion';
-import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from 'react-icons/md';
+import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
+import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
+import { GrMoney } from 'react-icons/gr';
 import { categories } from '../utils/data';
 import Loader from './Loader';
 import { storage } from '../firebase.config';
-import { saveItem, getAllOCIT, updateItem } from '../utils/firebaseFunctions';
+import { saveItem, getAllOCIT, updateItem, pushArr, deleteItemBtn, makeid } from '../utils/firebaseFunctions';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 
@@ -14,6 +16,9 @@ function UpdateProduct({ id }) {
     const [title, setTitle] = useState('');
     const [calories, setCalories] = useState('');
     const [price, setPrice] = useState('');
+    const [code, setCode] = useState('');
+    const [description, setDescription] = useState('');
+
     const [category, setCategory] = useState(null);
     const [imagesAssets, setImagesAssets] = useState(null);
     const [fields, setFields] = useState(true);
@@ -24,13 +29,15 @@ function UpdateProduct({ id }) {
     // console.log(window.location.pathname);
     const pathName = window.location.pathname;
     const subPath = pathName.slice(8);
-    // console.log(subPath); data={OCIT?.filter((n) => n.category == filter)}
+
+    //  data={OCIT?.filter((n) => n.category == filter)}
 
     const uploadImage = (e) => {
         setIsLoading(true);
         const imageFile = e.target.files[0];
         // console.log(imageFile);
-        const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+        // const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+        const storageRef = ref(storage, `app/ocit/${makeid(5)}-${imageFile.name}`);
         // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
@@ -78,37 +85,36 @@ function UpdateProduct({ id }) {
             }, 4000);
         });
     };
-    const saveDetails = () => {
+    const saveDetails = (index) => {
         setIsLoading(true);
         try {
-            if (!title || !calories || !imagesAssets || !price || !category) {
-                setFields(true);
-                setMsg("Required fields can't be empty");
-                setAlertStatus('danger');
-                setTimeout(() => {
-                    setFields(false);
-                    setIsLoading(false);
-                }, 4000);
-            } else {
-                const data = {
-                    id: subPath,
-                    title: title,
-                    imageURL: imagesAssets,
-                    category: category,
-                    calories: calories,
-                    qty: 1,
-                    price: price,
-                };
-                updateItem(subPath, data);
-                setIsLoading(false);
-                setFields(true);
-                setMsg('Data Uploaded successfully');
-                clearData();
-                setAlertStatus('success');
-                setTimeout(() => {
-                    setFields(false);
-                }, 4000);
-            }
+            const data = {
+                id: `${category.split(' ').join('')}${title.split(' ').join('')}${price}${code.split(' ').join('')}}`,
+                title: title,
+                imageURL: imagesAssets,
+                category: category,
+                calories: calories,
+                qty: 1,
+                price: price,
+                description: description,
+                code: code,
+            };
+            updateItem(subPath, data);
+
+            // try {
+            //     deleteItemBtn(subPath);
+            //     // window.location.reload();
+            // } catch (e) {
+            //     console.error(e);
+            // }
+            setIsLoading(false);
+            setFields(true);
+            setMsg('Data Uploaded successfully');
+            clearData();
+            setAlertStatus('success');
+            setTimeout(() => {
+                setFields(false);
+            }, 4000);
         } catch (e) {
             setFields(true);
             setMsg('Error while uploading : Try again later');
@@ -138,25 +144,12 @@ function UpdateProduct({ id }) {
         });
     };
     return (
-        <div className="w-full h-screen flex flex-row ">
-            <RowContainer flag={false} data={OCIT?.filter((n) => n.id == subPath)} />
-            <div className="w-full h-screen flex items-center justify-center">
-                <div
-                    className="w-[80%] md:w-[100%] md:h-[90%] border
-                 border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center"
-                >
-                    {!fields && (
-                        <motion.p
-                            initial={{ opacity: 0, x: 200 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 200 }}
-                            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
-                                alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'
-                            }`}
-                        >
-                            {msg}
-                        </motion.p>
-                    )}
+        <div className="w-full h-screen flex items-center justify-center grid gap-4 grid-cols-2 ">
+            <div>
+                <RowContainer flag={false} data={OCIT?.filter((n) => n.id == subPath)} />
+            </div>
+            <div className=" mr-2  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
+                <div>
                     <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
                         <MdFastfood className="text-xl text-gray-700" />
                         <input
@@ -168,6 +161,17 @@ function UpdateProduct({ id }) {
                             className="w-full h-full text-lg bg-transparent font-semibold
                         outline-none border-none placeholder:text-gray-400 text-white"
                         />
+                    </div>
+                    <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+                        <input
+                            type="text"
+                            id="message"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Description ..."
+                        ></input>
                     </div>
                     <div className="w-full">
                         <select
@@ -229,33 +233,42 @@ function UpdateProduct({ id }) {
                             </>
                         )}
                     </div>
+                    <div className="w-full py-2 border-b border-gray-700 flex items-center gap-2">
+                        <BsFileEarmarkPdf className="text-gray-700 text-2xl" />
+                        <input
+                            type="text"
+                            value={calories}
+                            onChange={(e) => setCalories(e.target.value)}
+                            required
+                            placeholder="Loại Tài Liệu"
+                            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
+                        />
+                    </div>{' '}
                     <div className="w-full flex flex-col md:flex-row items-center gap-3 ">
-                        <div className="w-full py-2 border-b border-gray-700 flex items-center gap-2">
-                            <MdFoodBank className="text-gray-700 text-2xl" />
-                            <input
-                                type="text"
-                                value={calories}
-                                onChange={(e) => setCalories(e.target.value)}
-                                required
-                                placeholder="Calories"
-                                className="w-full h-full text-lg bg-transparent  text-white
-                                outline-none border-none placeholder:text-gray-400"
-                            />
-                        </div>{' '}
                         <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-                            <MdAttachMoney className="text-gray-700 text-2xl" />
+                            <GrMoney className="text-gray-700 text-2xl" />
                             <input
                                 type="text"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 required
                                 placeholder="Price"
-                                className="w-full h-full text-lg bg-transparent text-white outline-none border-none placeholder:text-gray-400"
+                                className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
+                            />
+                        </div>
+                        <div className="w-full py-2 border-b  border-gray-300 flex items-center gap-2">
+                            <BsCodeSquare className="text-gray-700 text-2xl" />
+                            <input
+                                type="text"
+                                value={code}
+                                onChange={(e) => setCode(e.target.value)}
+                                required
+                                placeholder="Code"
+                                className="w-full h-full text-xl bg-transparent outline-none border-none placeholder:text-gray-400"
                             />
                         </div>
                     </div>
-
-                    <div className="flex items-center w-full">
+                    <div className="flex items-center w-full mt-4">
                         <button
                             type="button"
                             className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"

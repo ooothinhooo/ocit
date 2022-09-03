@@ -12,7 +12,7 @@ import {
     HeaderContainer,
     UpdateProduct,
 } from './components';
-import { getAllOCIT } from './utils/firebaseFunctions';
+import { getAllOCIT, getArr, pushArr } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
 function App() {
@@ -29,6 +29,10 @@ function App() {
     useEffect(() => {
         fetchData();
         // getdata();
+        getArr();
+        for (let i = 0; i < pushArr.length; i++) {
+            console.log(pushArr[i]);
+        }
     }, []);
 
     return (
@@ -36,7 +40,7 @@ function App() {
             <div className="w-screen h-auto flex flex-col bg-primary">
                 {/* <Header /> */}
                 <HeaderContainer />
-                <main className="mt-14 md:mt-20 px-4 md:px-16  py-4 w-full">
+                <main className="mt-14 md:mt-20 px-4 md:px-16  py-4 w-full  bg-primary">
                     <Routes>
                         <Route path="/*" element={<MainContainer />} />
                         <Route path="/createItem" element={<CreateContainer />} />

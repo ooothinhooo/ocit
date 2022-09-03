@@ -62,7 +62,7 @@ function HeaderContainer() {
         <>
             <nav className="bg-primary  px-2 sm:px-4 py-2.5  dark:bg-gray-900">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
-                    <Link to={'/'} className="flex items-center gap-2">
+                    <Link to={'/'} className="flex items-center gap-2   ">
                         <img src={Logo} alt="" className="w-10 object-cover" />
                         <p className="text-red-600 text-xl font-bold"> OCIT </p>
                     </Link>

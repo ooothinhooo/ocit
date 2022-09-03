@@ -60,11 +60,12 @@ function RowContainer({ flag, data, scrollValue }) {
                             </motion.div>
                         </div>
                         <div className="w-full flex flex-col items-end justify-end  -mt-8 ">
+                            <p className="  text-gray-500 text-sm">{item?.category}</p>
                             <p className="text-textColor font-semibold text-sm md:text-lg">{item?.title}</p>
                             <p className="mt-1 text-sm text-gray-500 ">{item?.calories}</p>
-                            <div className=" flex -items-center gap-8">
-                                <p className="text-lg text-headingColor font-semibold">
-                                    <span className=" text-sm text-red-500 ">{item?.price}K</span>
+                            <div className="flex justify-center items-center  text-md flex-row ">
+                                <p className=" text-headingColor font-semibold">
+                                    <span className="  text-red-500 ">{item?.price}K</span>
                                 </p>
                             </div>
                         </div>

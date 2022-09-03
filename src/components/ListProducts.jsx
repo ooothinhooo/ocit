@@ -4,11 +4,14 @@ import { motion } from 'framer-motion';
 import { NotFound } from '../img';
 import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
-import { deleteItem } from '../utils/firebaseFunctions';
+import { deleteItem, pushArr } from '../utils/firebaseFunctions';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { firestore, storage } from '../firebase.config';
 
 function ListProducts({ flag, data, scrollValue }) {
     const rowContainer = useRef();
     const [fields, setFields] = useState(true);
+    const [Modal, setModal] = useState(true);
     const [alertStatus, setAlertStatus] = useState('');
     const [msg, setMsg] = useState(null);
 
@@ -23,7 +26,10 @@ function ListProducts({ flag, data, scrollValue }) {
             console.error(e);
         }
     };
-    // console.log(data);
+
+    for (let i = 0; i < pushArr.length; i++) {
+        console.log(pushArr[i]);
+    }
     return (
         <div className=" px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             {!fields && (
@@ -41,7 +47,7 @@ function ListProducts({ flag, data, scrollValue }) {
             <div className="grid gap-10 row-gap-8 mx-auto sm:row-gap-10 lg:max-w-screen-lg sm:grid-cols-2 lg:grid-cols-3">
                 {data && data.length > 0 ? (
                     data.map((item, index) => (
-                        <motion.div whileHover={{ scale: 1.2 }} key={item.id} className=" bg-cardOverlay rounded-md ">
+                        <motion.div key={item.id} className=" bg-cardOverlay rounded-md ">
                             <div className="flex ">
                                 <motion.div whileHover={{ scale: 1.5 }} className="w-20 h-20 drop-shadow-2xl">
                                     <img src={item?.imageURL} alt="" className="w-full h-full object-contain" />
@@ -62,6 +68,7 @@ function ListProducts({ flag, data, scrollValue }) {
                                         Edit
                                     </button>
                                 </Link>
+
                                 <button
                                     type="button"
                                     onClick={() => deleteBtn(index, item?.title)}

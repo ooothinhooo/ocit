@@ -9,6 +9,7 @@ import {
     query,
     setDoc,
     where,
+
 } from 'firebase/firestore';
 import { firestore, storage } from '../firebase.config';
 export const makeid = (length) => {
@@ -23,9 +24,19 @@ export const makeid = (length) => {
 
 //saving new items
 export const saveItem = async (data) => {
-    await setDoc(doc(firestore, 'OCIT', `${data.category}-${data.title}-${data.price}-${makeid(5)}`), data, {
-        merge: true,
-    });
+    await setDoc(
+        doc(
+            firestore,
+            'OCIT',
+            `${data.category.split(' ').join('')}${data.title.split(' ').join('')}${data.price}${data.code
+                .split(' ')
+                .join('')}`,
+        ),
+        data,
+        {
+            merge: true,
+        },
+    );
 };
 
 //getAll food items
@@ -34,7 +45,16 @@ export const getAllOCIT = async () => {
 
     return items.docs.map((doc) => doc.data());
 };
-
+export const pushArr = [];
+export const getArr = async () => {
+    const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+    // const oid = OCIT.docs[index].id;
+    const temp = OCIT.docs;
+    for (let i = 0; i < temp.length; i++) {
+        pushArr[i] = temp[i].id;
+        // console.log(pushArr[i]);
+    }
+};
 export const deleteItem = async (index) => {
     const db = getFirestore();
     const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
@@ -50,7 +70,21 @@ export const deleteItem = async (index) => {
             console.log(error);
         });
 };
+export const deleteItemBtn = async (oid) => {
+    const db = getFirestore();
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+    // const oid = OCIT.docs[index].id;
+    const docRef = doc(db, 'OCIT', oid);
 
+    deleteDoc(docRef)
+        .then(() => {
+            console.log('Entire Document has been deleted successfully.');
+            // alert("Entire Document has been deleted successfully.")
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
 // get all items in folder
 export const getAllItemsInFolder = async () => {
     // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
@@ -61,20 +95,36 @@ export const getAllItemsInFolder = async () => {
 };
 
 //update item
-export const updateItem = async (id, updates) => {
-    await firestore.collection('OCIT').doc(id).update(updates);
-    const doc = await firestore.collection('OCIT').doc(id).get();
+export const updateItem = async (oid, updates) => {
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+    // const oid = OCIT.docs[index].id;
+    // console.log(pushArr[index]);
+    // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
+    // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
+    const db = getFirestore();
+
+    const docRef = doc(db, 'OCIT', oid);
+
     const data = {
-        id: doc.id,
-        ...doc.data(),
-        // title: doc.title,
-        // imageURL: doc.imagesAssets,
-        // category: doc.category,
-        // calories: doc.calories,
-        // qty: 1,
-        // price: doc.price,
+        id: oid,
+        title: updates.title,
+        imageURL: updates.imageURL,
+        category: updates.category,
+        calories: updates.calories,
+        description: updates.description,
+        qty: 1,
+        price: updates.price,
+        code: updates.code,
     };
-    console.log(data);
-    return data;
+
+    setDoc(docRef, data)
+        .then((docRef) => {
+            console.log('Entire Document has been updated successfully');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
+
+
 
