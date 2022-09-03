@@ -30,6 +30,7 @@ function HeaderContainer() {
                 type: actionType.SET_USER,
                 user: providerData[0],
             });
+            window.location = '/';
         } else {
             // setIsMenu(!isMenu);
             // isMobileMenu(false);
@@ -45,6 +46,7 @@ function HeaderContainer() {
             type: actionType.SET_USER,
             user: null,
         });
+        window.location = '/';
     };
 
     const showCart = () => {

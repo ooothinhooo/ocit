@@ -80,7 +80,7 @@ export const categories = [
     {
         id: 2,
         name: 'CT449',
-        title: 'Phát triển ứng dụng web',
+        title: 'Phát triển ứng dụng Web',
         urlParamName: 'CT449',
     },
     {

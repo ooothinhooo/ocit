@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
 import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
-import { categories } from '../utils/data';
-import Loader from './Loader';
-import { storage } from '../firebase.config';
-import { saveItem, getAllOCIT, makeid } from '../utils/firebaseFunctions';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
+import { categories } from '../../../utils/data';
+import Loader from '../../Loader';
+import { storage } from '../../../firebase.config';
+import { saveItem, getAllOCIT, makeid } from '../../../utils/firebaseFunctions';
+import { useStateValue } from '../../../context/StateProvider';
+import { actionType } from '../../../context/reducer';
 
 function CreateContainer() {
     const [title, setTitle] = useState('');

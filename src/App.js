@@ -11,6 +11,7 @@ import {
     Contact,
     HeaderContainer,
     UpdateProduct,
+    Banner,
 } from './components';
 import { Thanks } from './pages';
 import { getAllOCIT, getArr, pushArr } from './utils/firebaseFunctions';
@@ -31,15 +32,13 @@ function App() {
         fetchData();
         // getdata();
         getArr();
-        for (let i = 0; i < pushArr.length; i++) {
-            console.log(pushArr[i]);
-        }
     }, []);
 
     return (
         <AnimatePresence exitBeforeEnter>
             <div className="w-screen h-auto flex flex-col bg-primary">
                 {/* <Header /> */}
+
                 <HeaderContainer />
                 <main className="mt-14 md:mt-20 px-4 md:px-16  py-4 w-full  bg-primary">
                     <Routes>

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { motion } from 'framer-motion';
-import { NotFound } from '../img';
-import { useStateValue } from '../context/StateProvider';
+import { NotFound } from '../../../img';
+import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
-import { deleteItem, pushArr } from '../utils/firebaseFunctions';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { firestore, storage } from '../firebase.config';
+import { deleteItem, pushArr } from '../../../utils/firebaseFunctions';
 
 function ListProducts({ flag, data, scrollValue }) {
     const rowContainer = useRef();
@@ -28,7 +26,7 @@ function ListProducts({ flag, data, scrollValue }) {
     };
 
     return (
-        <div className=" px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div className="h-full px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             {!fields && (
                 <motion.p
                     initial={{ opacity: 0, x: 200 }}
@@ -56,23 +54,22 @@ function ListProducts({ flag, data, scrollValue }) {
                                     <p className="text-sm text-gray-600">{item?.calories}</p>
                                 </div>
                             </div>
-                            <div className="flex flex-row justify-center items-center">
+                            <div className="w-full flex flex-row justify-center items-center">
+                                <button
+                                    type="button"
+                                    onClick={() => deleteBtn(index, item?.title)}
+                                    class="w-[100px]  py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                >
+                                    Delete
+                                </button>
                                 <Link to={'/update/' + item.id}>
                                     <button
                                         type="button"
-                                        class="py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        class="w-[100px] py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                         Edit
                                     </button>
                                 </Link>
-
-                                <button
-                                    type="button"
-                                    onClick={() => deleteBtn(index, item?.title)}
-                                    class="py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                >
-                                    Delete
-                                </button>
                             </div>
                         </motion.div>
                     ))

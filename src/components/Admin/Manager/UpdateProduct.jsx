@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
 import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
 import { GrMoney } from 'react-icons/gr';
-import { categories } from '../utils/data';
-import Loader from './Loader';
-import { storage } from '../firebase.config';
-import { saveItem, getAllOCIT, updateItem, pushArr, deleteItemBtn, makeid } from '../utils/firebaseFunctions';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
+import { categories } from '../../../utils/data';
+import Loader from '../../Loader';
+import { storage } from '../../../firebase.config';
+import { saveItem, getAllOCIT, updateItem, pushArr, deleteItemBtn, makeid } from '../../../utils/firebaseFunctions';
+import { useStateValue } from '../../../context/StateProvider';
+import { actionType } from '../../../context/reducer';
 
-import RowContainer from './RowContainer';
+import RowContainer from '../../RowContainer';
 function UpdateProduct({ id }) {
     const [title, setTitle] = useState('');
     const [calories, setCalories] = useState('');
