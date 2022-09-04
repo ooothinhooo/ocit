@@ -9,9 +9,10 @@ import {
     query,
     setDoc,
     where,
-
+    getStorage,
 } from 'firebase/firestore';
 import { firestore, storage } from '../firebase.config';
+import { initializeApp } from 'firebase/app';
 export const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -52,6 +53,7 @@ export const getAllOCIT = async () => {
 
     return items.docs.map((doc) => doc.data());
 };
+
 export const pushArr = [];
 export const getArr = async () => {
     const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
@@ -95,10 +97,9 @@ export const deleteItemBtn = async (oid) => {
 // get all items in folder
 export const getAllItemsInFolder = async () => {
     // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
-    const items = await getDocs(query(collection(storage, 'app/oci/'), orderBy('category')));
-    // console.log(items);
-
-    return items.docs.map((doc) => doc.data());
+    const items = await getDocs(query(storage, '/app/ocit/Images/'));
+    console.log('Images');
+    console.log(items);
 };
 
 //update item

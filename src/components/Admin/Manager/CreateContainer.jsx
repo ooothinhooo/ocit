@@ -30,10 +30,9 @@ function CreateContainer() {
         // console.log(imageFile);
         const storageRef = ref(
             storage,
-            `app/ocit/Images/${category}/${makeid(5).toUpperCase()}-${removeAccents(imageFile.name)
-                .split('')
-                .join('')
-                .toUpperCase()}`,
+            `app/ocit/Images/${category}/${category}-${code.split(' ').join('').toUpperCase()}/${makeid(
+                5,
+            ).toUpperCase()}-${removeAccents(imageFile.name).split('').join('').toUpperCase()}`,
         );
         // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
@@ -106,7 +105,7 @@ function CreateContainer() {
                     description: description,
                     qty: 1,
                     price: price,
-                    code: code,
+                    code: code.toUpperCase(),
                 };
                 saveItem(data);
                 setIsLoading(false);
@@ -147,7 +146,7 @@ function CreateContainer() {
         });
     };
     return (
-        <div className="w-full h-screen flex items-center justify-center -mt-20  bg-primary">
+        <div className="w-full h-full flex items-center justify-center md:py-14 md:mt-4  bg-primary">
             <div className="w-[90%] md:w-[50%] mr-2  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                 {!fields && (
                     <motion.p

@@ -9,6 +9,7 @@ import MenuContainer from './MenuContainer';
 import CartContainer from './CartContainer';
 import Footer from './Footer';
 import Tabs from './Tabs';
+import Banner from './Banner';
 
 function MainContainer() {
     const [{ OCIT, cartShow }, dispatch] = useStateValue();
@@ -18,8 +19,17 @@ function MainContainer() {
     useEffect(() => {}, [scrollValue, cartShow]);
 
     return (
-        <div className=" w-full h-auto flex flex-col  items-center  justify-center">
+        <div className=" w-full h-full flex flex-col  items-center  justify-center">
             <HomeContainer />
+            <div className="w-full my-6">
+                <Banner
+                    ImagePhoto={
+                        'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT178%2FCT178-PROJECT%2FBJ3MG-CT178PROJECT.PNG?alt=media&token=51a67716-7c81-4e4b-a98e-6ddbedd85edb'
+                    }
+                    title={'Hướng Dẫn Làm Project CT178'}
+                    desc={'Nhanh Tay Liên Hệ Giá Cả Tính Sau'}
+                />
+            </div>
             <div id="menu">
                 <MenuContainer />
             </div>

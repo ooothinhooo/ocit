@@ -11,7 +11,7 @@ function HomeContainer() {
                 decp: 'CT239',
                 price: '550',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FLUNN3-CT239SUDOKU.PNG?alt=media&token=96d93330-10e9-4330-817c-83478eae1295',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FCT239-%2FN7HG5-CT239SUDOKU.PNG?alt=media&token=403af963-7ec5-4870-8586-c0ce282252dc',
             },
             {
                 id: 2,
@@ -19,7 +19,7 @@ function HomeContainer() {
                 decp: 'CT239',
                 price: '530',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FE9YEP-CT239DIJSKTRA.PNG?alt=media&token=d45d31f7-6675-492e-9b03-f92f0612d073',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FCT239-NLCS%2FGCFYN-CT239DIJSKTRA.PNG?alt=media&token=4ea9f17e-18da-4134-9e33-c3858eef55f6',
             },
             {
                 id: 3,
@@ -27,7 +27,7 @@ function HomeContainer() {
                 decp: 'CT178',
                 price: '140',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT178%2FKPSUS-CT178PROJECT.PNG?alt=media&token=6d38a96e-1787-44e5-a93c-2ce4d3b34d25',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT178%2FCT178-PROJECT%2FBJ3MG-CT178PROJECT.PNG?alt=media&token=51a67716-7c81-4e4b-a98e-6ddbedd85edb',
             },
         ];
 
@@ -75,8 +75,8 @@ function HomeContainer() {
                     <span className="text-cardNumBg text-[3rem] lg:text-[5rem] ">Tôi Có</span>
                 </p>
                 <p className="text-base text-white text-center md:text-left md:w-[80%]">
-                    Liên hệ với tôi để nhận thêm nhiều thứ mới và tôi nhận làm một số bài thực hành và project cho một
-                    số môn. Hãy liên hệ để thoả thuận và biết thêm nhiều chi tiết. Cảm ơn các bạn đã ghé qua
+                    Liên hệ với tôi để nhận thêm nhiều thứ mới .Tôi nhận làm một số bài thực hành và project cho một số
+                    môn. Hãy liên hệ để thoả thuận và biết thêm nhiều chi tiết. Cảm ơn các bạn đã ghé qua
                 </p>
 
                 <button
