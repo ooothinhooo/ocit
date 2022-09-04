@@ -7,7 +7,15 @@ import { GrMoney } from 'react-icons/gr';
 import { categories } from '../../../utils/data';
 import Loader from '../../Loader';
 import { storage } from '../../../firebase.config';
-import { saveItem, getAllOCIT, updateItem, pushArr, deleteItemBtn, makeid } from '../../../utils/firebaseFunctions';
+import {
+    saveItem,
+    getAllOCIT,
+    updateItem,
+    pushArr,
+    deleteItemBtn,
+    makeid,
+    removeAccents,
+} from '../../../utils/firebaseFunctions';
 import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
 
@@ -37,7 +45,13 @@ function UpdateProduct({ id }) {
         const imageFile = e.target.files[0];
         // console.log(imageFile);
         // const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-        const storageRef = ref(storage, `app/ocit/${makeid(5)}-${imageFile.name}`);
+        const storageRef = ref(
+            storage,
+            `app/ocit/Images/${category.split(' ').join('')}/${makeid(5).toUpperCase()}-${removeAccents(imageFile.name)
+                .split('')
+                .join('')
+                .toUpperCase()}`,
+        );
         // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
@@ -89,7 +103,10 @@ function UpdateProduct({ id }) {
         setIsLoading(true);
         try {
             const data = {
-                id: `${category.split(' ').join('')}${title.split(' ').join('')}${price}${code.split(' ').join('')}}`,
+                id: `${category.split(' ').join('').toUpperCase()}${removeAccents(title)
+                    .split(' ')
+                    .join('')
+                    .toUpperCase()}${price}${code.split(' ').join('').toUpperCase()}}`,
                 title: title,
                 imageURL: imagesAssets,
                 category: category,
@@ -114,6 +131,8 @@ function UpdateProduct({ id }) {
             setAlertStatus('success');
             setTimeout(() => {
                 setFields(false);
+                window.location = '/viewproduct';
+                window.location.reload();
             }, 4000);
         } catch (e) {
             setFields(true);

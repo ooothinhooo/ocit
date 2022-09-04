@@ -19,7 +19,6 @@ function ListProducts({ flag, data, scrollValue }) {
             deleteItem(index);
             setFields(false);
             setAlertStatus('success');
-            // window.location.reload();
         } catch (e) {
             console.error(e);
         }

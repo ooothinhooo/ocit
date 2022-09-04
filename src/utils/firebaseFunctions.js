@@ -21,16 +21,23 @@ export const makeid = (length) => {
     }
     return result;
 };
-
+export const removeAccents = (str) => {
+    return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D');
+};
 //saving new items
 export const saveItem = async (data) => {
     await setDoc(
         doc(
             firestore,
             'OCIT',
-            `${data.category.split(' ').join('')}${data.title.split(' ').join('')}${data.price}${data.code
+            `${data.category.split(' ').join('').toUpperCase()}${removeAccents(data.title)
                 .split(' ')
-                .join('')}`,
+                .join('')
+                .toUpperCase()}${data.price}${data.code.split(' ').join('').toUpperCase()}`,
         ),
         data,
         {

@@ -7,7 +7,7 @@ import { GiMoneyStack } from 'react-icons/gi';
 import { categories } from '../../../utils/data';
 import Loader from '../../Loader';
 import { storage } from '../../../firebase.config';
-import { saveItem, getAllOCIT, makeid } from '../../../utils/firebaseFunctions';
+import { saveItem, getAllOCIT, makeid, removeAccents } from '../../../utils/firebaseFunctions';
 import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
 
@@ -28,7 +28,13 @@ function CreateContainer() {
         setIsLoading(true);
         const imageFile = e.target.files[0];
         // console.log(imageFile);
-        const storageRef = ref(storage, `app/ocit/${makeid(5)}-${imageFile.name}`);
+        const storageRef = ref(
+            storage,
+            `app/ocit/Images/${category}/${makeid(5).toUpperCase()}-${removeAccents(imageFile.name)
+                .split('')
+                .join('')
+                .toUpperCase()}`,
+        );
         // const storageRef = ref(storage, `app/oci/${category}/${Date.now()}-${imageFile.name}`);
         // const storageRef = ref(storage, `Images/${Data.now()} - ${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
@@ -89,9 +95,10 @@ function CreateContainer() {
                 }, 4000);
             } else {
                 const data = {
-                    id: `${category.split(' ').join('')}${title.split(' ').join('')}${price}${code
+                    id: `${category.split(' ').join('').toUpperCase()}${removeAccents(title)
                         .split(' ')
-                        .join('')}`,
+                        .join('')
+                        .toUpperCase()}${price}${code.split(' ').join('').toUpperCase()}`,
                     title: title,
                     imageURL: imagesAssets,
                     category: category,
@@ -104,7 +111,7 @@ function CreateContainer() {
                 saveItem(data);
                 setIsLoading(false);
                 setFields(true);
-                setMsg('Data Uploaded successfully');
+                setMsg(`Data Uploaded ${title.toUpperCase()} successfully`);
                 clearData();
                 setAlertStatus('success');
                 setTimeout(() => {

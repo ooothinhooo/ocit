@@ -11,15 +11,15 @@ function HomeContainer() {
                 decp: 'CT239',
                 price: '550',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/Images%2F1661701225198-ct239_sudoku.png?alt=media&token=a9bcb886-0ca3-4f6f-971f-f2a71ed2ce1a',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FLUNN3-CT239SUDOKU.PNG?alt=media&token=96d93330-10e9-4330-817c-83478eae1295',
             },
             {
                 id: 2,
-                title: 'DIJKSTRA Tìm đường đi ngắn nhất',
+                title: 'DIJKSTRA Tìm Đường Đi Ngắn Nhất',
                 decp: 'CT239',
-                price: '550',
+                price: '530',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/Images%2F1661701244089-ct239_dijstra.png?alt=media&token=6b3821de-ebd5-4a6b-99ab-d8a4a7ac862f',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FE9YEP-CT239DIJSKTRA.PNG?alt=media&token=d45d31f7-6675-492e-9b03-f92f0612d073',
             },
             {
                 id: 3,
@@ -27,7 +27,7 @@ function HomeContainer() {
                 decp: 'CT178',
                 price: '140',
                 imageURL:
-                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/Images%2F1661700474511-project_ct178.png.png?alt=media&token=2fe892c2-4dc1-47f8-ae4a-5e7f083e0d2b',
+                    'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT178%2FKPSUS-CT178PROJECT.PNG?alt=media&token=6d38a96e-1787-44e5-a93c-2ce4d3b34d25',
             },
         ];
 
