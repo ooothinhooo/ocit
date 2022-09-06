@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { AiFillCode } from 'react-icons/ai';
 import { categories } from '../../../utils/data';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStateValue } from '../../../context/StateProvider';
 import ChildrenMenu from '../../../components/ChildrenMenu';
@@ -13,8 +13,15 @@ function MenuProductList() {
     const [modal, setModal] = useState('');
     const [{ OCIT }, dispatch] = useStateValue();
     return (
-        <>
-            <section className="w-full my-6" id="menu">
+        <AnimatePresence>
+            <motion.section
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full my-6"
+                id="menu"
+            >
                 <div className="w-full flex flex-col items-center justify-center">
                     <p
                         className="text-2xl font-semibold capitalize  text-headingColor relative 
@@ -64,8 +71,8 @@ function MenuProductList() {
                         <ListProducts flag={false} data={OCIT?.filter((n) => n.category == filter)} />
                     </div>
                 </div>
-            </section>
-        </>
+            </motion.section>
+        </AnimatePresence>
     );
 }
 

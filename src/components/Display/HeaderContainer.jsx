@@ -13,6 +13,7 @@ import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
 import Logo from '../../img/logo.png';
 import Avatar from '../../img/avatar.png';
+import Swal from 'sweetalert2';
 
 function HeaderContainer() {
     const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
@@ -34,6 +35,7 @@ function HeaderContainer() {
         } else {
             // setIsMenu(!isMenu);
             // isMobileMenu(false);
+            Swal.fire('Đăng Nhập Thất Bại', 'Vui Lòng Thử Lại', 'error');
         }
         // console.log(user);
     };
@@ -59,23 +61,60 @@ function HeaderContainer() {
     const handleSetisMenu = () => {
         setIsMenu(!isMenu);
     };
+
+    const renderSwal = () => {
+        Swal.fire({
+            title: 'HÃY ĐĂNG NHẬP ĐỂ XEM THÊM',
+            width: 600,
+            padding: '3em',
+            color: '#fff',
+            background: '#A5C9CA',
+            backdrop: `
+          rgba(0,0,123,0.4)
+          url('https://i.ibb.co/XxsmhTz/meme.gif')
+          left top
+          no-repeat
+        `,
+        });
+    };
     return (
-        <>
-            <nav className="bg-primary  px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+        <AnimatePresence>
+            <motion.nav
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="bg-primary  px-2 sm:px-4 py-2.5  dark:bg-gray-900"
+            >
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <Link to={'/'} className="flex items-center gap-2   ">
                         <img src={Logo} alt="" className="w-10 object-cover" />
                         <p className="text-red-600 text-xl font-bold"> OCIT </p>
                     </Link>
                     <div className="flex items-center md:order-2">
-                        <div className="relative flex items-center justify-center mr-4" onClick={showCart}>
-                            <FaShoppingBasket className="text-white text-2xl cursor-pointer" />
-                            {cartItems && cartItems.length > 0 && (
-                                <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
-                                    <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                        {user && user ? (
+                            <>
+                                <div className="relative flex items-center justify-center mr-4" onClick={showCart}>
+                                    <FaShoppingBasket className="text-white text-2xl cursor-pointer" />
+                                    {cartItems && cartItems.length > 0 && (
+                                        <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
+                                            <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="relative flex items-center justify-center mr-4" onClick={renderSwal}>
+                                    <FaShoppingBasket className="text-white text-2xl cursor-pointer" />
+                                    {cartItems && cartItems.length > 0 && (
+                                        <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
+                                            <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </>
+                        )}
+
                         <div className="mr-3">
                             {user && user ? (
                                 <button
@@ -260,8 +299,8 @@ function HeaderContainer() {
                         </ul>
                     </div>
                 </div>
-            </nav>
-        </>
+            </motion.nav>
+        </AnimatePresence>
     );
 }
 

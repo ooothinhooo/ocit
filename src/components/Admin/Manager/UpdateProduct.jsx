@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
 import { MdShoppingBasket } from 'react-icons/md';
 import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
@@ -164,8 +164,14 @@ function UpdateProduct({ id }) {
     const ProductItem = Product[0];
     console.log(ProductItem);
     return (
-        <div>
-            <div className="w-full h-full  items-center justify-center  py-3 grid gap-4 grid-cols-2 bg-primary  ">
+        <AnimatePresence>
+            <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full  items-center justify-center  py-3 grid gap-4 grid-cols-2 bg-primary  "
+            >
                 <div className="items-center justify-center flex-col -mt-20 ">
                     <RowContainer flag={false} data={OCIT?.filter((n) => n.id == subPath)} />
                     <div className="w-full flex items-center flex-wrap justify-center">
@@ -341,9 +347,9 @@ function UpdateProduct({ id }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             {/* <Banner /> */}
-        </div>
+        </AnimatePresence>
     );
 }
 

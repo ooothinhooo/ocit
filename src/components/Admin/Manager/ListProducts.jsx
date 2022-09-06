@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { NotFound } from '../../../img';
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
@@ -25,59 +25,66 @@ function ListProducts({ flag, data, scrollValue }) {
     };
 
     return (
-        <div className="h-full px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            {!fields && (
-                <motion.p
-                    initial={{ opacity: 0, x: 200 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 200 }}
-                    className={`w-full p-2 rounded-lg text-center text-lg font-semibold -mt-20 mb-4 ${
-                        alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'
-                    }`}
-                >
-                    {msg}
-                </motion.p>
-            )}
-            <div className="grid gap-10 row-gap-8 mx-auto sm:row-gap-10 lg:max-w-screen-lg sm:grid-cols-2 lg:grid-cols-3">
-                {data && data.length > 0 ? (
-                    data.map((item, index) => (
-                        <motion.div key={item.id} className=" bg-cardOverlay rounded-md ">
-                            <div className="flex ">
-                                <motion.div whileHover={{ scale: 1.5 }} className="w-20 h-20 drop-shadow-2xl">
-                                    <img src={item?.imageURL} alt="" className="w-full h-full object-contain" />
-                                </motion.div>
+        <AnimatePresence>
+            <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="h-full px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+            >
+                {!fields && (
+                    <motion.p
+                        initial={{ opacity: 0, x: 200 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 200 }}
+                        className={`w-full p-2 rounded-lg text-center text-lg font-semibold -mt-20 mb-4 ${
+                            alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'
+                        }`}
+                    >
+                        {msg}
+                    </motion.p>
+                )}
+                <div className="grid gap-10 row-gap-8 mx-auto sm:row-gap-10 lg:max-w-screen-lg sm:grid-cols-2 lg:grid-cols-3">
+                    {data && data.length > 0 ? (
+                        data.map((item, index) => (
+                            <motion.div key={item.id} className=" bg-cardOverlay rounded-md ">
+                                <div className="flex ">
+                                    <motion.div whileHover={{ scale: 1.5 }} className="w-20 h-20 drop-shadow-2xl">
+                                        <img src={item?.imageURL} alt="" className="w-full h-full object-contain" />
+                                    </motion.div>
 
-                                <div className="flex flex-col justify-center">
-                                    <p className="text-md font-bold">{item?.title}</p>
-                                    <p className="text-sm text-gray-800">Price: {item?.price}</p>
-                                    <p className="text-sm text-gray-600">{item?.calories}</p>
+                                    <div className="flex flex-col justify-center">
+                                        <p className="text-md font-bold">{item?.title}</p>
+                                        <p className="text-sm text-gray-800">Price: {item?.price}</p>
+                                        <p className="text-sm text-gray-600">{item?.calories}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="w-full flex flex-row justify-center items-center">
-                                <button
-                                    type="button"
-                                    onClick={() => deleteBtn(index, item?.title)}
-                                    class="w-[100px]  py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                >
-                                    Delete
-                                </button>
-                                <Link to={'/update/' + item.id}>
+                                <div className="w-full flex flex-row justify-center items-center">
                                     <button
                                         type="button"
-                                        class="w-[100px] py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        onClick={() => deleteBtn(index, item?.title)}
+                                        class="w-[100px]  py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
-                                        Edit
+                                        Delete
                                     </button>
-                                </Link>
-                            </div>
-                        </motion.div>
-                    ))
-                ) : (
-                    <></>
-                )}
-            </div>
-        </div>
-
+                                    <Link to={'/update/' + item.id}>
+                                        <button
+                                            type="button"
+                                            class="w-[100px] py-2 px-3 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        >
+                                            Edit
+                                        </button>
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        ))
+                    ) : (
+                        <></>
+                    )}
+                </div>
+            </motion.div>
+        </AnimatePresence>
         // <div
         //     ref={rowContainer}
         //     className={`w-full flex items-center my-12 scroll-smooth ${

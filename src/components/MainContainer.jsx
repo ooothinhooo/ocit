@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+
 import { useStateValue } from '../context/StateProvider';
 
 import HomeContainer from './HomeContainer';
@@ -10,9 +11,9 @@ import CartContainer from './CartContainer';
 import Footer from './Footer';
 import Tabs from './Tabs';
 import Banner from './Banner';
-
+import meme from '../img/meme.gif';
 function MainContainer() {
-    const [{ OCIT, cartShow }, dispatch] = useStateValue();
+    const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
     const [scrollValue, setScrollValue] = useState(0);
 
@@ -68,7 +69,16 @@ function MainContainer() {
                 </div>
                 {/* component */}
                 {/* <RowContainer flag={true} data={OCIT?.filter((n) => n.category === 'chicken')} /> */}
-                <RowContainer scrollValue={scrollValue} flag={true} data={OCIT} />
+                <AnimatePresence exitBeforeEnter>
+                    <motion.div
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -10, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <RowContainer scrollValue={scrollValue} flag={true} data={OCIT} />
+                    </motion.div>
+                </AnimatePresence>
             </section>
             {/* <section className="w-full my-6"></section>  */}
 
