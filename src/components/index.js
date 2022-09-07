@@ -12,7 +12,7 @@ export { default as Tabs } from './Tabs';
 export { default as ChildrenMenu } from './ChildrenMenu';
 export { default as Banner } from './Banner';
 export { default as Contact } from './Contact';
-
+export { default as ViewCartItem } from './ViewCartItem';
 export { default as HeaderContainer } from './Display/HeaderContainer';
 
 export { default as CreateContainer } from './Admin/Manager/CreateContainer';

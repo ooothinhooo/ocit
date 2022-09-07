@@ -147,6 +147,18 @@ function CreateContainer() {
     };
     return (
         <AnimatePresence>
+            {!fields && (
+                <motion.p
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 200 }}
+                    className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
+                        alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'
+                    }`}
+                >
+                    {msg}
+                </motion.p>
+            )}
             <motion.div
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -155,18 +167,6 @@ function CreateContainer() {
                 className="w-full h-full flex items-center justify-center md:py-14 md:mt-4  bg-primary"
             >
                 <div className="w-[90%] md:w-[50%] mr-2  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
-                    {!fields && (
-                        <motion.p
-                            initial={{ opacity: 0, x: 200 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 200 }}
-                            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
-                                alertStatus === 'danger' ? 'bg-red-400 text-red-800' : 'bg-emerald-400 text-emerald-800'
-                            }`}
-                        >
-                            {msg}
-                        </motion.p>
-                    )}
                     <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
                         <MdFastfood className="text-xl text-textRed" />
                         <input
@@ -179,36 +179,17 @@ function CreateContainer() {
                         outline-none border-none placeholder:text-gray-400 text-white"
                         />
                     </div>
-                    <div className="w-full">
-                        <select
-                            className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
-                            onChange={(e) => setCategory(e.target.value)}
-                        >
-                            <option value="orther" className="bg-white">
-                                Select category
-                            </option>
-                            {categories &&
-                                categories.map((item) => (
-                                    <option
-                                        key={item.id}
-                                        value={item.urlParamName}
-                                        className="text-base border-0 outline-none capitalize bg-white text-headingColor "
-                                    >
-                                        {item.name}
-                                    </option>
-                                ))}
-                        </select>
-                    </div>
 
-                    <input
+                    {/* <input
                         type="text"
                         id="message"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block p-2.5 h-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Description ..."
-                    ></input>
+                    ></input> */}
+
                     <div className="w-full py-2 border-b border-gray-700 flex items-center gap-2">
                         <BsFileEarmarkPdf className="text-textRed text-2xl" />
                         <input
@@ -217,6 +198,7 @@ function CreateContainer() {
                             onChange={(e) => setCalories(e.target.value)}
                             required
                             placeholder="Loại Tài Liệu"
+                            rows="4"
                             className="w-full h-full text-xl bg-transparent outline-none border-none text-white placeholder:text-gray-400"
                         />
                     </div>
@@ -244,19 +226,10 @@ function CreateContainer() {
                             />
                         </div>
                     </div>
-
-                    <div className="flex items-center w-full">
-                        <button
-                            type="button"
-                            className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
-                            onClick={saveDetails}
-                        >
-                            Save
-                        </button>
-                    </div>
-                </div>
-                <div className="w-[90%] md:w-[40%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
-                    <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-420 cursor-pointer rounded-lg">
+                    <div
+                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300
+                     w-full h-225 md:h-300 cursor-pointer rounded-lg"
+                    >
                         {isLoading ? (
                             <Loader />
                         ) : (
@@ -297,7 +270,47 @@ function CreateContainer() {
                         )}
                     </div>
                 </div>
+                <div className="w-[90%] md:w-[40%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
+                    <div className="w-full">
+                        <select
+                            className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value="orther" className="bg-white">
+                                Select category
+                            </option>
+                            {categories &&
+                                categories.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.urlParamName}
+                                        className="text-base border-0 outline-none capitalize bg-white text-headingColor "
+                                    >
+                                        {item.name}
+                                    </option>
+                                ))}
+                        </select>
+                    </div>
+
+                    <textarea
+                        id="message"
+                        rows="22"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Your message..."
+                    ></textarea>
+                </div>
             </motion.div>
+            <div className="flex items-center w-full">
+                <button
+                    type="button"
+                    className="ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+                    onClick={saveDetails}
+                >
+                    Save
+                </button>
+            </div>
         </AnimatePresence>
     );
 }

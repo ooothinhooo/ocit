@@ -14,11 +14,13 @@ import {
     HeaderContainer,
     UpdateProduct,
     Banner,
+    ViewCartItem,
 } from './components';
 import { Thanks } from './pages';
 import { getAllOCIT, getArr, pushArr, getAllItemsInFolder } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
+
 function App() {
     const [{ OCIT }, dispatch] = useStateValue();
 
@@ -51,6 +53,7 @@ function App() {
                         <Route path="/profile/:uid" element={<UserProfile />} />
                         <Route path="/viewproduct" element={<ViewProductsList />} />
                         <Route path="/update/:uid" element={<UpdateProduct />} />
+                        <Route path="/products/:uid" element={<ViewCartItem />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/xincamon" element={<Thanks />} />
                     </Routes>

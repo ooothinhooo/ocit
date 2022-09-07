@@ -1,5 +1,5 @@
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    content: ['./src/**/*.{js,jsx,ts,tsx}', 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
     // content: [
     //     "./node_modules/flowbite/**/*.js"
     // ]
@@ -72,6 +72,6 @@ module.exports = {
             },
         },
     },
-    plugins: [require('tailwind-scrollbar')],
+    plugins: [require('tailwind-scrollbar'), require('flowbite/plugin')],
     // plugins: [require('flowbite/plugin')],
 };

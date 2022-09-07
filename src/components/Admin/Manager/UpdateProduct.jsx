@@ -130,7 +130,7 @@ function UpdateProduct({ id }) {
             setTimeout(() => {
                 setFields(false);
                 window.location = '/';
-                window.location.reload();
+                // window.location.reload();
             }, 4000);
         } catch (e) {
             setFields(true);
@@ -225,17 +225,14 @@ function UpdateProduct({ id }) {
                         outline-none border-none placeholder:text-gray-400 text-white"
                             />
                         </div>
-                        <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-                            <input
-                                type="text"
-                                id="message"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                rows="4"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Description ..."
-                            ></input>
-                        </div>
+                        <textarea
+                            id="message"
+                            rows="6"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Your message..."
+                        ></textarea>
                         <div className="w-full flex flex-col md:flex-row items-center gap-3 ">
                             <div className="w-full">
                                 <select
