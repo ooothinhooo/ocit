@@ -13,6 +13,8 @@ export { default as ChildrenMenu } from './ChildrenMenu';
 export { default as Banner } from './Banner';
 export { default as Contact } from './Contact';
 export { default as ViewCartItem } from './ViewCartItem';
+export { default as BannerHome } from './BannerHome';
+
 export { default as HeaderContainer } from './Display/HeaderContainer';
 
 export { default as CreateContainer } from './Admin/Manager/CreateContainer';

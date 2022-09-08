@@ -12,6 +12,7 @@ import Footer from './Footer';
 import Tabs from './Tabs';
 import Banner from './Banner';
 import meme from '../img/meme.gif';
+import BannerHome from './BannerHome';
 function MainContainer() {
     const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
@@ -21,6 +22,9 @@ function MainContainer() {
 
     return (
         <div className=" w-full h-full flex flex-col  items-center  justify-center">
+            <div className="w-full ">
+                <BannerHome />
+            </div>
             <HomeContainer />
             <div className="w-full my-6">
                 <Banner

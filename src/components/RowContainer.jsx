@@ -7,6 +7,8 @@ import { actionType } from '../context/reducer';
 import Swal from 'sweetalert2';
 import { ViewCartItem } from '../components';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function RowContainer({ flag, data, scrollValue }) {
     // const MySwal = withReactContent(Swal);
@@ -104,7 +106,7 @@ function RowContainer({ flag, data, scrollValue }) {
                             <>
                                 <div
                                     key={item.id}
-                                    className="w-200 h-250 min-h-[180px] min-w[200px]
+                                    className="w-[160px] h-250 min-h-[200px] min-w[180px]
                         md:w-340  md:min-w-[240px] 
                         my-12 md:h-auto bg-gray-100 p-2 m-2
                         flex flex-col items-center justify-between
@@ -173,7 +175,15 @@ function RowContainer({ flag, data, scrollValue }) {
 
                                 <div className="p-6 space-y-6">
                                     <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                        {itemProduct?.description}
+                                        {/* <ReactMarkdown children={itemProduct?.description} /> */}
+                                        {/* {itemProduct?.description} */}
+                                        {/* <ReactMarkdown
+                                            children={itemProduct?.description}
+                                            remarkPlugins={[remarkGfm]}
+                                        /> */}
+                                        <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+                                            {itemProduct?.description}
+                                        </ReactMarkdown>
                                     </p>
                                     {/* <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                                         The European Union’s General Data Protection Regulation

@@ -16,12 +16,16 @@ import {
     Banner,
     ViewCartItem,
 } from './components';
-import { Thanks } from './pages';
+import { HocPhan, Thanks } from './pages';
 import { getAllOCIT, getArr, pushArr, getAllItemsInFolder } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
+import CT242 from './HocPhan/CT242';
+import CT112 from './HocPhan/CT112';
+import CT179 from './HocPhan/CT179';
 
 function App() {
+    const markdown = `hs`;
     const [{ OCIT }, dispatch] = useStateValue();
 
     const fetchData = async () => {
@@ -46,6 +50,7 @@ function App() {
                 {/* <Header /> */}
 
                 <HeaderContainer />
+                {/* <Reactmd /> */}
                 <main className="mt-14 md:mt-10 px-4 md:px-16  py-4 w-full  bg-primary">
                     <Routes>
                         <Route path="/*" element={<MainContainer />} />
@@ -56,6 +61,11 @@ function App() {
                         <Route path="/products/:uid" element={<ViewCartItem />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/xincamon" element={<Thanks />} />
+
+                        <Route path="/hocphan" element={<HocPhan />} />
+                        <Route path="/CT242" element={<CT242 />} />
+                        <Route path="/CT112" element={<CT112 />} />
+                        <Route path="/CT179" element={<CT179 />} />
                     </Routes>
                 </main>
             </div>
