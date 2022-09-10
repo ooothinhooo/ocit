@@ -1,9 +1,9 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
+
 import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import ReactMarkdown from 'react-markdown';
 import {
     Header,
     MainContainer,
@@ -25,7 +25,6 @@ import CT112 from './HocPhan/CT112';
 import CT179 from './HocPhan/CT179';
 
 function App() {
-    const markdown = `hs`;
     const [{ OCIT }, dispatch] = useStateValue();
 
     const fetchData = async () => {
@@ -68,6 +67,7 @@ function App() {
                         <Route path="/CT179" element={<CT179 />} />
                     </Routes>
                 </main>
+                {/* <DocViewer documents={docs} /> */}
             </div>
         </AnimatePresence>
     );
