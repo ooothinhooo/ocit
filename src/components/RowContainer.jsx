@@ -5,6 +5,10 @@ import { NotFound } from '../img';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import Swal from 'sweetalert2';
+import Markdown from 'markdown-to-jsx';
+
+import { H1, H2, H3, H4, H5, Text, Code, aside, note, pre } from '../styles-components';
+
 import { ViewCartItem } from '../components';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
@@ -174,7 +178,7 @@ function RowContainer({ flag, data, scrollValue }) {
                                 </div>
 
                                 <div className="p-6 space-y-6">
-                                    <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    <div className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                         {/* <ReactMarkdown children={itemProduct?.description} /> */}
                                         {/* {itemProduct?.description} */}
                                         {/* <ReactMarkdown
@@ -184,7 +188,7 @@ function RowContainer({ flag, data, scrollValue }) {
                                         <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
                                             {itemProduct?.description}
                                         </ReactMarkdown>
-                                    </p>
+                                    </div>
                                     {/* <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                                                         The European Union’s General Data Protection Regulation
                                                         (G.D.P.R.) goes into effect on May 25 and is meant to ensure a

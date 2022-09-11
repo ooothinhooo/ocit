@@ -6,6 +6,10 @@ html, body{
     scroll-behavior:smooth ;
     overflow-x: hidden
 }
+
+br{
+    color: red;
+}
 /* width */
 ::-webkit-scrollbar {
     width: 1px;
@@ -35,6 +39,7 @@ html, body{
         -webkit-box-shadow: 1px 1px 10px #999;
                 box-shadow: 1px 1px 10px #999;
       }
+
       
 @tailwind base;
 @tailwind components;
