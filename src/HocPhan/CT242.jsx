@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Markdown from 'markdown-to-jsx';
-import { H1, H2, H3, H4, H5, H6, Text, Code, aside, note, pre } from '../styles-components';
-
+import {
+    H1,
+    H2,
+    H3,
+    H4,
+    H5,
+    H6,
+    Text,
+    Code,
+    aside,
+    note,
+    pre,
+    ul,
+    ol,
+    info,
+    warning,
+    success,
+    danger,
+    create,
+} from '../styles-components';
 function CT242() {
     const [contentTab1, setContentTab1] = useState('');
     const [contentTab2, setContentTab2] = useState('');
@@ -32,22 +50,22 @@ function CT242() {
     }, []);
 
     const tab = [
-        {
-            id: 1,
-            link: contentTab1,
-        },
-        {
-            id: 2,
-            link: contentTab2,
-        },
-        {
-            id: 3,
-            link: contentTab3,
-        },
-        {
-            id: 4,
-            link: contentTab4,
-        },
+        // {
+        //     id: 1,
+        //     link: contentTab1,
+        // },
+        // {
+        //     id: 2,
+        //     link: contentTab2,
+        // },
+        // {
+        //     id: 3,
+        //     link: contentTab3,
+        // },
+        // {
+        //     id: 4,
+        //     link: contentTab4,
+        // },
         {
             id: 5,
             link: contentTab5,
@@ -65,7 +83,7 @@ function CT242() {
             link: contentTab8,
         },
         {
-            id: 8,
+            id: 9,
             link: contentTab9,
         },
     ];
@@ -80,7 +98,7 @@ function CT242() {
                                 <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                     <a
                                         className={
-                                            'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+                                            'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal mx-1 my-1 ' +
                                             (openTab === item.id ? 'text-white bg-red-600' : 'text-red-600 bg-white')
                                         }
                                         onClick={(e) => {
@@ -121,6 +139,13 @@ function CT242() {
                                                                 aside: { component: aside },
                                                                 note: { component: note },
                                                                 pre: { component: pre },
+                                                                info: { component: info },
+                                                                danger: { component: danger },
+                                                                success: { component: success },
+                                                                warning: { component: warning },
+                                                                create: { component: create },
+                                                                ul: { component: ul },
+                                                                ol: { component: ol },
                                                             },
                                                         }}
                                                     >

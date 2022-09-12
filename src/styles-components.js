@@ -43,7 +43,7 @@ export const H6 = styled.h6`
 export const Text = styled.p`
     color: #bface0;
     margin-top: 5px;
-
+    font-weight: italic;
     font-size: 16px;
     font-family: sans-serif;
 `;
@@ -66,12 +66,12 @@ export const aside = styled.button`
     font-family: sans-serif;
     color: #256d85;
     text-align: left;
-    padding: 8px;
+    padding: 10px;
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 0px;
     margin-left: 0px;
-    border-left: 0.5rem solid #00ff99;
+    border-left: 0.2rem solid #1e5128;
 `;
 
 export const note = styled.button`
@@ -105,15 +105,69 @@ export const pre = styled.button`
     border-left: 0.5rem double #1c6758;
 `;
 
-// code {
-//     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-//       monospace;
-//     color: #256D85;
-//   }
+export const danger = styled.div`
+    background: #ffdddd;
+    border-left: 6px solid #f44336;
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #256d85;
+    text-align: left;
+`;
 
-//   pre {
-//     background-color: black;
-//     padding-top: 1em;
-//     padding-left: 1em;
-//     padding-bottom: 1em;
-//   }
+export const success = styled.div`
+    background: #ddffdd;
+    border-left: 6px solid #04aa6d;
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #256d85;
+    text-align: left;
+`;
+
+export const info = styled.div`
+    background: #e7f3fe;
+    border-left: 6px solid #2196f3;
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #256d85;
+    text-align: left;
+`;
+
+export const warning = styled.div`
+    background: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #256d85;
+    text-align: left;
+`;
+
+export const ul = styled.ul`
+    list-style-type: circle;
+`;
+export const ol = styled.ol`
+    list-style-type: lower-alpha;
+`;
+
+export const create = styled.div`
+    margin-top: 5rem;
+    text-align: right;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: #256d85;
+`;
+{
+    /* <style>
+ul.a {list-style-type: circle;}
+ul.b {list-style-type: square;}
+ol.c {list-style-type: upper-roman;}
+ol.d {list-style-type: lower-alpha;}
+</style> */
+}
