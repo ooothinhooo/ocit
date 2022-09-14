@@ -5,7 +5,7 @@ import ListProducts from './ListProducts';
 import MenuContainer from '../../MenuContainer';
 import { AnimatePresence, motion } from 'framer-motion';
 const color = 'rose';
-function ViewProductsList() {
+function ViewProductsList({ tab }) {
     const [{ OCIT, cartShow }, dispatch] = useStateValue();
     const [openTab, setOpenTab] = React.useState(1);
     return (

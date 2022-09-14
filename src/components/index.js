@@ -14,6 +14,7 @@ export { default as Banner } from './Banner';
 export { default as Contact } from './Contact';
 export { default as ViewCartItem } from './ViewCartItem';
 export { default as BannerHome } from './BannerHome';
+export { default as Task } from './Task';
 
 export { default as HeaderContainer } from './Display/HeaderContainer';
 

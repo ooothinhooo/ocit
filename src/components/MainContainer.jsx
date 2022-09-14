@@ -13,6 +13,7 @@ import Tabs from './Tabs';
 import Banner from './Banner';
 import meme from '../img/meme.gif';
 import BannerHome from './BannerHome';
+import Task from './Task';
 function MainContainer() {
     const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
@@ -90,6 +91,7 @@ function MainContainer() {
 
             {/* <Tabs /> */}
             <Footer />
+            {/* <Task /> */}
         </div>
     );
 }

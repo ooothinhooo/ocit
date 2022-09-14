@@ -150,8 +150,8 @@ function HeaderContainer() {
                         {isMenu && (
                             <>
                                 <div
-                                    className=" z-50 my-4 text-base top-12 right-3  inset-y-auto  m-0 absolute
-                             bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block"
+                                    className="z-50 my-6 mx-2 text-base top-12 right-3  inset-y-auto m-0 absolute
+                             bg-primary rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block"
                                     id="user-dropdown"
                                     data-popper-reference-hidden=""
                                     data-popper-escaped=""
@@ -159,7 +159,7 @@ function HeaderContainer() {
                                 >
                                     {user && user ? (
                                         <div className="py-3 px-4">
-                                            <span className="block text-sm text-gray-900 dark:text-white">
+                                            <span className="block text-sm text-gray-100 dark:text-white">
                                                 {user.displayName}
                                             </span>
                                             <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
@@ -171,43 +171,76 @@ function HeaderContainer() {
                                     )}
 
                                     <ul className="py-1" aria-labelledby="user-menu-button">
-                                        <li>
-                                            <Link to={'/profile/' + user.uid}>
-                                                <p
-                                                    className=" block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                                    onClick={() => setIsMenu(false)}
+                                        <>
+                                            <li>
+                                                <a
+                                                    href="#"
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay  "
+                                                    onClick={handleSetisMenu}
+                                                    aria-current="page"
                                                 >
-                                                    {' '}
-                                                    View Profile
-                                                </p>
-                                            </Link>
-                                        </li>
+                                                    Home
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    to="/collections"
+                                                    onClick={handleSetisMenu}
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                >
+                                                    Sản Phẩm
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    to="/hocphan"
+                                                    onClick={handleSetisMenu}
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                >
+                                                    Học Phần
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    to="/resources"
+                                                    onClick={handleSetisMenu}
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                >
+                                                    Tài Nguyên
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    h
+                                                    onClick={handleSetisMenu}
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                >
+                                                    Liên Hệ
+                                                </a>
+                                            </li>
+                                        </>
                                         <li>
-                                            {user && user.email === ROOT_USER_EMAIL && (
-                                                <Link to={'/createItem'}>
+                                            {user && user ? (
+                                                <Link to={'/profile/' + user.uid}>
                                                     <p
-                                                        className=" block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                        className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
                                                         onClick={() => setIsMenu(false)}
                                                     >
-                                                        New Item
+                                                        {' '}
+                                                        View Profile
                                                     </p>
                                                 </Link>
+                                            ) : (
+                                                <></>
                                             )}
                                         </li>
-                                        <li>
-                                            {user && user.email === ROOT_USER_EMAIL && (
-                                                <Link to={'/viewproduct'}>
-                                                    <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                                        Product List
-                                                    </p>
-                                                </Link>
-                                            )}
-                                        </li>
+
                                         <li>
                                             {user && user ? (
                                                 <p
-                                                    className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                    // className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                     onClick={logout}
+                                                    className="block mt-2 py-2 px-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold  border rounded shadow"
                                                 >
                                                     Logout
                                                 </p>
@@ -222,10 +255,39 @@ function HeaderContainer() {
                         {user && user ? (
                             <>
                                 {' '}
+                                <div className="">
+                                    <button
+                                        data-collapse-toggle="mobile-menu-2"
+                                        type="button"
+                                        className="inline-flex items-center  p-2 ml-2 mr-3 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                        aria-controls="mobile-menu-2"
+                                        aria-expanded="false"
+                                        onClick={handleSetisMenu}
+                                    >
+                                        <span className="sr-only">Open main menu</span>
+                                        <svg
+                                            className="w-6 h-6"
+                                            aria-hidden="true"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                                clip-rule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                {' '}
                                 <button
                                     data-collapse-toggle="mobile-menu-2"
                                     type="button"
-                                    className="inline-flex items-center  p-2 ml-2 mr-3 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                    className="inline-flex items-center md:hidden  p-2 ml-2 mr-3 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     aria-controls="mobile-menu-2"
                                     aria-expanded="false"
                                     onClick={handleSetisMenu}
@@ -246,54 +308,54 @@ function HeaderContainer() {
                                     </svg>
                                 </button>
                             </>
-                        ) : (
-                            <></>
                         )}
                     </div>
                     <div
                         className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1 bg-primary"
                         id="mobile-menu-2"
                     >
-                        <ul className="flex flex-col p-4 mt-4 bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <ul className="flex  flex-col p-4 mt-4 bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                                    className="text-md text-gray-100 block py-2 pr-4 pl-3 font-bold  bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
                                     aria-current="page"
                                 >
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a
+                                <Link
+                                    to="/collections"
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="text-md text-gray-100 block py-1 pr-2 pl-2  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700  md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    Products
-                                </a>
+                                    Sản Phẩm
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/hocphan"
+                                    className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                >
+                                    Học Phần
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/resources"
+                                    href="#"
+                                    className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                >
+                                    Tài Nguyên
+                                </Link>
                             </li>
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    Services
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                                >
-                                    About
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                                >
-                                    Contact
+                                    Liên Hệ
                                 </a>
                             </li>
                         </ul>

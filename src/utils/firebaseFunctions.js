@@ -13,6 +13,7 @@ import {
 } from 'firebase/firestore';
 import { firestore, storage } from '../firebase.config';
 import { initializeApp } from 'firebase/app';
+import { getAuth, sendEmailVerification } from 'firebase/auth';
 export const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -133,6 +134,5 @@ export const updateItem = async (oid, updates) => {
             console.log(error);
         });
 };
-
 
 

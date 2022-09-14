@@ -12,6 +12,7 @@ import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
 
 function CreateContainer() {
+    var today = new Date();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [calories, setCalories] = useState('');
@@ -106,6 +107,7 @@ function CreateContainer() {
                     qty: 1,
                     price: price,
                     code: code.toUpperCase(),
+                    date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
                 };
                 saveItem(data);
                 setIsLoading(false);
@@ -273,7 +275,7 @@ function CreateContainer() {
                 <div className="w-[90%] md:w-[40%]  border border-gray-300 rounded-lg  gap-4 p-4 flex flex-col items-center justify-center">
                     <div className="w-full">
                         <select
-                            className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+                            className="outline-none w-full text-base border-b-2 bg-primary text-red-400 border-gray-200 p-2 rounded-md cursor-pointer"
                             onChange={(e) => setCategory(e.target.value)}
                         >
                             <option value="orther" className="bg-white">
@@ -284,7 +286,7 @@ function CreateContainer() {
                                     <option
                                         key={item.id}
                                         value={item.urlParamName}
-                                        className="text-base border-0 outline-none capitalize bg-white text-headingColor "
+                                        className="text-base border-0 bg-primary text-red-400 outline-none capitalize bg-white text-headingColor "
                                     >
                                         {item.name}
                                     </option>
@@ -297,7 +299,7 @@ function CreateContainer() {
                         rows="22"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block p-2.5 w-full text-sm bg-primary text-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Your message..."
                     ></textarea>
                 </div>

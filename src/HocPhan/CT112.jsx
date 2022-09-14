@@ -4,10 +4,10 @@ import { H1, H2, H3, H4, H5, Text, Code, aside, note, pre } from '../styles-comp
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { Buffer } from 'buffer';
-import contents from './contents.md';
+
 function CT112() {
     const [markDown, setMarkdown] = useState();
-    const markdown = contents.toString();
+    // const markdown = contents.toString();
     const [content, setContent] = useState('');
 
     useEffect(() => {
