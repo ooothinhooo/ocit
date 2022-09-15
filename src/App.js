@@ -36,6 +36,7 @@ import {
     CT241,
     CT242,
     CT244,
+    CT287,
     CT296,
     CT449,
 } from './HocPhan';
@@ -109,6 +110,7 @@ function App() {
                                     <Route path="/CT241" element={<CT241 />} />
                                     <Route path="/CT242" element={<CT242 />} />
                                     <Route path="/CT244" element={<CT244 />} />
+                                    <Route path="/CT287" element={<CT287 />} />
                                     <Route path="/CT296" element={<CT296 />} />
                                     <Route path="/CT449" element={<CT449 />} />
                                 </>

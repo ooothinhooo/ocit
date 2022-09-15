@@ -95,6 +95,15 @@ function Task() {
             creater: 'othinho',
             img: 'https://i.ibb.co/rxJfJ6G/image.png',
         },
+        {
+            MaHP: 'CT287',
+            name: 'Kiểm Chứng Mô Hình',
+            category: 'Chuyên Ngành',
+            link: '/CT287',
+            update: 'Now',
+            creater: 'othinho',
+            img: 'https://i.ibb.co/rxJfJ6G/image.png',
+        },
     ];
     return (
         <>

@@ -1,11 +1,15 @@
-import React from 'react';
-import { ChildrenMenu, ViewProductsList } from '../components';
-import MenuProductList from '../components/Admin/Manager/MenuProductList';
+import React, { useState } from 'react';
+
+import { ChildrenMenu, MenuContainer, RowContainer } from '../components';
+import { useStateValue } from '../context/StateProvider';
 
 function ProductPage() {
+    const [filter, setFilter] = useState('CT178');
+    const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
+
     return (
         <>
-            <ViewProductsList />
+            <MenuContainer />
         </>
     );
 }

@@ -10,5 +10,6 @@ export { default as CT240 } from './CT240';
 export { default as CT241 } from './CT241';
 export { default as CT242 } from './CT242';
 export { default as CT244 } from './CT244';
+export { default as CT287 } from './CT287';
 export { default as CT296 } from './CT296';
 export { default as CT449 } from './CT449';

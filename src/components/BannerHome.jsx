@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 // import CT112 from '../HocPhan/CT112';
 // import CT179 from '../HocPhan/CT179';
 // import CT296 from '../HocPhan/CT296';
+import { useStateValue } from '../context/StateProvider';
 function BannerHome() {
+    const [{ OCIT, user }, dispatch] = useStateValue();
+
     return (
         <>
             <div className="bg-primary">
@@ -17,13 +20,25 @@ function BannerHome() {
                                     <img src="https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Foci%2F153-1532142_code-coding-css-html-java-layout-php-programming-static-website-icon-png-removebg-preview.png?alt=media&token=a0fecae7-bce9-4b6c-a284-17794a196d87" />
                                 </div>
                                 <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                                    <h1 className="text-red-400 text-2xl title-font font-bold mb-2">
-                                        Đăng Nhập Để Xem Nhiều Hơn
-                                    </h1>
-                                    <p className="leading-relaxed text-base text-cardOverlay">
-                                        Một là đăng nhập, Hai là đăng nhập -)))
-                                    </p>
-
+                                    {user && user ? (
+                                        <>
+                                            <h1 className="text-red-400 text-2xl title-font font-bold mb-2">
+                                                Làm tốt lắm
+                                            </h1>
+                                            <p className="leading-relaxed text-base text-cardOverlay">
+                                                Hãy Khám Phá OCIT nhé
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h1 className="text-red-400 text-2xl title-font font-bold mb-2">
+                                                Đăng Nhập Để Xem Nhiều Hơn
+                                            </h1>
+                                            <p className="leading-relaxed text-base text-cardOverlay">
+                                                Một là đăng nhập, Hai là đăng nhập -)))
+                                            </p>
+                                        </>
+                                    )}
                                     <div className="py-2 ml-1 mr-1 px-1">
                                         <span class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">
                                             Javascript
