@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { ChildrenMenu, MenuContainer, RowContainer } from '../components';
-import { useStateValue } from '../context/StateProvider';
+import { MenuContainer } from '../components';
+// import { useStateValue } from '../context/StateProvider';
 
 function ProductPage() {
-    const [filter, setFilter] = useState('CT178');
-    const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
+    // const [filter, setFilter] = useState('CT178');
+    // const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
     return (
         <>

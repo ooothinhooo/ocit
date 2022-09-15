@@ -164,11 +164,3 @@ export const create = styled.div`
     font-family: sans-serif;
     color: #256d85;
 `;
-{
-    /* <style>
-ul.a {list-style-type: circle;}
-ul.b {list-style-type: square;}
-ol.c {list-style-type: upper-roman;}
-ol.d {list-style-type: lower-alpha;}
-</style> */
-}

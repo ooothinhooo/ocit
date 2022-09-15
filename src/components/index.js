@@ -15,6 +15,7 @@ export { default as Contact } from './Contact';
 export { default as ViewCartItem } from './ViewCartItem';
 export { default as BannerHome } from './BannerHome';
 export { default as Task } from './Task';
+export { default as Unfinished } from './Unfinished';
 
 export { default as HeaderContainer } from './Display/HeaderContainer';
 

@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import {
-    Header,
     MainContainer,
     CreateContainer,
     UserProfile,
@@ -13,16 +12,12 @@ import {
     Contact,
     HeaderContainer,
     UpdateProduct,
-    Banner,
     ViewCartItem,
 } from './components';
 import { Admin, HocPhan, Thanks } from './pages';
-import { getAllOCIT, getArr, pushArr, getAllItemsInFolder } from './utils/firebaseFunctions';
+import { getAllOCIT, getArr, getAllItemsInFolder } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
-// import CT242 from './HocPhan/CT242';
-// import CT112 from './HocPhan/CT112';
-// import CT179 from './HocPhan/CT179';
 import {
     CT112,
     CT176,
@@ -44,7 +39,7 @@ import ProductPage from './pages/ProductPage';
 import Resources from './pages/Resources';
 
 function App() {
-    const [{ OCIT, user }, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
 
     const fetchData = async () => {
@@ -58,7 +53,6 @@ function App() {
 
     useEffect(() => {
         fetchData();
-        // getdata();
         getAllItemsInFolder();
         getArr();
     }, []);
@@ -67,15 +61,12 @@ function App() {
         <AnimatePresence exitBeforeEnter>
             <div className="w-screen h-auto flex flex-col bg-primary">
                 {/* <Header /> */}
-
                 <HeaderContainer />
-
                 <main className="mt-14 md:mt-10 px-4 md:px-16  py-4 w-full  bg-primary">
                     <Routes>
                         {user && user.email === ROOT_USER_EMAIL ? (
                             <>
                                 <Route path="/home" element={<MainContainer />} />
-
                                 <Route path="/*" element={<Admin />} />
                                 <Route path="/createItem" element={<CreateContainer />} />
                                 <Route path="/viewproduct" element={<ViewProductsList />} />
@@ -88,9 +79,8 @@ function App() {
                                 <Route path="/*" element={<MainContainer />} />
                             </>
                         )}
-
+                        {/* link to page */}
                         <Route path="/profile/:uid" element={<UserProfile />} />
-
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/xincamon" element={<Thanks />} />
 

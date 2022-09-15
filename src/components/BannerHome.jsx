@@ -1,21 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// import CT242 from '../HocPhan/CT242';
-// import CT112 from '../HocPhan/CT112';
-// import CT179 from '../HocPhan/CT179';
-// import CT296 from '../HocPhan/CT296';
 import { useStateValue } from '../context/StateProvider';
-function BannerHome() {
-    const [{ OCIT, user }, dispatch] = useStateValue();
+import Swal from 'sweetalert2';
 
+import { logo } from '../img';
+function BannerHome() {
+    const [{ user }, dispatch] = useStateValue();
+    const arr = [
+        {
+            MAHP: 'CT112',
+            title: 'Mạng Máy Tính',
+        },
+        {
+            MAHP: 'CT242',
+            title: 'Kiến Trúc & Thiết Kế Phần Mềm',
+        },
+        {
+            MAHP: 'CT287',
+            title: 'Kiểm Chứng Mô Hình',
+        },
+    ];
+
+    const renderSwal = () => {
+        Swal.fire({
+            title: 'HÃY ĐĂNG NHẬP ĐỂ XEM THÊM',
+            width: 600,
+            padding: '3em',
+            color: '#fff',
+            background: '#A5C9CA',
+            backdrop: `
+          rgba(0,0,123,0.4)
+          url('https://i.ibb.co/XxsmhTz/meme.gif')
+          left top
+          no-repeat
+        `,
+        });
+    };
     return (
         <>
             <div className="bg-primary">
                 <section>
                     <section className="text-gray-600 body-font">
                         <div className="container md:px-5 md:py-2 md:mx-auto -mt-10">
-                            <div className="p-5 bg-primary flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-lg sm:flex-row flex-col">
+                            <div className="p-5 bg-primary flex items-center mx-auto border-b border-t mb-10 border-gray-200 hover:border-red-400 sm:flex-row flex-col">
                                 <div className="sm:w-32 hidden md:inline-flex sm:h-32 h-20 w-20 sm:mr-10  items-center justify-center flex-shrink-0 scale-150">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Foci%2F153-1532142_code-coding-css-html-java-layout-php-programming-static-website-icon-png-removebg-preview.png?alt=media&token=a0fecae7-bce9-4b6c-a284-17794a196d87" />
                                 </div>
@@ -23,7 +50,7 @@ function BannerHome() {
                                     {user && user ? (
                                         <>
                                             <h1 className="text-red-400 text-2xl title-font font-bold mb-2">
-                                                Làm tốt lắm
+                                                Wowww! Đăng Nhập Rồi Đấy à
                                             </h1>
                                             <p className="leading-relaxed text-base text-cardOverlay">
                                                 Hãy Khám Phá OCIT nhé
@@ -56,67 +83,104 @@ function BannerHome() {
                                             Java
                                         </span>
                                     </div>
-                                    <div className="md:flex font-bold text-gray-800 md:text-md text-sm">
-                                        <div className="w-full md:w-1/2 flex space-x-3 ">
-                                            <div className="w-1/2">
-                                                <h2 className="text-gray-100">Kiến Trúc & Thiết Kế PM</h2>
-
-                                                <Link to="/CT242">
-                                                    <button
-                                                        type="button"
-                                                        class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-                                                    >
-                                                        CT242
-                                                    </button>
-                                                </Link>
-                                            </div>
-                                            <div className="w-1/2">
-                                                <h2 className="text-gray-100">Mạng Máy Tính</h2>
-                                                <Link to="/CT112">
-                                                    <button
-                                                        type="button"
-                                                        class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-                                                    >
-                                                        CT112
-                                                    </button>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="w-full md:w-1/2 flex space-x-3">
-                                            <div className="w-1/2">
-                                                <h2 className="text-gray-100">Quản Trị Hệ Thống</h2>
-                                                <button
-                                                    type="button"
-                                                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-                                                >
-                                                    CT179
-                                                </button>
-                                            </div>
-                                            <div className="w-1/2">
-                                                <h2 className="text-gray-100">Quản Lý Dự Án PM</h2>
-                                                <button
-                                                    type="button"
-                                                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-                                                >
-                                                    CT223
-                                                </button>
-                                            </div>
+                                    <div className="md:flex font-bold text-gray-800 md:text-md text-sm ">
+                                        <div class="bg-primary rounded-sm shadow-lg  h-full flex flex-col text-sm">
+                                            <header class="text-white flex flex-col rounded-lg ">
+                                                <section class="flex space-x-1 bg-primary p-1 pr-0 rounded-t-lg ">
+                                                    <nav class="ml-6 md:m-0">
+                                                        <ul class="md:flex p-2 space-x-2  ">
+                                                            {arr &&
+                                                                arr.map((item) => (
+                                                                    <>
+                                                                        {user && user ? (
+                                                                            <>
+                                                                                <Link to={`/${item.MAHP}`}>
+                                                                                    <li class="md:w-52 w-full p-2 rounded-md flex cursor-pointer border border-purple-400 hover:bg-opacity-20 hover:bg-white">
+                                                                                        <img
+                                                                                            class="h-4 w-4 my-auto mr-2"
+                                                                                            src={logo}
+                                                                                            alt=""
+                                                                                        />
+                                                                                        <span class="overflow-ellipsis overflow-hidden whitespace-nowrap flex-grow">
+                                                                                            <span className="md:hidden">
+                                                                                                {' '}
+                                                                                                {item.MAHP} -
+                                                                                            </span>{' '}
+                                                                                            {item.title}
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </Link>
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <div onClick={renderSwal}>
+                                                                                    <li class="md:w-52 w-full p-2 rounded-md flex cursor-pointer border border-purple-400 hover:bg-opacity-20 hover:bg-white">
+                                                                                        <img
+                                                                                            class="h-4 w-4 my-auto mr-2"
+                                                                                            src={logo}
+                                                                                            alt=""
+                                                                                        />
+                                                                                        <span class="overflow-ellipsis overflow-hidden whitespace-nowrap flex-grow">
+                                                                                            <span className="md:hidden">
+                                                                                                {' '}
+                                                                                                {item.MAHP} -
+                                                                                            </span>{' '}
+                                                                                            {item.title}
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </div>
+                                                                            </>
+                                                                        )}
+                                                                    </>
+                                                                ))}
+                                                        </ul>
+                                                    </nav>
+                                                    <div class="flex-grow"></div>
+                                                </section>
+                                            </header>
                                         </div>
                                     </div>
-                                    <Link to="/hocphan" className="mt-3 text-indigo-500 inline-flex items-center">
-                                        Learn More
-                                        <svg
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            className="w-4 h-4 ml-2"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                        </svg>
-                                    </Link>
+                                    {user && user ? (
+                                        <>
+                                            <Link
+                                                to="/hocphan"
+                                                className="mt-3 text-indigo-500 inline-flex items-center"
+                                            >
+                                                Truy Cập Học Phần
+                                                <svg
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    className="w-4 h-4 ml-2"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                                </svg>
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div
+                                                className="mt-3 text-indigo-500 inline-flex items-center"
+                                                onClick={renderSwal}
+                                            >
+                                                Truy Cập Học Phần
+                                                <svg
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    className="w-4 h-4 ml-2"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
