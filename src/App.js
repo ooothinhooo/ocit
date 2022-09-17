@@ -13,9 +13,11 @@ import {
     HeaderContainer,
     UpdateProduct,
     ViewCartItem,
+    Test,
+    CreateHocPhan,
 } from './components';
 import { Admin, HocPhan, Thanks } from './pages';
-import { getAllOCIT, getArr, getAllItemsInFolder } from './utils/firebaseFunctions';
+import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
 import {
@@ -39,7 +41,7 @@ import ProductPage from './pages/ProductPage';
 import Resources from './pages/Resources';
 
 function App() {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
 
     const fetchData = async () => {
@@ -50,11 +52,31 @@ function App() {
             });
         });
     };
+    const fetchHocPhan = async () => {
+        await getAllOCIT_HOCPHAN().then((data) => {
+            dispatch({
+                type: actionType.SET_OCIT_HOCPHAN,
+                OCIT_HOCPHAN: data,
+            });
+        });
+    };
+    const fetchOrder = async () => {
+        await getOrder_OCIT().then((data) => {
+            dispatch({
+                type: actionType.SET_OCIT_ORDER,
+                OCIT_ORDER: data,
+            });
+        });
+    };
 
     useEffect(() => {
         fetchData();
-        getAllItemsInFolder();
-        getArr();
+    }, []);
+    useEffect(() => {
+        fetchHocPhan();
+    }, []);
+    useEffect(() => {
+        fetchOrder();
     }, []);
 
     return (
@@ -64,11 +86,13 @@ function App() {
                 <HeaderContainer />
                 <main className="mt-14 md:mt-10 px-4 md:px-16  py-4 w-full  bg-primary">
                     <Routes>
+                        <Route path="/test" element={<Test />} />
                         {user && user.email === ROOT_USER_EMAIL ? (
                             <>
                                 <Route path="/home" element={<MainContainer />} />
                                 <Route path="/*" element={<Admin />} />
                                 <Route path="/createItem" element={<CreateContainer />} />
+                                <Route path="/createHocPhan" element={<CreateHocPhan />} />
                                 <Route path="/viewproduct" element={<ViewProductsList />} />
                                 <Route path="/update/:uid" element={<UpdateProduct />} />
                                 <Route path="/products/:uid" element={<ViewCartItem />} />

@@ -179,25 +179,11 @@ function RowContainer({ flag, data, scrollValue }) {
 
                                 <div className="p-6 space-y-6">
                                     <div className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                        {/* <ReactMarkdown children={itemProduct?.description} /> */}
-                                        {/* {itemProduct?.description} */}
-                                        {/* <ReactMarkdown
-                                            children={itemProduct?.description}
-                                            remarkPlugins={[remarkGfm]}
-                                        /> */}
                                         <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
                                             {itemProduct?.description}
                                         </ReactMarkdown>
                                     </div>
-                                    {/* <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                        The European Union’s General Data Protection Regulation
-                                                        (G.D.P.R.) goes into effect on May 25 and is meant to ensure a
-                                                        common set of data rights in the European Union. It requires
-                                                        organizations to notify users as soon as possible of high-risk
-                                                        data breaches that could personally affect them.
-                                                    </p> */}
                                 </div>
-
                                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                     <button
                                         data-modal-toggle="defaultModal"

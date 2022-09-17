@@ -1,10 +1,11 @@
 export const actionType = {
     SET_USER: 'SET_USER',
-    // SET_CART: 'SET_CART',
     SET_CART_SHOW: 'SET_CART_SHOW',
     SET_CART_ITEMS: 'SET_CART_ITEMS',
     SET_TOTAL: 'SET_TOTAL',
     SET_FOOD_ITEMS: 'SET_FOOD_ITEMS',
+    SET_OCIT_HOCPHAN: 'SET_OCIT_HOCPHAN',
+    SET_OCIT_ORDER: 'SET_OCIT_ORDER',
 };
 
 const reducer = (state, action) => {
@@ -42,7 +43,16 @@ const reducer = (state, action) => {
                 ...state,
                 OCIT: action.OCIT,
             };
-
+        case actionType.SET_OCIT_HOCPHAN:
+            return {
+                ...state,
+                OCIT_HOCPHAN: action.OCIT_HOCPHAN,
+            };
+        case actionType.SET_OCIT_ORDER:
+            return {
+                ...state,
+                OCIT_ORDER: action.OCIT_ORDER,
+            };
         default:
             return state;
     }

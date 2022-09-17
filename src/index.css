@@ -10,6 +10,7 @@ html, body{
 br{
     color: red;
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 1px;

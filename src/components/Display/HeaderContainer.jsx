@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Link } from 'react-router-dom';
-import { FaShoppingBasket, FaUserEdit } from 'react-icons/fa';
-import { AiOutlineLogout, AiOutlineBars } from 'react-icons/ai';
-import { GrAddCircle } from 'react-icons/gr';
-import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
+import { FaShoppingBasket } from 'react-icons/fa';
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../../firebase.config.js';

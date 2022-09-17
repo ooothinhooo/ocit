@@ -4,12 +4,43 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import emailjs from '@emailjs/browser';
 import CartItem from './CartItem';
+import { storage } from '../firebase.config';
+import { order_OCIT } from '../utils/firebaseFunctions';
+import { actionType } from '../context/reducer';
+
 import { AnimatePresence, motion } from 'framer-motion';
 function Contact() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
-
+    var today = new Date();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const form = useRef();
     const [done, setDone] = useState(false);
+    const google_id = user.uid;
+    const userName = user.displayName;
+    const email = user.email;
+    const imgURL = user.photoURL;
+
+    const saveDetails = () => {
+        try {
+            const data = {
+                id: `${user.displayName.split(' ').join('').toUpperCase()}-${time}`,
+                time: time,
+                google_id: google_id,
+                userName: userName,
+                email: email,
+                imgURL: imgURL,
+                phone: '',
+                order: orderItem,
+                totalPrice: priceItem,
+                date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+            };
+            // saveItem(data);
+            order_OCIT(data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     const sendEmail = (e) => {
         e.preventDefault();
 
@@ -24,32 +55,49 @@ function Contact() {
             },
         );
     };
+    // const order = data.join(' || ');
     function a() {
         var data = cartItems.map((item) => {
             return `${item?.title}`;
         });
         return data;
     }
+    var dataOrder = cartItems.map((item) => {
+        return `${item?.title}`;
+    });
+    var dataPrice = cartItems.map((item) => {
+        return `${item?.price}`;
+    });
+    var orderItem = dataOrder.join(' || ');
+    var priceItem = dataPrice.join(' || ');
+
     const message = `Tôi ${user.displayName} xác nhận đặt hàng ${a()}.
 
 Mọi thông tin chi tiết liên hệ qua email ${user.email}`;
 
     function renderSwal() {
-        Swal.fire({
-            title: 'Cảm Ơn Bạn Đã Mua Hàng',
-            width: 600,
-            padding: '3em',
-            color: '#fff',
-            background: '#A5C9CA',
-            backdrop: `
-      rgba(0,0,123,0.4)
-      url('https://i.ibb.co/5hbnp8q/2c93b85b50c6a5eca0a8d199d7ab4d6c.gif')
-      left top
-      no-repeat
-    `,
-        });
+        //     Swal.fire({
+        //         title: 'Cảm Ơn Bạn Đã Mua Hàng',
+        //         width: 600,
+        //         padding: '3em',
+        //         color: '#fff',
+        //         background: '#A5C9CA',
+        //         backdrop: `
+        //   rgba(0,0,123,0.4)
+        //   url('https://i.ibb.co/5hbnp8q/2c93b85b50c6a5eca0a8d199d7ab4d6c.gif')
+        //   left top
+        //   no-repeat
+        // `,
+        //     });
         window.location = '/xincamon';
     }
+
+    const submitBtn = () => {
+        saveDetails();
+
+        renderSwal();
+        // sendEmail();
+    };
     return (
         <AnimatePresence>
             <motion.div
@@ -63,7 +111,7 @@ Mọi thông tin chi tiết liên hệ qua email ${user.email}`;
                     <h1 className="text-4xl font-medium">Xác Nhận Đặt Hàng</h1>
                     <p className="mt-3">Dịch vụ othinho</p>
 
-                    <form ref={form} onSubmit={sendEmail} className="mt-10">
+                    <div className="mt-10">
                         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
                         <div className="grid gap-6 sm:grid-cols-2">
                             <div className="relative z-0">
@@ -107,10 +155,12 @@ Mọi thông tin chi tiết liên hệ qua email ${user.email}`;
                             type="submit"
                             className="mt-5 rounded-md bg-black px-10 py-2 text-white"
                             // onClick={renderSwal}
+                            onClick={submitBtn}
                         >
-                            <Link to="/xincamon">Xác Nhận</Link>
+                            {/* <Link to="/xincamon">Xác Nhận</Link> */}
+                            OK
                         </button>
-                    </form>
+                    </div>
                 </div>
             </motion.div>
         </AnimatePresence>
