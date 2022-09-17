@@ -32,7 +32,7 @@ function Contact() {
                 phone: '',
                 order: orderItem,
                 totalPrice: priceItem,
-                date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                date: today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear(),
             };
             // saveItem(data);
             order_OCIT(data);
@@ -95,7 +95,10 @@ Mọi thông tin chi tiết liên hệ qua email ${user.email}`;
     const submitBtn = () => {
         saveDetails();
 
-        renderSwal();
+        setTimeout(() => {
+            // console.log('Delayed for 1 second.');
+            renderSwal();
+        }, 1000);
         // sendEmail();
     };
     return (

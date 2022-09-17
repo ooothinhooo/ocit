@@ -14,6 +14,15 @@ function HocPhan_OCIT() {
     };
     return (
         <>
+            {' '}
+            <div className=" mb-2">
+                <h4
+                    class={`m-2 flex text-lg font-semibold text-blue-600  hover:text-pink-300 cursor-pointer
+        `}
+                >
+                    OCIT Danh Sách Học Phần
+                </h4>
+            </div>
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
                     <thead>

@@ -12,12 +12,24 @@ function CartContainer() {
     const [tot, setTot] = useState(0);
     const [flag, setFlag] = useState(1);
 
+    function unique(arr) {
+        var formArr = arr.sort();
+        var newArr = [formArr[0]];
+        for (let i = 1; i < formArr.length; i++) {
+            if (formArr[i].id !== formArr[i - 1].id) {
+                newArr.push(formArr[i]);
+            }
+        }
+        return newArr;
+    }
+    const newCartItems = unique(cartItems);
+    console.log(newCartItems);
     useEffect(() => {
-        let totalPrice = cartItems.reduce(function (accumulator, item) {
+        let totalPrice = newCartItems.reduce(function (accumulator, item) {
             return accumulator + item.qty * item.price;
         }, 0);
         setTot(totalPrice);
-        console.log(tot);
+        // console.log(tot);
     }, [tot, flag]);
 
     const showCart = () => {
@@ -28,10 +40,12 @@ function CartContainer() {
     };
 
     const handleClearCart = () => {
+        showCart();
         dispatch({
             type: actionType.SET_CART_ITEMS,
             cartItems: [],
         });
+        newCartItems = [];
         localStorage.setItem('cartItems', JSON.stringify([]));
     };
 
@@ -78,13 +92,13 @@ function CartContainer() {
                 </div>
 
                 {/* bottom section */}
-                {cartItems && cartItems.length > 0 ? (
+                {newCartItems && newCartItems.length > 0 ? (
                     <div className="w-full h-full bg-cartBg flex flex-col rounded-t-[2rem] ">
                         {/* cart items section */}
                         <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
                             {/* cart item */}
-                            {cartItems &&
-                                cartItems.map((item) => (
+                            {newCartItems &&
+                                newCartItems.map((item) => (
                                     <CartItem key={item.id} item={item} setFlag={setFlag} flag={flag} />
                                 ))}
                         </div>

@@ -14,6 +14,8 @@ import {
 import { firestore, storage } from '../firebase.config';
 import { initializeApp } from 'firebase/app';
 import { getAuth, sendEmailVerification } from 'firebase/auth';
+import Swal from 'sweetalert2';
+
 export const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -123,13 +125,12 @@ export const deleteItem_OCIT_HOCPHAN = async (index) => {
     const db = getFirestore();
     const OCIT = await getDocs(query(collection(firestore, 'OCIT_HOCPHAN'), orderBy('MaHP', 'asc')));
     const oid = OCIT.docs[index].id;
-    console.log(oid)
+    console.log(oid);
     const docRef = doc(db, 'OCIT_HOCPHAN', oid);
 
     deleteDoc(docRef)
         .then(() => {
-           
-            alert("Entire Document has been deleted successfully.")
+            alert('Entire Document has been deleted successfully.');
         })
         .catch((error) => {
             console.log(error);
@@ -167,19 +168,50 @@ export const updateItem_OCIT_HOCPHAN = async (oid, updates) => {
         });
 };
 
-
 //* đơn đặt Hàng
 //! get order to user
 export const getOrder_OCIT = async () => {
-    const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('date', 'desc')));
-    console.log(items.docs.map((doc) => doc.data()))
+    const items = await getDocs(
+        query(collection(firestore, 'ORDER'), where('date', '>', '17-9-2022'), orderBy('date', 'asc')),
+    );
+    // const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('date', 'desc')));
     return items.docs.map((doc) => doc.data());
 };
 ////TODO don dat hang
 export const order_OCIT = async (data) => {
-    await setDoc(doc(firestore, 'ORDER', `${data.userName.split(' ').join('').toUpperCase()}_[${data.google_id}]_[${data.time}]`), data, {
-        merge: true,
-    });
+    await setDoc(
+        doc(
+            firestore,
+            'ORDER',
+            `${data.userName.split(' ').join('').toUpperCase()}_[${data.time}]_[${data.date}]_[${data.google_id}]`,
+        ),
+        data,
+        {
+            merge: true,
+        },
+    );
+    // let timerInterval;
+    // Swal.fire({
+    //     title: 'Đơn Hàng Đang Được Duyệt',
+    //     html: 'Khoang!!! Dừng Khoản <b></b> milliseconds.',
+    //     timer: 2000,
+    //     timerProgressBar: true,
+    //     didOpen: () => {
+    //         Swal.showLoading();
+    //         const b = Swal.getHtmlContainer().querySelector('b');
+    //         timerInterval = setInterval(() => {
+    //             b.textContent = Swal.getTimerLeft();
+    //         }, 100);
+    //     },
+    //     willClose: () => {
+    //         clearInterval(timerInterval);
+    //     },
+    // }).then((result) => {
+    //     /* Read more about handling dismissals below */
+    //     if (result.dismiss === Swal.DismissReason.timer) {
+    //         console.log('I was closed by the timer');
+    //     }
+    // });
 };
 
 
