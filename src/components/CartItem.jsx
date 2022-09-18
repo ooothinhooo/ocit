@@ -14,6 +14,17 @@ function CartItem({ item, setFlag, flag }) {
     const [{ cartItems, total }, dispatch] = useStateValue();
     // const [dispatch] = useStateValue();
     const [qty, setQty] = useState(item?.qty);
+    function unique(arr) {
+        var formArr = arr.sort();
+        var newArr = [formArr[0]];
+        for (let i = 1; i < formArr.length; i++) {
+            if (formArr[i]?.id !== formArr[i - 1]?.id) {
+                newArr.push(formArr[i]);
+            }
+        }
+        return newArr;
+    }
+    const [temp, setTemp] = useState([]);
 
     const cartDispatch = () => {
         localStorage.setItem('cartItems', JSON.stringify(items));
@@ -51,10 +62,10 @@ function CartItem({ item, setFlag, flag }) {
             }
         }
     };
-
     useEffect(() => {
         items = cartItems;
     }, [qty, items]);
+
     return (
         <AnimatePresence>
             <div
@@ -63,13 +74,13 @@ function CartItem({ item, setFlag, flag }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className={`w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2 
-                ${item?.id ? '' : 'hidden'}`}
+               `}
             >
                 <img src={item?.imageURL} alt="" className="w-20 h-20 max-w-[60px] rounded-full object-contain" />
                 {/* name select */}
                 <div className="flex flex-col gap-2">
-                    <p className="text-base text-gray-50">{item?.title}</p>
-                    <p className="text-sm block font-semibold text-gray-300">$ {parseFloat(item?.price) * qty}</p>
+                    <p className="text-base text-gray-50">{item.title}</p>
+                    <p className="text-sm block font-semibold text-gray-300">$ {parseFloat(item.price) * qty}</p>
                 </div>
                 {/* button section */}
                 <div className="group flex items-center gap-2 ml-auto cursor-pointer">

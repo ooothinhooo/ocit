@@ -48,9 +48,9 @@ function RowContainer({ flag, data, scrollValue }) {
     const addToCart = () => {
         dispatch({
             type: actionType.SET_CART_ITEMS,
-            cartItems: unique(items),
+            cartItems: items,
         });
-        localStorage.setItem('cartItems', JSON.stringify(unique(items)));
+        localStorage.setItem('cartItems', JSON.stringify(items));
     };
 
     const renderSwal = (action, item) => {

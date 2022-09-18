@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { AiFillCode } from 'react-icons/ai';
 import { categories } from '../utils/data';
 import { AnimatePresence, motion } from 'framer-motion';
 import RowContainer from './RowContainer';
-import { useStateValue } from '../context/StateProvider';
 import ChildrenMenu from './ChildrenMenu';
+import { useStateValue } from '../context/StateProvider';
+import { actionType } from '../context/reducer';
+
+// import { useStateValue } from '../context/StateProvider';
 
 function MenuContainer() {
+    // const [{ cartShow, cartItems, user, total }, dispatch] = useStateValue();
+    const [{ OCIT, cartShow }, dispatch] = useStateValue();
+    useEffect(() => {}, [cartShow]);
+
     const [filter, setFilter] = useState('CT178');
     const [modal, setModal] = useState('');
-    const [{ OCIT }, dispatch] = useStateValue();
+    const [isMenu, setIsMenu] = useState(false);
 
     return (
         <AnimatePresence>
@@ -52,7 +59,6 @@ function MenuContainer() {
                                 ${filter === category.urlParamName ? 'bg-card' : 'bg-cardNumBg'}
                                  group-hover:bg-card p-1
                                  flex items-center justify-center
-                                 
                                  `}
                                     >
                                         <AiFillCode

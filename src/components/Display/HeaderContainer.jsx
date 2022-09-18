@@ -70,6 +70,7 @@ function HeaderContainer() {
         `,
         });
     };
+
     return (
         <AnimatePresence>
             <motion.nav
@@ -87,10 +88,8 @@ function HeaderContainer() {
                         {user && user ? (
                             <>
                                 <div
-                                    className="relative flex items-center justify-center mr-4
-                                  rounded-full p-2 
-                                 active:bg-violet-200 focus:outline-none focus:ring focus:ring-violet-200 
-                                 hover:border hover:border-[#483838]
+                                    className="relative flex items-center justify-center mr-4 rounded-full p-2 
+                                    active:bg-violet-200 focus:outline-none focus:ring focus:ring-violet-200 hover:border hover:border-[#483838]
                                 "
                                     onClick={showCart}
                                 >
@@ -104,11 +103,16 @@ function HeaderContainer() {
                             </>
                         ) : (
                             <>
-                                <div className="relative flex items-center justify-center mr-4" onClick={renderSwal}>
+                                <div
+                                    className="relative flex items-center justify-center mr-4 rounded-full p-2 
+                                    active:bg-violet-200 focus:outline-none focus:ring focus:ring-violet-200  hover:border hover:border-[#483838]
+                                "
+                                    onClick={renderSwal}
+                                >
                                     <FaShoppingBasket className="text-white text-2xl cursor-pointer" />
                                     {cartItems && cartItems.length > 0 && (
                                         <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
-                                            <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                                            <p className="text-xs text-white font-semibold">{cartItems?.length}</p>
                                         </div>
                                     )}
                                 </div>

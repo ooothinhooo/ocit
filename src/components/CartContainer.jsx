@@ -55,13 +55,23 @@ function CartContainer() {
     //     return result;
     // }
 
+    var newArr = [];
+    if (cartItems.length > 0) {
+        newArr = [cartItems[0]];
+    }
+    for (let i = 1; i < cartItems.length; i++) {
+        if (cartItems[i]?.id !== cartItems[i - 1]?.id) {
+            newArr.push(cartItems[i]);
+        }
+    }
+
     return (
         <AnimatePresence>
             <motion.div
                 initial={{ opacity: 0, x: 200 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 200 }}
-                className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white drop-shadow-md flex flex-col z-[101]"
+                className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white drop-shadow-md flex flex-col z-[200]"
             >
                 <div className="w-full flex items-center justify-between p-4 cursor-pointer">
                     <motion.div className="" whileTap={{ scale: 0.75 }} onClick={showCart}>
@@ -80,14 +90,14 @@ function CartContainer() {
                 </div>
 
                 {/* bottom section */}
-                {cartItems && cartItems.length > 0 ? (
+                {newArr && newArr.length > 0 ? (
                     <div className="w-full h-full bg-cartBg flex flex-col rounded-t-[2rem] ">
                         {/* cart items section */}
                         <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
                             {/* cart item */}
-                            {cartItems &&
-                                cartItems.map((item) => (
-                                    <CartItem key={item?.id} item={item} setFlag={setFlag} flag={flag} />
+                            {newArr &&
+                                newArr.map((item) => (
+                                    <CartItem key={item.id} item={item} setFlag={setFlag} flag={flag} />
                                 ))}
                         </div>
 
