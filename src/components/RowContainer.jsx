@@ -34,14 +34,23 @@ function RowContainer({ flag, data, scrollValue }) {
             title: 'DIJKSTRA',
         },
     ]);
-    const addToCart = () => {
-        // console.log(item);
+    function unique(arr) {
+        var formArr = arr.sort();
+        var newArr = [formArr[0]];
+        for (let i = 1; i < formArr.length; i++) {
+            if (formArr[i]?.id !== formArr[i - 1]?.id) {
+                newArr.push(formArr[i]);
+            }
+        }
+        return newArr;
+    }
 
+    const addToCart = () => {
         dispatch({
             type: actionType.SET_CART_ITEMS,
-            cartItems: items,
+            cartItems: unique(items),
         });
-        localStorage.setItem('cartItems', JSON.stringify(items));
+        localStorage.setItem('cartItems', JSON.stringify(unique(items)));
     };
 
     const renderSwal = (action, item) => {

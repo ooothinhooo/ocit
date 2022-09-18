@@ -30,13 +30,9 @@ function HeaderContainer() {
             });
             window.location = '/';
         } else {
-            // setIsMenu(!isMenu);
-            // isMobileMenu(false);
             Swal.fire('Đăng Nhập Thất Bại', 'Vui Lòng Thử Lại', 'error');
         }
-        // console.log(user);
     };
-
     //logout function
     const logout = () => {
         setIsMenu(false);
@@ -80,7 +76,7 @@ function HeaderContainer() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="bg-primary  px-2 sm:px-4 py-2.5  dark:bg-gray-900"
+                className="bg-primary h-full  px-2 sm:px-4 py-2.5  dark:bg-gray-900"
             >
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <Link to={'/'} className="flex items-center gap-2   ">
@@ -90,8 +86,15 @@ function HeaderContainer() {
                     <div className="flex items-center md:order-2">
                         {user && user ? (
                             <>
-                                <div className="relative flex items-center justify-center mr-4" onClick={showCart}>
-                                    <FaShoppingBasket className="text-white text-2xl cursor-pointer" />
+                                <div
+                                    className="relative flex items-center justify-center mr-4
+                                  rounded-full p-2 
+                                 active:bg-violet-200 focus:outline-none focus:ring focus:ring-violet-200 
+                                 hover:border hover:border-[#483838]
+                                "
+                                    onClick={showCart}
+                                >
+                                    <FaShoppingBasket className="hover:text-[#B1B2FF] text-white text-2xl cursor-pointer" />
                                     {cartItems && cartItems.length > 0 && (
                                         <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center">
                                             <p className="text-xs text-white font-semibold">{cartItems.length}</p>
@@ -308,14 +311,14 @@ function HeaderContainer() {
                         )}
                     </div>
                     <div
-                        className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1 bg-primary"
+                        className="hidden md:flex w justify-between items-center w-full  md:w-auto md:order-1 bg-primary mb-4"
                         id="mobile-menu-2"
                     >
-                        <ul className="flex  flex-col p-4 mt-4 bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <ul className="flex  flex-col p-4  bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
                                 <a
                                     href="#"
-                                    className="text-md text-gray-100 block py-2 pr-4 pl-3 font-bold  bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
+                                    className="text-md text-gray-100 block py-2 pr-4 pl-3 md:p-0  font-bold  bg-blue-700 rounded md:bg-transparent md:text-blue-700 "
                                     aria-current="page"
                                 >
                                     Home

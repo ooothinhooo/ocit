@@ -63,13 +63,13 @@ function Contact() {
         return data;
     }
     var dataOrder = cartItems.map((item) => {
-        return `${item?.title}`;
+        return `[ ${item.category}:${item?.title} ]`;
     });
     var dataPrice = cartItems.map((item) => {
         return `${item?.price}`;
     });
-    var orderItem = dataOrder.join(' || ');
-    var priceItem = dataPrice.join(' || ');
+    var orderItem = dataOrder.join('  -  ');
+    var priceItem = dataPrice.join('  -  ');
 
     const message = `Tôi ${user.displayName} xác nhận đặt hàng ${a()}.
 

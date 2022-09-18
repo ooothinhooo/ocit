@@ -12,11 +12,8 @@ let items = [];
 
 function CartItem({ item, setFlag, flag }) {
     const [{ cartItems, total }, dispatch] = useStateValue();
-
-    const [qty, setQty] = useState(item.qty);
-
-    // const [id, setId] = useState(item.id);
-    // const [items, setItems] = useState([]);
+    // const [dispatch] = useStateValue();
+    const [qty, setQty] = useState(item?.qty);
 
     const cartDispatch = () => {
         localStorage.setItem('cartItems', JSON.stringify(items));
@@ -61,11 +58,12 @@ function CartItem({ item, setFlag, flag }) {
     return (
         <AnimatePresence>
             <div
-                key={item.id}
+                key={item?.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2"
+                className={`w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2 
+                ${item?.id ? '' : 'hidden'}`}
             >
                 <img src={item?.imageURL} alt="" className="w-20 h-20 max-w-[60px] rounded-full object-contain" />
                 {/* name select */}
