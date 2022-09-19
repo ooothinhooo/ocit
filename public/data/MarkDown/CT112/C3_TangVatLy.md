@@ -24,14 +24,6 @@ Hệ thống trên là hệ thống cơ bản nhất cho các hệ thống truy�
 
 Thông tin tồn tại dưới nhiều hình thức khác nhau. Để xử lý, mà đặc biệt để truyền tải thông tin ta cần phải mã hóa chúng.
 
-![image.png](https://image.thanhnien.vn/w1024/Uploaded/2022/tnabtw/2021_12_09/ta03-7305.jpg)
-
-| Thông tin | Hệ thống | Bộ mã hoá |	Bộ giải mã	| Truyền tải |
-| :-----------: |:-------------:| :----:| :-----------: |:-------------:|
-|Lời nói|	điện thoại|	micro	|loa	|tín hiệu tuần tự hay tín hiệu số|
-|Ảnh tĩnh|	fax	| scanner|	bộ thông dịch tập tin|	tín hiệu tuần tự hoặc tín hiệu số|
-|Dữ liệu tin học	| mạng truyền tin |	bộ điều khiển truyền thông	|bộ điều khiển truyền thông	| tín hiệu tuần tự hoặc tín hiệu số|
-|Truyền hình	|truyền quảng bá|	camera|	bộ thu TV + antene	|Tín hiệu tuấn tự hoặc tín hiểu số|
 
 <Text>
 Trong thời đại chúng ta, thông tin thường được thể hiện dưới dạng các trang tài liệu hỗn hợp, như các trang web, mà ở đó đồng thời có thể thể hiện văn bản, hình ảnh tĩnh, hình ảnh động, phim ảnh,.... Thông tin thực tế được thể hiện dưới dạng đa phương tiện. Mỗi một loại thông tin sở hữu hệ thống mã hóa riêng, nhưng kết quả thì giống nhau: một chuỗi các số 0 và 1. Việc truyền tải thông tin bao gồm việc truyền tải các bit này. Mô hình mã hóa như sau:
