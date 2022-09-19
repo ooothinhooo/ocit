@@ -177,14 +177,14 @@ function HeaderContainer() {
                                     <ul className="py-1" aria-labelledby="user-menu-button">
                                         <>
                                             <li>
-                                                <a
-                                                    href="#"
+                                                <Link
+                                                    to="/"
                                                     className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay  "
                                                     onClick={handleSetisMenu}
                                                     aria-current="page"
                                                 >
                                                     Home
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
                                                 <Link
@@ -320,13 +320,13 @@ function HeaderContainer() {
                     >
                         <ul className="flex  flex-col p-4  bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/"
                                     className="text-md text-gray-100 block py-2 pr-4 pl-3 md:p-0  font-bold  bg-blue-700 rounded md:bg-transparent md:text-blue-700 "
                                     aria-current="page"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <Link

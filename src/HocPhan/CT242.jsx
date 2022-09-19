@@ -31,7 +31,7 @@ function CT242() {
     const [contentTab8, setContentTab8] = useState('');
     const [contentTab9, setContentTab9] = useState('');
     const [contentTab10, setContentTab10] = useState('');
-    const [openTab, setOpenTab] = React.useState(5);
+    const [openTab, setOpenTab] = React.useState(6);
     let tab5 = './data/MarkDown/CT242/Theory/B5.md';
     let tab6 = './data/MarkDown/CT242/Theory/B6.md';
     let tab7 = './data/MarkDown/CT242/Theory/B7.md';
@@ -164,7 +164,6 @@ function CT242() {
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
     );

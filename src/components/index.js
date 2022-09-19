@@ -38,3 +38,7 @@ export { default as CreateHocPhan } from './Admin/OCIT_HOCPHAN/CreateHocPhan';
 export { default as HocPhan_OCIT } from './Admin/View/HocPhan_OCIT';
 export { default as Product_OCIT } from './Admin/View/Product_OCIT';
 export { default as Order_OCIT } from './Admin/View/Order_OCIT';
+
+//! children
+
+export { default as ToggleModal } from './children/ToggleModal'
