@@ -80,7 +80,7 @@ function Login() {
                         LOGINSHOW ? '' : 'hidden'
                     } fixed justify-center top-0 left-0 right-0 bottom-0 m-auto w-full h-screen bg-primary opacity-25 drop-shadow-md flex z-[222]`}
                 >
-                    <div className="md:w-[73%] md:h-[78%] w-[90%] h-[70%] rounded-lg flex m-auto items-center bg-white justify-center">
+                    <div className="md:w-[73%] md:h-[78%] w-[90%] h-[88%] rounded-lg flex m-auto items-center bg-white justify-center">
                         <div class=" flex    mx-auto my-8">
                             <div class=" max-w-xl mx-auto w-full flex items-center ">
                                 <div class=" my-4 max-w-sm text-center  ">
@@ -135,7 +135,7 @@ function Login() {
                                         Close
                                     </button>
 
-                                    <div class=" -mb-10 text-[11px] text-gray-300">
+                                    <div class=" -mb-10 mx-4 text-[11px] text-gray-300">
                                         <p>Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với</p>
                                         <p>
                                             <a href="#">Điều khoản sử dụng</a> của chúng tôi.
