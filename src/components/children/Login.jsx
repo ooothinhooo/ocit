@@ -80,10 +80,10 @@ function Login() {
                         LOGINSHOW ? '' : 'hidden'
                     } fixed justify-center top-0 left-0 right-0 bottom-0 m-auto w-full h-screen bg-primary opacity-25 drop-shadow-md flex z-[222]`}
                 >
-                    <div className="md:w-[73%] md:h-[78%] w-[80%] h-[70%] rounded-lg flex m-auto items-center bg-white justify-center">
+                    <div className="md:w-[73%] md:h-[78%] w-[90%] h-[70%] rounded-lg flex m-auto items-center bg-white justify-center">
                         <div class=" flex    mx-auto my-8">
                             <div class=" max-w-xl mx-auto w-full flex items-center ">
-                                <div class="LgnSm my-4 max-w-sm text-center  ">
+                                <div class=" my-4 max-w-sm text-center  ">
                                     <div class="flex items-center justify-center m-3">
                                         <img class="w-16 h-16 " src={logo} />
                                     </div>
@@ -92,25 +92,36 @@ function Login() {
                                     </p>
                                     <div
                                         onClick={loginWithGoogle}
-                                        class="w-full p-3 flex bg-white border rounded-full
-                                         text-black  my-4 hover:bg-gray-200"
+                                        class="md:w-full flex p-3  bg-white border  w-[85%] m-auto justify-center
+                                        rounded-full text-black md:hover:text-black-600
+                                         my-4 hover:bg-gray-200 text-left left-0"
                                     >
-                                        <FcGoogle className="text-2xl mr-[65px]" />
-                                        <span className="mr-5">Tiếp tục với Google</span>
+                                        <span className=" text-2xl text-left  mr-8 md:mr-[65px]">
+                                            <FcGoogle className="" />
+                                        </span>
+                                        <span className="mr-5 px-4">Tiếp tục với Google</span>
                                     </div>
                                     <div
                                         onClick={loginWithFacebook}
-                                        class="w-full flex p-3  bg-white border rounded-full text-black md:hover:text-black-600 my-4 hover:bg-gray-200"
+                                        class="md:w-full flex p-3  bg-white border  w-[85%] m-auto justify-center
+                                        rounded-full text-black md:hover:text-black-600
+                                         my-4 hover:bg-gray-200 text-left left-0"
                                     >
-                                        <FaFacebookSquare className="text-2xl mr-[65px] text-blue-700" />
-                                        <span className="mr-10">Tiếp tục với Facebook</span>
+                                        <span className="text-2xl text-left  mr-8 md:mr-[65px]">
+                                            <FaFacebookSquare className=" text-blue-700" />
+                                        </span>
+                                        <span className="mr-1 px-4 ">Tiếp tục với Facebook</span>
                                     </div>
                                     <div
                                         onClick={loginWithGithub}
-                                        class="w-full p-3 flex bg-white border rounded-full text-black md:hover:text-black-600 my-4 hover:bg-gray-200"
+                                        class="md:w-full flex p-3  bg-white border  w-[85%] m-auto justify-center
+                                        rounded-full text-black md:hover:text-black-600
+                                         my-4 hover:bg-gray-200 text-left left-0 bottom-0 "
                                     >
-                                        <FaGithub className="text-2xl mr-[65px]" />
-                                        <span>Tiếp tục với Github</span>
+                                        <span className="text-2xl text-left  mr-8 md:mr-[65px]">
+                                            <FaGithub className="" />
+                                        </span>
+                                        <span className="mr-5 px-4">Tiếp tục với Github</span>
                                     </div>
 
                                     <button
