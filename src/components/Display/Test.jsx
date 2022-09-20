@@ -20,19 +20,52 @@ import {
     danger,
     create,
 } from '../../styles-components';
+import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 
+import { authentication } from '../../firebase.config';
+import { useStateValue } from '../../context/StateProvider';
+import { actionType } from '../../context/reducer';
+import { app } from '../../firebase.config.js';
 function Test() {
     const [contentTab1, setContentTab1] = useState('');
-
+    const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
     let tab1 = './contents.md';
     useEffect(() => {
         fetch(tab1)
             .then((res) => res.text())
             .then((text) => setContentTab1(text));
     }, []);
-
+    const firebaseAuth = getAuth(app);
+    const signInWithFacebook = async () => {
+        const provider = new GithubAuthProvider();
+        // signInWithPopup(authentication, provider)
+        const { user } = await signInWithPopup(firebaseAuth, provider);
+        const { refreshToken, providerData } = user;
+        localStorage.setItem('user', JSON.stringify(providerData[0]));
+        dispatch({
+            type: actionType.SET_USER,
+            user: providerData[0],
+        });
+        // .then((re) => {
+        //     // console.log(re);
+        //     const user = re.user;
+        //     console.log(user.email);
+        // })
+        // .catch((err) => {
+        //     console.log(err.message);
+        // });
+        console.log(user);
+    };
     return (
         <div>
+            <div>
+                <button type="button" onClick={signInWithFacebook}>
+                    Sign in
+                </button>
+            </div>
+            <img src="https://lh3.googleusercontent.com/a-/ACNPEu91mDaPk1btJWORfRvd_fOkAQ1R4YTpTGeF8rlFeA=s96-c" />
+            <>
+                {/*             
             <div className="text-white">
                 <Markdown
                     options={{
@@ -59,14 +92,15 @@ function Test() {
                     }}
                 >
                     {contentTab1}
-                    {/* {text} */}
+                   
                 </Markdown>
                 <div
                     dangerouslySetInnerHTML={{
                         __html: '<script>alert(document.cookie);</script>',
                     }}
                 />
-            </div>
+            </div> */}
+            </>
         </div>
     );
 }

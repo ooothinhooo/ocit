@@ -163,7 +163,7 @@ function BannerHome() {
                                     ) : (
                                         <>
                                             <div
-                                                className="mt-3 text-indigo-500 inline-flex items-center"
+                                                className="mt-3 text-indigo-500 inline-flex items-center cursor-pointer rounded-lg p-3  hover:text-pink-400"
                                                 onClick={renderSwal}
                                             >
                                                 Truy Cập Học Phần

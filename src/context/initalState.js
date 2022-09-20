@@ -7,5 +7,6 @@ export const initialState = {
     OCIT: null,
     OCIT_HOCPHAN: null,
     cartShow: false,
+    LOGINSHOW: false,
     cartItems: cartInfo,
 };

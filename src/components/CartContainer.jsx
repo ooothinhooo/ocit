@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import Swal from 'sweetalert2';
+
 import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { AiOutlineClear } from 'react-icons/ai';
+
 import { actionType } from '../context/reducer';
 import { useStateValue } from '../context/StateProvider';
 import { emptyCart } from '../img';
 import CartItem from './CartItem';
 function CartContainer() {
-    const [{ cartShow, cartItems, user, total }, dispatch] = useStateValue();
+    const [{ cartShow, LOGINSHOW, cartItems, user, total }, dispatch] = useStateValue();
     const [tot, setTot] = useState(0);
     const [flag, setFlag] = useState(1);
 
@@ -36,25 +39,36 @@ function CartContainer() {
 
         localStorage.setItem('cartItems', JSON.stringify([]));
     };
+    const showLogin = () => {
+        dispatch({
+            type: actionType.SET_LOGIN_SHOW,
+            LOGINSHOW: !LOGINSHOW,
+        });
+    };
+    const renderSwal = () => {
+        Swal.fire({
+            title: 'Vui Lòng Đăng Nhập',
+            width: 600,
+            padding: '3em',
+            color: '#fff',
+            background: '#A5C9CA',
 
-    // useEffect(() => {
-    //     let totalPrice = cartItems.reduce(function (accumulator, item) {
-    //         return accumulator + item.qty * item.price;
-    //     }, 0);
-    //     setTot(totalPrice);
-    //     console.log(tot);
-    // }, [tot, flag]);
-
-    // function TotalCartItem() {
-    //     let num = 0;
-    //     let result = 0;
-    //     for (let e in cartItems) {
-    //         num += cartItems[e].price * cartItems[e].qty;
-    //         result = Math.round(num * 100) / 100;
-    //     }
-    //     return result;
-    // }
-
+            confirmButtonText: 'Đăng Nhập Ngay',
+            cancelButtonText: 'Để Sau',
+            showCancelButton: true,
+            showCloseButton: true,
+            backdrop: `
+          rgba(0,0,123,0.4)
+          url('https://i.ibb.co/XxsmhTz/meme.gif')
+          left top
+          no-repeat
+        `,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                showLogin();
+            }
+        });
+    };
     var newArr = [];
     if (cartItems.length > 0) {
         newArr = [cartItems[0]];
@@ -131,6 +145,7 @@ function CartContainer() {
                             ) : (
                                 <motion.button
                                     whileTap={{ scale: 0.75 }}
+                                    onClick={renderSwal}
                                     type="button"
                                     className="w-full p-2 rounded-full bg-orange-400 text-gray-50 text-lg my-2 hover:shadow-lg 
                         cursor-pointer"

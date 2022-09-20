@@ -11,13 +11,14 @@ import { actionType } from '../../context/reducer';
 import Logo from '../../img/logo.png';
 import Avatar from '../../img/avatar.png';
 import Swal from 'sweetalert2';
+import Login from '../children/Login.jsx';
 
 function HeaderContainer() {
     const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
     const firebaseAuth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+    const [{ user, cartShow, LOGINSHOW, cartItems }, dispatch] = useStateValue();
     const [isMenu, setIsMenu] = useState(false);
     const login = async () => {
         if (!user) {
@@ -50,7 +51,12 @@ function HeaderContainer() {
             cartShow: !cartShow,
         });
     };
-
+    const showLogin = () => {
+        dispatch({
+            type: actionType.SET_LOGIN_SHOW,
+            LOGINSHOW: !LOGINSHOW,
+        });
+    };
     const handleSetisMenu = () => {
         setIsMenu(!isMenu);
     };
@@ -70,7 +76,7 @@ function HeaderContainer() {
         `,
         });
     };
-
+    // console.log(user.photoURL);
     return (
         <AnimatePresence>
             <motion.nav
@@ -84,6 +90,7 @@ function HeaderContainer() {
                         <img src={Logo} alt="" className="w-10 object-cover" />
                         <p className="text-red-600 text-xl font-bold"> OCIT </p>
                     </Link>
+                    <Login />
                     <div className="flex items-center md:order-2">
                         {user && user ? (
                             <>
@@ -131,17 +138,18 @@ function HeaderContainer() {
                                 >
                                     <span className="sr-only">Open user menu</span>
                                     <motion.img
-                                        src={user ? user.photoURL : Avatar}
+                                        // src={user ? user.photoURL : Avatar}
+                                        src={user.photoURL ? user.photoURL : Avatar}
                                         whileTap={{ scale: 0.6 }}
                                         className="w-10 min-w-[40px] h10 min-h-[40px] rounded-full drop-shadow-xl cursor-pointer"
-                                        alt="avatar"
+                                        alt=""
                                     />
                                 </button>
                             ) : (
                                 <>
                                     <button
                                         type="button"
-                                        onClick={login}
+                                        onClick={showLogin}
                                         class="py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                         Login
@@ -151,6 +159,7 @@ function HeaderContainer() {
                         </div>
 
                         {/* <!-- Dropdown menu --> */}
+
                         {isMenu && (
                             <>
                                 <div

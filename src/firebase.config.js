@@ -1,8 +1,7 @@
-import {getApp, getApps, initializeApp} from 'firebase/app';
-import {getFirestore} from 'firebase/firestore';
-import {getStorage} from 'firebase/storage';
-
-
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
 const firebaseConfig = {
     apiKey: 'AIzaSyCSaq729Fcax2sCKaieiL1o5wE9qYy6mIs',
     authDomain: 'fooddeliveryapp154.firebaseapp.com',
@@ -19,7 +18,6 @@ const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const storage = getStorage(app);
 
+export const authentication = getAuth(app);
 
 export { app, firestore, storage };
-
-

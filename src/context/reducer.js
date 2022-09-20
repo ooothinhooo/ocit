@@ -1,6 +1,7 @@
 export const actionType = {
     SET_USER: 'SET_USER',
     SET_CART_SHOW: 'SET_CART_SHOW',
+    SET_LOGIN_SHOW: 'SET_LOGIN_SHOW',
     SET_CART_ITEMS: 'SET_CART_ITEMS',
     SET_TOTAL: 'SET_TOTAL',
     SET_FOOD_ITEMS: 'SET_FOOD_ITEMS',
@@ -26,6 +27,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 cartShow: action.cartShow,
+            };
+        case actionType.SET_LOGIN_SHOW:
+            return {
+                ...state,
+                LOGINSHOW: action.LOGINSHOW,
             };
         case actionType.SET_CART_ITEMS:
             return {
