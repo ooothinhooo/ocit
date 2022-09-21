@@ -48,16 +48,18 @@ export const Text = styled.p`
     font-family: sans-serif;
 `;
 
-export const Code = styled.button`
+export const Code = styled.div`
     font-size: 16px;
     font-family: sans-serif;
-    background: #a5c9ca;
+    // background: #a5c9ca;
+    // background: #a5c9ca;
     padding: 8px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-right: 0px;
     margin-left: 0px;
     text-align: left;
+    border: 2px solid #151965;
     border-radius: 8px;
 `;
 

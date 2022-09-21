@@ -21,11 +21,22 @@ import {
     create,
 } from '../../styles-components';
 import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
-
+import { FacebookProvider, CommentsCount, Page } from 'react-facebook';
 import { authentication } from '../../firebase.config';
 import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
 import { app } from '../../firebase.config.js';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+// Demo styles, see 'Styles' section below for some notes on use.
+import 'react-accessible-accordion/dist/fancy-example.css';
+import AccordionContainer from '../children/AccordionContainer';
 function Test() {
     const [contentTab1, setContentTab1] = useState('');
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
@@ -35,35 +46,25 @@ function Test() {
             .then((res) => res.text())
             .then((text) => setContentTab1(text));
     }, []);
-    const firebaseAuth = getAuth(app);
-    const signInWithFacebook = async () => {
-        const provider = new GithubAuthProvider();
-        // signInWithPopup(authentication, provider)
-        const { user } = await signInWithPopup(firebaseAuth, provider);
-        const { refreshToken, providerData } = user;
-        localStorage.setItem('user', JSON.stringify(providerData[0]));
-        dispatch({
-            type: actionType.SET_USER,
-            user: providerData[0],
-        });
-        // .then((re) => {
-        //     // console.log(re);
-        //     const user = re.user;
-        //     console.log(user.email);
-        // })
-        // .catch((err) => {
-        //     console.log(err.message);
-        // });
-        console.log(user);
-    };
+
+    const items = [
+        {
+            uuid: 1,
+            heading: 'Heading 1',
+            content:
+                'Chương 6: Tầng mạng Chương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạng',
+        },
+        {
+            uuid: 2,
+            heading: 'Heading 1',
+            content:
+                'Chương 6: Tầng mạng Chương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạngChương 6: Tầng mạng',
+        },
+    ];
     return (
-        <div>
-            <div>
-                <button type="button" onClick={signInWithFacebook}>
-                    Sign in
-                </button>
-            </div>
-            <img src="https://lh3.googleusercontent.com/a-/ACNPEu91mDaPk1btJWORfRvd_fOkAQ1R4YTpTGeF8rlFeA=s96-c" />
+        <div className="">
+            <h1>Test Page</h1>
+            <AccordionContainer items={items} />
             <>
                 {/*             
             <div className="text-white">

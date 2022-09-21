@@ -29,21 +29,6 @@ function Footer() {
                     </div>
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold  uppercase ">Resources</h2>
-                            <ul class=" ">
-                                <li class="mb-4">
-                                    <a href="https://flowbite.com/" class="hover:underline">
-                                        Flowbite
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://tailwindcss.com/" class="hover:underline">
-                                        Tailwind CSS
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
                             <h2 class="mb-6 text-sm font-semibold  uppercase">Follow us</h2>
                             <ul class=" ">
                                 <li class="mb-4">
