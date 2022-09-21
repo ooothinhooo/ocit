@@ -1,25 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Markdown from 'markdown-to-jsx';
-import {
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    Text,
-    Code,
-    aside,
-    note,
-    pre,
-    ul,
-    ol,
-    info,
-    warning,
-    success,
-    danger,
-    create,
-} from '../styles-components';
+import { MarkDownContainer, CartNameHP } from '../components';
 function CT242() {
     const [contentTab1, setContentTab1] = useState('');
     const [contentTab2, setContentTab2] = useState('');
@@ -90,7 +70,12 @@ function CT242() {
 
     return (
         <>
-            <div className="flex flex-wrap bg-primary">
+            <div className="flex flex-wrap bg-primary -mt-12">
+                <CartNameHP
+                    link="http://www.cit.ctu.edu.vn/decuong/CT242.pdf"
+                    id="CT242"
+                    name="Kiến Trúc Và Thiết Kế Phần Mềm"
+                />
                 <div className="w-full">
                     <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row" role="tablist">
                         {tab &&
@@ -124,39 +109,7 @@ function CT242() {
                                                 className={openTab === item.id ? 'block' : 'hidden'}
                                                 id={`link${item.id}`}
                                             >
-                                                <div className="text-white">
-                                                    <Markdown
-                                                        options={{
-                                                            overrides: {
-                                                                h1: { component: H1 },
-                                                                h2: { component: H2 },
-                                                                h3: { component: H3 },
-                                                                h4: { component: H4 },
-                                                                h5: { component: H5 },
-                                                                h6: { component: H6 },
-                                                                Text: { component: Text },
-                                                                Code: { component: Code },
-                                                                aside: { component: aside },
-                                                                note: { component: note },
-                                                                pre: { component: pre },
-                                                                info: { component: info },
-                                                                danger: { component: danger },
-                                                                success: { component: success },
-                                                                warning: { component: warning },
-                                                                create: { component: create },
-                                                                ul: { component: ul },
-                                                                ol: { component: ol },
-                                                            },
-                                                        }}
-                                                    >
-                                                        {item.link}
-                                                    </Markdown>
-                                                    <div
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: '<script>alert(document.cookie);</script>',
-                                                        }}
-                                                    />
-                                                </div>
+                                                <MarkDownContainer data={item.link} />
                                             </div>
                                         </>
                                     ))}

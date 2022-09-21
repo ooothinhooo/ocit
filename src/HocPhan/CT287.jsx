@@ -1,27 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
+import { MarkDownContainer, CartNameHP } from '../components';
 
-import Markdown from 'markdown-to-jsx';
-import {
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    Text,
-    Code,
-    aside,
-    note,
-    pre,
-    ul,
-    ol,
-    info,
-    warning,
-    success,
-    danger,
-    create,
-} from '../styles-components';
 function CT287() {
     const [contentTab1, setContentTab1] = useState('');
     const [contentTab2, setContentTab2] = useState('');
@@ -72,7 +52,8 @@ function CT287() {
             .then((text) => setContentTab4(text));
     }, []);
     return (
-        <div className="w-full h-full ">
+        <div className="w-full h-full -mt-12 ">
+            <CartNameHP link="http://www.cit.ctu.edu.vn/decuong/CT287.pdf" id="CT287" name="Kiểm Chứng Mô Hình" />
             <Tabs id="custom-animation" value="1">
                 <TabsHeader>
                     {data.map(({ label, value }) => (
@@ -90,39 +71,7 @@ function CT287() {
                 >
                     {data.map(({ value, desc }) => (
                         <TabPanel key={value} value={value}>
-                            <div className="text-white">
-                                <Markdown
-                                    options={{
-                                        overrides: {
-                                            h1: { component: H1 },
-                                            h2: { component: H2 },
-                                            h3: { component: H3 },
-                                            h4: { component: H4 },
-                                            h5: { component: H5 },
-                                            h6: { component: H6 },
-                                            Text: { component: Text },
-                                            Code: { component: Code },
-                                            aside: { component: aside },
-                                            note: { component: note },
-                                            pre: { component: pre },
-                                            info: { component: info },
-                                            danger: { component: danger },
-                                            success: { component: success },
-                                            warning: { component: warning },
-                                            create: { component: create },
-                                            ul: { component: ul },
-                                            ol: { component: ol },
-                                        },
-                                    }}
-                                >
-                                    {desc}
-                                </Markdown>
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: '<script>alert(document.cookie);</script>',
-                                    }}
-                                />
-                            </div>
+                            <MarkDownContainer data={desc} />
                         </TabPanel>
                     ))}
                 </TabsBody>

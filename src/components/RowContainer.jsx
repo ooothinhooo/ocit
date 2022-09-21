@@ -5,9 +5,7 @@ import { NotFound } from '../img';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import Swal from 'sweetalert2';
-import Markdown from 'markdown-to-jsx';
 
-import { H1, H2, H3, H4, H5, Text, Code, aside, note, pre } from '../styles-components';
 
 import { ViewCartItem } from '../components';
 import { Link } from 'react-router-dom';

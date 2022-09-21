@@ -120,7 +120,8 @@ export const danger = styled.div`
 `;
 
 export const success = styled.div`
-    background: #ddffdd;
+    // background: #ddffdd;
+    background-color: rgba(221, 255, 221, 0.9);
     border-left: 6px solid #04aa6d;
     margin-bottom: 15px;
     padding: 4px 12px;

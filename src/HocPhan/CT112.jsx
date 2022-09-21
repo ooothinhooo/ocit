@@ -1,30 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Markdown from 'markdown-to-jsx';
-import {
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    Text,
-    Code,
-    aside,
-    note,
-    pre,
-    ul,
-    ol,
-    info,
-    warning,
-    success,
-    danger,
-    create,
-} from '../styles-components';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import { Buffer } from 'buffer';
-import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
-import { AccordionContainer } from '../components';
+import { AccordionContainer, MarkDownContainer, CartNameHP } from '../components';
 function CT112() {
     const [markDown, setMarkdown] = useState();
     // const markdown = contents.toString();
@@ -109,8 +84,9 @@ function CT112() {
 
     return (
         <>
-            <div className="flex flex-wrap bg-primary">
-                <div className="w-full">
+            <div className="flex flex-wrap bg-primary -mt-12 ">
+                <CartNameHP link="http://www.cit.ctu.edu.vn/decuong/CT112.pdf" id="CT112" name="Mạng Máy Tính" />
+                <div className="w-full ">
                     <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row" role="tablist">
                         {tab &&
                             tab.map((item, index) => (
@@ -143,39 +119,7 @@ function CT112() {
                                                 className={openTab === item.id ? 'block' : 'hidden'}
                                                 id={`link${item.id}`}
                                             >
-                                                <div className="text-white">
-                                                    <Markdown
-                                                        options={{
-                                                            overrides: {
-                                                                h1: { component: H1 },
-                                                                h2: { component: H2 },
-                                                                h3: { component: H3 },
-                                                                h4: { component: H4 },
-                                                                h5: { component: H5 },
-                                                                h6: { component: H6 },
-                                                                Text: { component: Text },
-                                                                Code: { component: Code },
-                                                                aside: { component: aside },
-                                                                note: { component: note },
-                                                                pre: { component: pre },
-                                                                info: { component: info },
-                                                                danger: { component: danger },
-                                                                success: { component: success },
-                                                                warning: { component: warning },
-                                                                create: { component: create },
-                                                                ul: { component: ul },
-                                                                ol: { component: ol },
-                                                            },
-                                                        }}
-                                                    >
-                                                        {item.link}
-                                                    </Markdown>
-                                                    <div
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: '<script>alert(document.cookie);</script>',
-                                                        }}
-                                                    />
-                                                </div>
+                                                <MarkDownContainer data={item.link} />
                                             </div>
                                         </>
                                     ))}
