@@ -12,6 +12,11 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    /* background-color:#1a202c; */
+
+}
+body{
+    background-color:#1a202c;
 }
 /* width */
 ::-webkit-scrollbar {

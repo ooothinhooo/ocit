@@ -1,9 +1,16 @@
 import React from 'react';
 import { useStateValue } from '../../../context/StateProvider';
-import { deleteItem } from '../../../utils/firebaseFunctions';
+import { deleteItem_Order } from '../../../utils/firebaseFunctions';
 function Order_OCIT() {
     const [{ OCIT_ORDER }, dispatch] = useStateValue();
 
+    const deleteBtn_Order = (index, MaHP) => {
+        try {
+            deleteItem_Order(index);
+        } catch (e) {
+            console.error(e);
+        }
+    };
     return (
         <>
             {' '}
@@ -69,6 +76,7 @@ function Order_OCIT() {
                                     <td class="px-4 py-3">
                                         <div class="flex items-center space-x-4 text-sm">
                                             <button
+                                                onClick={() => deleteBtn_Order(index)}
                                                 class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5
                                                 hover:bg-green-100 hover:rounded-full hover:text-primary text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="Delete"

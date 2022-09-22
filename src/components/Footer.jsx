@@ -21,7 +21,7 @@ function Footer() {
                             <img
                                 // src="https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-6/275463227_3246860445547698_2514357701418578499_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=inYovdqUBtgAX88T__Z&tn=KiJQjhX5qLKgfa-b&_nc_ht=scontent.fsgn5-12.fna&oh=00_AT8Kg3OhoMMWrbKsTXmP2hbkTLYZKtD4tNyHrSM8gjz2bQ&oe=630FECC5"
                                 src={logo}
-                                class="mr-3 h-12"
+                                class="mr-3 h-12 w-12"
                                 alt="FlowBite Logo"
                             />
                             <span class="self-center text-red-600 text-2xl font-semibold whitespace-nowrap ">OCIT</span>

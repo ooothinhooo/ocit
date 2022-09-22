@@ -37,7 +37,7 @@ function MenuContainer() {
                         Product List
                     </p>
                     <div
-                        className="w-full md:flex md:gap-8 mr-2 grid grid-cols-4 items-center justify-start 
+                        className="w-full md:flex md:gap-8 mr-2  grid grid-cols-4 items-center justify-start 
                 lg:justify-center
                 py-6 overflow-x-scroll lg:scrollbar-none"
                     >
@@ -52,7 +52,7 @@ function MenuContainer() {
                             cursor-pointer
                             rounded-lg drop-shadow-xl flex flex-col 
                             gap-3 items-center justify-center 
-                            hover:bg-cardNumBg `}
+                            hover:bg-cardNumBg`}
                                 >
                                     <div
                                         className={`md:w-10 md:h-10 h-5 w-5 rounded-full  
@@ -67,7 +67,7 @@ function MenuContainer() {
                                             } group-hover:text-textColor text-lg`}
                                         />
                                     </div>
-                                    <p className="text-sm text-textColor group-hover:text-card">{category?.name}</p>
+                                    <p className=" text-sm text-textColor group-hover:text-card">{category?.name}</p>
                                 </motion.div>
                             ))}
                     </div>

@@ -118,7 +118,7 @@ function RowContainer({ flag, data, scrollValue }) {
                             <>
                                 <div
                                     key={item.id}
-                                    className="w-[160px] h-250 min-h-[200px] min-w[180px]
+                                    className="w-[150px] h-250 min-h-[200px] min-w[180px]
                         md:w-340  md:min-w-[240px] 
                         my-12 md:h-auto bg-gray-100 p-2 m-2
                         flex flex-col items-center justify-between
@@ -164,7 +164,7 @@ function RowContainer({ flag, data, scrollValue }) {
                         ))
                     ) : (
                         <div className="w-full flex flex-col items-center justify-center">
-                            <img src={NotFound} alt="" className="h-340" />
+                            <img src={NotFound} alt="" className="h-40 md:340" />
                             <p className="text-xl text-headingColor font-semibold my-2">Items Not Available</p>
                         </div>
                     )}

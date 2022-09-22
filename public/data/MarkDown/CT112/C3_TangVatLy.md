@@ -1,3 +1,5 @@
+#Tầng Vật Lý
+
 <Code>
 Các bit "1" được mã hóa bằng một điện thế dương, sau đó đến một điện thế âm và tiếp tục như thế.
 <success>

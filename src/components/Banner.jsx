@@ -33,7 +33,7 @@ export default function Banner({ title, desc, ImagePhoto }) {
                                 </a>
                             </div>
                             <div class="w-full md:w-1/2 flex items-center">
-                                <img class="mx-auto h-48" src={ImagePhoto} alt="" />
+                                <img class="mx-auto h-48 w-80" src={ImagePhoto} alt="" />
                             </div>
                         </div>
                     </div>

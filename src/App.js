@@ -84,7 +84,7 @@ function App() {
             <div className="w-screen h-auto flex flex-col bg-primary">
                 {/* <Header /> */}
                 <HeaderContainer />
-                <main className="mt-14 md:mt-10 px-4 md:px-16  py-4 w-full  bg-primary">
+                <main className="mt-10 md:mt-8 px-4 md:px-16  py-2 w-full  bg-primary">
                     <Routes>
                         <Route path="/test" element={<Test />} />
                         {user && user.email === ROOT_USER_EMAIL ? (

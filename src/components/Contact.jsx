@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import emailjs from '@emailjs/browser';
 import CartItem from './CartItem';
 import { storage } from '../firebase.config';
-import { order_OCIT } from '../utils/firebaseFunctions';
+import { order_OCIT, removeAccents } from '../utils/firebaseFunctions';
 import { actionType } from '../context/reducer';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,6 +13,7 @@ function Contact() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
     var today = new Date();
     var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     const form = useRef();
     const [done, setDone] = useState(false);
     const google_id = user.uid;
@@ -32,7 +33,8 @@ function Contact() {
                 phone: '',
                 order: orderItem,
                 totalPrice: priceItem,
-                date: today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear(),
+                oid: `[${date}][${time}]${[google_id]}`,
+                date: date,
             };
             // saveItem(data);
             order_OCIT(data);

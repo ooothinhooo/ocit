@@ -10,6 +10,7 @@ import { actionType } from '../context/reducer';
 import { useStateValue } from '../context/StateProvider';
 import { emptyCart } from '../img';
 import CartItem from './CartItem';
+import Btn_CheckOut from './children/Btn_CheckOut';
 function CartContainer() {
     const [{ cartShow, LOGINSHOW, cartItems, user, total }, dispatch] = useStateValue();
     const [tot, setTot] = useState(0);
@@ -131,6 +132,7 @@ function CartContainer() {
                                 <p className="text-gray-400 text-xl font-semibold">{tot}K</p>
                                 {/* <p className="text-gray-400 text-xl font-semibold">$ {TotalCartItem() }  </p> */}
                             </div>
+                            <Btn_CheckOut />
                             {user ? (
                                 <Link to="/contact">
                                     <motion.button

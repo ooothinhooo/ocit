@@ -26,11 +26,28 @@ export const makeid = (length) => {
     return result;
 };
 export const removeAccents = (str) => {
-    return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/đ/g, 'd')
-        .replace(/Đ/g, 'D');
+    var AccentsMap = [
+        'aàảãáạăằẳẵắặâầẩẫấậ',
+        'AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ',
+        'dđ',
+        'DĐ',
+        'eèẻẽéẹêềểễếệ',
+        'EÈẺẼÉẸÊỀỂỄẾỆ',
+        'iìỉĩíị',
+        'IÌỈĨÍỊ',
+        'oòỏõóọôồổỗốộơờởỡớợ',
+        'OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ',
+        'uùủũúụưừửữứự',
+        'UÙỦŨÚỤƯỪỬỮỨỰ',
+        'yỳỷỹýỵ',
+        'YỲỶỸÝỴ',
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+        var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+        var char = AccentsMap[i][0];
+        str = str.replace(re, char);
+    }
+    return str;
 };
 
 //*Data OCIT card item
@@ -171,9 +188,7 @@ export const updateItem_OCIT_HOCPHAN = async (oid, updates) => {
 //* đơn đặt Hàng
 //! get order to user
 export const getOrder_OCIT = async () => {
-    const items = await getDocs(
-        query(collection(firestore, 'ORDER'), where('date', '>', '17-9-2022'), orderBy('date', 'asc')),
-    );
+    const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('oid', 'desc')));
     // const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('date', 'desc')));
     return items.docs.map((doc) => doc.data());
 };
@@ -183,7 +198,9 @@ export const order_OCIT = async (data) => {
         doc(
             firestore,
             'ORDER',
-            `${data.userName.split(' ').join('').toUpperCase()}_[${data.time}]_[${data.date}]_[${data.google_id}]`,
+            `${removeAccents(data.userName).split(' ').join('').toUpperCase()}_[${data.time}]_[${data.date}]_[${
+                data.google_id
+            }]`,
         ),
         data,
         {
@@ -214,7 +231,45 @@ export const order_OCIT = async (data) => {
     // });
 };
 
+//TODO delete item ocit hocphan
+export const deleteItem_Order = async (index) => {
+    const db = getFirestore();
+    const OCIT = await getDocs(query(collection(firestore, 'ORDER'), orderBy('oid', 'desc')));
+    // console.log(OCIT);
+    const ooid = OCIT.docs[index].id;
+    // console.log(ooid);
+    const docRef = doc(db, 'ORDER', ooid);
 
+    deleteDoc(docRef)
+        .then(() => {
+            // alert('Entire Document has been deleted successfully.');
+            let timerInterval;
+            Swal.fire({
+                title: 'Đơn Hàng Đang Được Xoá',
+                html: 'Khoang!!! Dừng Khoản <b></b> milliseconds.',
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const b = Swal.getHtmlContainer().querySelector('b');
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft();
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                },
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer');
+                }
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
 
 
 

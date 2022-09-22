@@ -1,42 +1,48 @@
 import styled from 'styled-components';
-import './index.css';
+import './styles_components.css';
 export const H1 = styled.h1`
     font-family: sans-serif;
     font-size: 32px;
     margin-top: 5px;
-    color: #256d85;
+    color: #9adcff;
 `;
 export const H2 = styled.h2`
     font-family: sans-serif;
     font-size: 24px;
     margin-top: 5px;
-    color: #256d85;
+    color: #c1ffd7;
 `;
 export const H3 = styled.h3`
     font-family: sans-serif;
     font-size: 18px;
     margin-top: 5px;
-    color: #256d85;
+    color: #d3cedf;
 `;
 export const H4 = styled.h4`
     font-family: sans-serif;
     font-size: 16px;
     margin-top: 5px;
-    color: #256d85;
+    color: #d3cedf;
     margin-top: 5px;
 `;
 export const H5 = styled.h5`
+    font-size: 16px;
     font-family: sans-serif;
-    font-size: 13px;
-    margin-top: 5px;
-    color: #256d85;
+    color: #80c0ce;
+    text-align: left;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-left: 0.3rem solid #0096ff;
 `;
 
 export const H6 = styled.h6`
     font-family: sans-serif;
     font-size: 18px;
     margin-top: 5px;
-    color: #256d85;
+    color: #d3cedf;
     font-weight: bold;
 `;
 
@@ -63,24 +69,23 @@ export const Code = styled.div`
     border-radius: 8px;
 `;
 
-
 export const aside = styled.button`
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #d3cedf;
     text-align: left;
     padding: 10px;
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 0px;
     margin-left: 0px;
-    border-left: 0.2rem solid #1e5128;
+    border-left: 0.2rem solid #a7c5eb;
 `;
 
 export const note = styled.button`
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #d3cedf;
     text-align: left;
     padding: 8px;
     margin-top: 8px;
@@ -95,17 +100,17 @@ export const note = styled.button`
 export const pre = styled.button`
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #d3cedf;
     text-align: left;
     padding: 8px;
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 0px;
     margin-left: 0px;
-    border-bottom: 4px groove #16213e;
-    border-top: 4px solid #16213e;
-    border-right: 4px solid #16213e;
-    border-left: 0.5rem double #1c6758;
+    border-bottom: 0.2rem ridge #af0171;
+    border-left: 0.5rem double #c3ff99;
+    // border-top: 0.5rem double #1c6758;
+    // border-right: 4px solid #16213e;
 `;
 
 export const danger = styled.div`
@@ -115,7 +120,7 @@ export const danger = styled.div`
     padding: 4px 12px;
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #06113c;
     text-align: left;
 `;
 
@@ -127,7 +132,7 @@ export const success = styled.div`
     padding: 4px 12px;
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #06113c;
     text-align: left;
     // width: fit-content;
 `;
@@ -139,7 +144,7 @@ export const info = styled.div`
     padding: 4px 12px;
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #06113c;
     text-align: left;
 `;
 
@@ -150,10 +155,21 @@ export const warning = styled.div`
     padding: 4px 12px;
     font-size: 16px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #06113c;
     text-align: left;
 `;
-
+export const que = styled.p`
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #3e00ff;
+    text-align: left;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-left: 0.3rem solid #0096ff;
+`;
 export const ul = styled.ul`
     list-style-type: circle;
 `;
@@ -166,5 +182,5 @@ export const create = styled.div`
     text-align: right;
     font-size: 14px;
     font-family: sans-serif;
-    color: #256d85;
+    color: #d3cedf;
 `;

@@ -9,31 +9,31 @@ function CT287() {
     const [contentTab4, setContentTab4] = useState('');
 
     let tab1 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
-    let tab2 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
+    let tab2 = './data/MarkDown/CT287/Practice/NFA.md';
     let tab3 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
     let tab4 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
 
     const data = [
         {
-            label: 'DFA',
+            label: 'DFA - Deterministic Finite Automata',
             value: '1',
             desc: contentTab1,
         },
         {
-            label: 'Null',
+            label: 'NFAs - Nondeterministic Finite Automaton',
             value: '2',
             desc: contentTab2,
         },
-        {
-            label: 'Null',
-            value: '3',
-            desc: contentTab3,
-        },
-        {
-            label: 'Null',
-            value: '4',
-            desc: contentTab4,
-        },
+        // {
+        //     label: 'Null',
+        //     value: '3',
+        //     desc: contentTab3,
+        // },
+        // {
+        //     label: 'Null',
+        //     value: '4',
+        //     desc: contentTab4,
+        // },
     ];
 
     useEffect(() => {

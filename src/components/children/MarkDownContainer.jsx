@@ -19,6 +19,7 @@ import {
     success,
     danger,
     create,
+    que,
 } from '../../styles-components';
 function MarkDownContainer({ data }) {
     return (
@@ -42,6 +43,7 @@ function MarkDownContainer({ data }) {
                             danger: { component: danger },
                             success: { component: success },
                             warning: { component: warning },
+                            que: { component: que },
                             create: { component: create },
                             ul: { component: ul },
                             ol: { component: ol },

@@ -44,7 +44,10 @@ function BannerHome() {
                         <div className="container md:px-5 md:py-2 md:mx-auto -mt-10">
                             <div className="p-5 bg-primary flex items-center mx-auto border-b border-t mb-10 border-gray-200 hover:border-red-400 sm:flex-row flex-col">
                                 <div className="sm:w-32 hidden md:inline-flex sm:h-32 h-20 w-20 sm:mr-10  items-center justify-center flex-shrink-0 scale-150">
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Foci%2F153-1532142_code-coding-css-html-java-layout-php-programming-static-website-icon-png-removebg-preview.png?alt=media&token=a0fecae7-bce9-4b6c-a284-17794a196d87" />
+                                    <img
+                                        className="w-60"
+                                        src="https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Foci%2F153-1532142_code-coding-css-html-java-layout-php-programming-static-website-icon-png-removebg-preview.png?alt=media&token=a0fecae7-bce9-4b6c-a284-17794a196d87"
+                                    />
                                 </div>
                                 <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                                     {user && user ? (

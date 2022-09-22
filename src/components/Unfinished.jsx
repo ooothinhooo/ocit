@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Unfinished({ data }) {
     return (
         <>
-            <section class=" flex items-center h-screen justify-center bg-primary">
+            <section class="  py-[110px] flex items-center h-full justify-center bg-primary">
                 <div class="mx-auto max-w-[43rem]">
                     <div class="text-center">
                         <p class="text-lg font-medium leading-8 text-indigo-600/95">OCIT Rất Tiếc</p>

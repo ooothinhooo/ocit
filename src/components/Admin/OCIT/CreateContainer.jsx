@@ -135,8 +135,10 @@ function CreateContainer() {
     const clearData = () => {
         setTitle('');
         setImagesAssets('');
-        setPrice('40');
+        setPrice('');
         setCalories('Báo Cáo - PDF');
+        setDescription('');
+        setCode('');
     };
 
     const fetchData = async () => {
