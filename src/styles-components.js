@@ -129,6 +129,7 @@ export const success = styled.div`
     font-family: sans-serif;
     color: #256d85;
     text-align: left;
+    // width: fit-content;
 `;
 
 export const info = styled.div`

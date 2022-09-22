@@ -30,6 +30,21 @@ Thiết kế một DFA có tập kí tự đầu vào là {0, 1} chấp nhận t
 <img src="https://i.ibb.co/v1ynR1G/image.png" alt="image" border="0">
 </aside>
 
+<Code>
+<p>Thiết kế một DFA có tập kí tự đầu vào là {/, a, r} chỉ  chấp nhận tất cả các chuỗi đầu vào là chú thích 1 dòng trong Java. Với r là ký tự xuống dòng, a là ký tự bất kỳ.</p>
+<img src="https://i.ibb.co/SfzrMFt/image.png" alt="image" border="0">
+</Code>
+
+<Code>
+<p>Thiết kế một DFA có tập kí tự đầu vào là {0, 1} chấp nhận các chuỗi gồm m số 0, theo sau là n số 1 (với m,n>0)</p>
+<img src="https://i.ibb.co/wr6mnNk/image.png" alt="image" border="0">
+</Code>
+
+<Code>
+<p>Thiết kế một DFA có tập kí tự đầu vào là {0, 1} chấp nhận các chuỗi không phải dạng 0m1n (với m,n>0)</p>
+<img src="https://i.ibb.co/6ZY3T5m/image.png" alt="image" border="0">
+</Code>
+
 ##Thực hành 1: Lập trình Python
 <Code>
 Chuỗi DNA được tạo thành từ sự kết hợp của các codon, là 3 ký tự khác nhau bất kỳ thuộc bộ ký hiệu {A,C,G,T}, ví dụ ACT, ACG, TCG... Một đoạn gen là tập hợp của ít nhất 3 codon bắt đầu là ATG và kết thúc bằng TAA, TAG hoặc TGA.
