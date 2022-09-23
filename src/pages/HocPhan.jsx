@@ -5,9 +5,11 @@ const HocPhan = () => {
         <div className="w-screen">
             <Task />
 
-            <AddArticle colDB="cmt_hocphan" />
-            <div className="h-full">
-                <Articles colDB="cmt_hocphan" />
+            <div className="-mt-20">
+                <AddArticle colDB="cmt_hocphan" />
+                <div className="h-full">
+                    <Articles colDB="cmt_hocphan" />
+                </div>
             </div>
         </div>
     );

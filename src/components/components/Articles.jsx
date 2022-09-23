@@ -32,14 +32,12 @@ export default function Articles({ colDB }) {
                 ...doc.data(),
             }));
             setArticles(articles);
-            console.log(articles[0].userId);
-            console.log(user.uid);
         });
     }, []);
 
     return (
         <>
-            <div>
+            <div className="mb-14">
                 {articles.length === 0 ? (
                     <p>No articles found!</p>
                 ) : (
@@ -56,7 +54,7 @@ export default function Articles({ colDB }) {
                             likes,
                             comments,
                         }) => (
-                            <div className=" my-1 md:p-3 bg-light md:min-w-[799px] w-[93%]" key={id}>
+                            <div className=" my-1 md:p-3 bg-light md:min-w-[799px] w-[93%] " key={id}>
                                 <div
                                     class={`flex-col w-full py-4 md:mx-auto mt-1 bg-chat px-2 mr-1
                                     border-gray-200 sm:px-4 sm:py-4 md:px-4 rounded-lg  md:w-2/3
@@ -86,7 +84,14 @@ export default function Articles({ colDB }) {
                                                         likes?.length == 0 ? 'hidden' : ''
                                                     }`}
                                                 >
-                                                    <span>{likes?.length}</span>
+                                                    {user && user ? (
+                                                        <span>{likes?.length}</span>
+                                                    ) : (
+                                                        <span className=" flex justify-center items-center">
+                                                            <span> {likes?.length}</span>
+                                                            <AiOutlineLike className="text-xl" />
+                                                        </span>
+                                                    )}
                                                 </span>
                                                 <span className="mr-8">
                                                     {user && <LikeArticle id={id} likes={likes} colDB={colDB} />}
@@ -144,7 +149,7 @@ export default function Articles({ colDB }) {
                                 <Accordion allowZeroExpanded className="bg-primary  md:m-auto md:w-[60%] w-full">
                                     <AccordionItem key={id} className="  bg-primary">
                                         <AccordionItemHeading>
-                                            <AccordionItemButton className="bg-[#00454A] mt-1 p-1 rounded-md">
+                                            <AccordionItemButton className="bg-[#00454A] mt-1 p-1 rounded-md text-gray-300">
                                                 Rep Comment {createdBy}
                                             </AccordionItemButton>
                                         </AccordionItemHeading>

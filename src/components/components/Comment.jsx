@@ -21,7 +21,7 @@ export default function Comment({ id, colDB }) {
             setComments(snapshot.data().comments);
         });
     }, []);
-    console.log(comments);
+
     const handleChangeComment = (e) => {
         if (e.key === 'Enter') {
             updateDoc(commentRef, {
