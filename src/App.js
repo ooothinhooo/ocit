@@ -15,6 +15,9 @@ import {
     ViewCartItem,
     Test,
     CreateHocPhan,
+    Articles,
+    AddArticle,
+    Article,
 } from './components';
 import { Admin, HocPhan, Thanks } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
@@ -136,6 +139,21 @@ function App() {
                         <Route path="/hocphan" element={<HocPhan />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/collections" element={<ProductPage />} />
+                        <Route path="/article/:id" element={<Article />} />
+
+                        <Route
+                            path="/cmt"
+                            element={
+                                <div className="h-full">
+                                    <div className="col-md-4">
+                                        <AddArticle />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <Articles />
+                                    </div>
+                                </div>
+                            }
+                        />
                     </Routes>
                 </main>
                 {/* <DocViewer documents={docs} /> */}

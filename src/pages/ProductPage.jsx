@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { CartContainer, MenuContainer } from '../components';
+import { AddArticle, Articles, CartContainer, MenuContainer } from '../components';
 // import { useStateValue } from '../context/StateProvider';
 import { useStateValue } from '../context/StateProvider';
 
@@ -12,6 +12,11 @@ function ProductPage() {
         <>
             <MenuContainer />
             {cartShow && <CartContainer />}
+
+            <AddArticle colDB="cmt_sanpham" />
+            <div className="h-full">
+                <Articles colDB="cmt_sanpham" />
+            </div>
         </>
     );
 }

@@ -40,9 +40,17 @@ export { default as Product_OCIT } from './Admin/View/Product_OCIT';
 export { default as Order_OCIT } from './Admin/View/Order_OCIT';
 
 //! children
-
 export { default as ToggleModal } from './children/ToggleModal'
 export { default as AccordionContainer } from './children/AccordionContainer';
 export { default as MarkDownContainer } from './children/MarkDownContainer';
 export { default as CartNameHP } from './children/CartNameHP';
+
+//! components
+export { default as AddArticle } from './components/AddArticle'
+export { default as Article } from './components/Article'
+export { default as Articles } from './components/Articles'
+export { default as Comment } from './components/Comment'
+export { default as DeleteArticle } from './components/DeleteArticle'
+export { default as LikeArticle } from './components/LikeArticle'
+export { default as Navbar } from './components/Navbar'
 

@@ -14,6 +14,9 @@ import Banner from './Banner';
 import meme from '../img/meme.gif';
 import BannerHome from './BannerHome';
 import Task from './Task';
+import FBComments from './children/FBComments';
+import Articles from './components/Articles';
+import AddArticle from './components/AddArticle';
 function MainContainer() {
     const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
@@ -91,6 +94,7 @@ function MainContainer() {
 
             {/* <Tabs /> */}
             <Footer />
+
             {/* <Task /> */}
         </div>
     );
