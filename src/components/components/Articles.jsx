@@ -7,6 +7,7 @@ import LikeArticle from './LikeArticle';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../context/StateProvider';
 import { AiOutlineLike } from 'react-icons/ai';
+import { GiRapidshareArrow } from 'react-icons/gi';
 import Article from './Article';
 import Comment from './Comment';
 import {
@@ -57,7 +58,7 @@ export default function Articles({ colDB }) {
                         }) => (
                             <div className=" my-1 md:p-3 bg-light md:min-w-[799px] w-[93%] " key={id}>
                                 <div
-                                    class={`flex-col w-full py-4 md:mx-auto mt-1 bg-chat px-2 mr-1
+                                    class={`flex-col w-full py-2 md:mx-auto mt-1 bg-chat px-2 mr-1
                                     border-gray-200 sm:px-4 sm:py-4 md:px-4 rounded-lg  md:w-2/3
                                     ${user && user.uid === userId ? 'bg-[#4D4545]' : 'bg-[#283149]'}
                                     `}
@@ -79,7 +80,7 @@ export default function Articles({ colDB }) {
                                                 {description}
                                             </div>
                                             {/* <Link to={`/${colDB}/${id}`}> */}
-                                            <div className="flex  w-fit py-1 px-3 mr-2">
+                                            <div className="block  md:flex  w-fit py-1 px-3 mr-2">
                                                 <span className="flex shadow-lg px-2 py-[2px]">
                                                     <span
                                                         className={` text-lg text-blue-300  ${
@@ -90,7 +91,7 @@ export default function Articles({ colDB }) {
                                                             <span>{likes?.length}</span>
                                                         ) : (
                                                             <span className=" flex justify-center items-center">
-                                                                <span> {likes?.length}</span>
+                                                                <span>{likes?.length}</span>
                                                                 <AiOutlineLike className="text-xl" />
                                                             </span>
                                                         )}
@@ -101,8 +102,11 @@ export default function Articles({ colDB }) {
                                                 </span>
 
                                                 {comments && comments.length > 0 && (
-                                                    <span className="text-gray-200 text-sm ml-2 flex shadow-lg px-2 py-[2px]">
-                                                        <span>{comments?.length} comments</span>
+                                                    <span className="text-gray-200 text-md ml-2 flex shadow-lg px-2 py-[2px] ">
+                                                        <span className="flex justify-center items-center">
+                                                            <GiRapidshareArrow className="mr-1" /> {comments?.length}{' '}
+                                                            Phản hồi
+                                                        </span>
                                                     </span>
                                                 )}
                                                 <span>
@@ -153,8 +157,10 @@ export default function Articles({ colDB }) {
                                 <Accordion allowZeroExpanded className="bg-primary  md:m-auto md:w-[60%] w-full">
                                     <AccordionItem key={id} className="  bg-primary">
                                         <AccordionItemHeading>
-                                            <AccordionItemButton className="bg-[#00454A] mt-1 p-1 rounded-md text-gray-300">
-                                                Rep Comment {createdBy}
+                                            <AccordionItemButton className="flex bg-[#00454A] mt-1 p-1 rounded-md text-gray-300">
+                                                <span className="mr-[6px] text-[#4E9F3D]">Rep Comment</span>{' '}
+                                                <span className="md:block hidden">{createdBy}</span>
+                                                <span className="md:hidden">{createdBy.slice(0, 20)}...</span>
                                             </AccordionItemButton>
                                         </AccordionItemHeading>
                                         <AccordionItemPanel>
