@@ -6,13 +6,13 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
 export default function LikeArticle({ id, likes, colDB }) {
     const [user] = useAuthState(auth);
-
+    const arrLikes = likes.slice(0, 4);
     const likesRef = doc(db, colDB, id);
-
+    // console.log(likes);
     const handleLike = () => {
-        if (likes?.includes(user.uid)) {
+        if (likes?.includes(user.photoURL)) {
             updateDoc(likesRef, {
-                likes: arrayRemove(user.uid),
+                likes: arrayRemove(user.photoURL),
             })
                 .then(() => {
                     console.log('unliked');
@@ -22,7 +22,7 @@ export default function LikeArticle({ id, likes, colDB }) {
                 });
         } else {
             updateDoc(likesRef, {
-                likes: arrayUnion(user.uid),
+                likes: arrayUnion(user.photoURL),
             })
                 .then(() => {
                     console.log('liked');
@@ -37,12 +37,28 @@ export default function LikeArticle({ id, likes, colDB }) {
             onClick={handleLike}
             style={{
                 cursor: 'pointer',
-                color: likes?.includes(user.uid) ? 'red' : null,
+                color: likes?.includes(user.photoURL) ? 'red' : null,
             }}
-            className="text-2xl text-white"
+            className="text-2xl text-white flex items-center justify-center"
         >
-            {!likes?.includes(user.uid) ? <AiOutlineLike /> : <AiTwotoneLike className="text-red-500" />}
+            {!likes?.includes(user.photoURL) ? (
+                <>
+                    <AiOutlineLike />
+                </>
+            ) : (
+                <>
+                    <AiTwotoneLike className="text-red-500" />
+                </>
+            )}
             {/* <AiOutlineLike /> */}
+            <span className="mx-2 flex">
+                {arrLikes &&
+                    arrLikes.map((item) => (
+                        <>
+                            <img src={item} className="h-6 w-6 rounded-full left-2 " />
+                        </>
+                    ))}
+            </span>
         </div>
     );
 }

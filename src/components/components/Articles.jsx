@@ -22,6 +22,7 @@ export default function Articles({ colDB }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
 
     const [articles, setArticles] = useState([]);
+    // console.log(articles);
     // const [user] = useAuthState(auth);
     useEffect(() => {
         const articleRef = collection(db, colDB);
@@ -78,26 +79,29 @@ export default function Articles({ colDB }) {
                                                 {description}
                                             </div>
                                             {/* <Link to={`/${colDB}/${id}`}> */}
-                                            <div className="flex shadow-lg w-fit py-1 px-3">
-                                                <span
-                                                    className={` text-lg text-blue-300 ${
-                                                        likes?.length == 0 ? 'hidden' : ''
-                                                    }`}
-                                                >
-                                                    {user && user ? (
-                                                        <span>{likes?.length}</span>
-                                                    ) : (
-                                                        <span className=" flex justify-center items-center">
-                                                            <span> {likes?.length}</span>
-                                                            <AiOutlineLike className="text-xl" />
-                                                        </span>
-                                                    )}
+                                            <div className="flex  w-fit py-1 px-3 mr-2">
+                                                <span className="flex shadow-lg px-2 py-[2px]">
+                                                    <span
+                                                        className={` text-lg text-blue-300  ${
+                                                            likes?.length == 0 ? 'hidden' : ''
+                                                        }`}
+                                                    >
+                                                        {user && user ? (
+                                                            <span>{likes?.length}</span>
+                                                        ) : (
+                                                            <span className=" flex justify-center items-center">
+                                                                <span> {likes?.length}</span>
+                                                                <AiOutlineLike className="text-xl" />
+                                                            </span>
+                                                        )}
+                                                    </span>
+                                                    <span className="">
+                                                        {user && <LikeArticle id={id} likes={likes} colDB={colDB} />}
+                                                    </span>
                                                 </span>
-                                                <span className="mr-8">
-                                                    {user && <LikeArticle id={id} likes={likes} colDB={colDB} />}
-                                                </span>
+
                                                 {comments && comments.length > 0 && (
-                                                    <span className="text-gray-200 text-sm p-1 mr-4">
+                                                    <span className="text-gray-200 text-sm ml-2 flex shadow-lg px-2 py-[2px]">
                                                         <span>{comments?.length} comments</span>
                                                     </span>
                                                 )}

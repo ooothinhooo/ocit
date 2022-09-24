@@ -13,8 +13,13 @@ export default function Comment({ id, colDB }) {
 
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
+    // console.log(comments);
     const [currentlyLoggedinUser] = useAuthState(auth);
+    // const currentUser = currentlyLoggedinUser.providerData[0];
+    // console.log(currentlyLoggedinUser.providerData[0].photoURL);
     const commentRef = doc(db, colDB, id);
+    // console.log(commentRef);
+
     useEffect(() => {
         const docRef = doc(db, colDB, id);
         onSnapshot(docRef, (snapshot) => {
@@ -30,6 +35,7 @@ export default function Comment({ id, colDB }) {
                     userName: currentlyLoggedinUser.displayName,
                     comment: comment,
                     createdAt: new Date(),
+                    userPhotoURL: currentlyLoggedinUser.providerData[0].photoURL,
                     commentId: uuidv4(),
                 }),
             }).then(() => {
@@ -55,7 +61,7 @@ export default function Comment({ id, colDB }) {
         <div className="m-auto w-[100%] -mt-2">
             <div>
                 {comments !== null &&
-                    comments.map(({ commentId, user, comment, userName, createdAt }) => (
+                    comments.map(({ commentId, user, comment, userName, createdAt, userPhotoURL }) => (
                         <div key={commentId}>
                             <div
                                 class={`text-left  flex rounded-md space-x-2 mb-1  border-l py-2 border-[#]
@@ -64,7 +70,11 @@ export default function Comment({ id, colDB }) {
                                 <div class="block">
                                     <div class=" w-full  px-2 pb-2">
                                         <div class="font-medium flex">
-                                            <div class="flex justify-center">
+                                            <div class="flex justify-center items-center">
+                                                <img
+                                                    class="h-4 w-4 md:h-6 md:w-6 shadow-lg rounded-full mr-1"
+                                                    src={userPhotoURL}
+                                                />
                                                 <span
                                                     className={`md:text-xl text-md text-blue-400 ${
                                                         user === user.uid ? '' : ''
@@ -72,9 +82,9 @@ export default function Comment({ id, colDB }) {
                                                 >
                                                     {userName}
                                                 </span>
-
+                                                {/* <span className="text-sm">{createdAt}</span> */}
                                                 <span className={`ml-4`}>
-                                                    {user === user.uid && (
+                                                    {user === currentlyLoggedinUser.uid && (
                                                         <span
                                                             className="md:text-2xl text-lg text-pink-400"
                                                             style={{ cursor: 'pointer' }}
@@ -85,6 +95,7 @@ export default function Comment({ id, colDB }) {
                                                                     comment,
                                                                     userName,
                                                                     createdAt,
+                                                                    userPhotoURL,
                                                                 })
                                                             }
                                                         >
