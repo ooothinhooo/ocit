@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import data from '../data/courses';
-import { AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../components';
+import { AddArticle, Articles } from '../components';
 
 export default function Test() {
     const [key, setKey] = useState('');
-    const [keyFind, setKeyFind] = useState('');
+    // const [keyFind, setKeyFind] = useState('');
     const [year, setYear] = useState('2022-2023');
     const [HocKi, setHocKi] = useState('2');
     const courses = data.filter(function (item) {
@@ -141,7 +141,7 @@ export default function Test() {
                     <p className="text-black text-md p-2 shadow-lg mx-2">Tín chỉ: {weight}</p>
                 </div>
                 <div className="h-full w-full ">
-                    {courses.length > 0 && !MaHP == '' && !key == '' ? (
+                    {courses.length > 0 && !key == '' ? (
                         <>
                             <div className="mt-2">
                                 <AddArticle colDB={dbCmt} />
