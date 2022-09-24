@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import data from '../../data/courses';
-import { AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../../components';
+import data from '../data/courses';
+import { AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../components';
 
 export default function Test() {
     const [key, setKey] = useState('');
@@ -8,22 +8,25 @@ export default function Test() {
     const [year, setYear] = useState('2022-2023');
     const [HocKi, setHocKi] = useState('2');
     const courses = data.filter(function (item) {
-        return item.key === keyFind;
+        return item.key === key.toUpperCase();
     });
+    // console.log();
     const name = courses.length > 0 ? courses[0].name : '';
     const weight = courses.length > 0 ? courses[0].weight : '';
     const MaHP = courses.length > 0 ? courses[0].key : '';
-    const dbCmt = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
 
-    // console.log(courses);
+    const dbCmt = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
+    // console.log(courses[0]);
     // console.log(year);
     // console.log(HocKi);
-    const getInputCourses = () => {
-        setKeyFind(key.toUpperCase());
-    };
+    // console.log(dbCmt);
+    const getInputCourses = () => {};
     return (
         <>
             <div className="w-full h-full m-auto justify-center items-center">
+                <div className="flex m-auto justify-center items-center -mt-4">
+                    <span className="md:text-md text-sm">NHẬP MÃ HỌC PHẦN NÓ SẼ TẠO MỘT NHÓM CHAT CHO BẠN</span>
+                </div>
                 <div>
                     <div className="flex m-auto justify-center items-center my-2">
                         <div>
@@ -138,7 +141,7 @@ export default function Test() {
                     <p className="text-black text-md p-2 shadow-lg mx-2">Tín chỉ: {weight}</p>
                 </div>
                 <div className="h-full w-full ">
-                    {!MaHP == '' ? (
+                    {courses.length > 0 && !MaHP == '' && !key == '' ? (
                         <>
                             <div className="mt-2">
                                 <AddArticle colDB={dbCmt} />

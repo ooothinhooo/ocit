@@ -223,13 +223,13 @@ function HeaderContainer() {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <a
-                                                    h
+                                                <Link
+                                                    to="/tracuu"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
-                                                    Liên Hệ
-                                                </a>
+                                                    Tra Cứu
+                                                </Link>
                                             </li>
                                         </>
                                         <li>
@@ -364,12 +364,12 @@ function HeaderContainer() {
                                 </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/tracuu"
                                     className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    Liên Hệ
-                                </a>
+                                    Tra Cứu
+                                </Link>
                             </li>
                         </ul>
                     </div>

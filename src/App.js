@@ -19,7 +19,7 @@ import {
     AddArticle,
     Article,
 } from './components';
-import { Admin, HocPhan, Thanks } from './pages';
+import { Admin, HocPhan, Thanks, TraCuu } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
@@ -139,6 +139,7 @@ function App() {
                         <Route path="/hocphan" element={<HocPhan />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/collections" element={<ProductPage />} />
+                        <Route path="/tracuu" element={<TraCuu />} />
                         <Route path="/article/:id" element={<Article />} />
 
                         <Route
