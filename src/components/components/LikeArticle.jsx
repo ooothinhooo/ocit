@@ -6,7 +6,8 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
 export default function LikeArticle({ id, likes, colDB }) {
     const [user] = useAuthState(auth);
-    const arrLikes = likes.slice(0, 4);
+    const newArr = likes.sort(() => Math.random() - 0.5);
+    const arrLikes = newArr.slice(0, 5);
     const likesRef = doc(db, colDB, id);
     // console.log(likes);
     const handleLike = () => {
