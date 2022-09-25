@@ -21,6 +21,10 @@ export default function AddArticle({ colDB }) {
         createdAt: Timestamp.now().toDate(),
     });
 
+    console.log(formData.description.length);
+    if (formData.description.length > 3000) {
+        alert('Bạn đã comments nhiều chữ quá');
+    }
     const [progress, setProgress] = useState(0);
 
     const handleChange = (e) => {
@@ -131,6 +135,7 @@ export default function AddArticle({ colDB }) {
                                     value={formData.description}
                                     onChange={(e) => handleChange(e)}
                                     placeholder="Type Your Comment"
+                                    maxlength="3000"
                                     required
                                 ></textarea>
                                 <button

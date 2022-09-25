@@ -77,7 +77,7 @@ export default function Articles({ colDB }) {
                                                 </span>
                                             </div>
                                             <div class="flex-1 px-2 ml-2 text-sm md:font-medium leading-loose text-gray-50">
-                                                {description}
+                                                {description.substring(0, 3000)}
                                             </div>
                                             {/* <Link to={`/${colDB}/${id}`}> */}
                                             <div className="block  md:flex  w-fit py-1 px-3 mr-2">

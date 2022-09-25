@@ -12,6 +12,10 @@ export default function Comment({ id, colDB }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
 
     const [comment, setComment] = useState('');
+    console.log(comment);
+    if (comment.length > 3000) {
+        alert('Bạn viết quá nhiều rồi ');
+    }
     const [comments, setComments] = useState([]);
     // console.log(comments);
     const [currentlyLoggedinUser] = useAuthState(auth);
@@ -110,7 +114,10 @@ export default function Comment({ id, colDB }) {
                                                 user === user.uid ? 'bg-[#4D4545]' : 'bg-[#283149]'
                                             }`}
                                         >
-                                            <span className="text-gray-200 text-sm md:text-md"> {comment}</span>
+                                            <span className="text-gray-200 text-sm md:text-md">
+                                                {' '}
+                                                {comment.substring(0, 5000)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -152,6 +159,7 @@ export default function Comment({ id, colDB }) {
                             setComment(e.target.value);
                         }}
                         placeholder="Add a comment"
+                        maxlength="3000"
                         onKeyUp={(e) => {
                             handleChangeComment(e);
                         }}

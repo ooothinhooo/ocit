@@ -20,6 +20,7 @@ import {
     danger,
     create,
     que,
+    tag,
 } from '../../styles-components';
 function MarkDownContainer({ data }) {
     return (
@@ -47,6 +48,7 @@ function MarkDownContainer({ data }) {
                             create: { component: create },
                             ul: { component: ul },
                             ol: { component: ol },
+                            tag: { component: tag },
                         },
                     }}
                 >

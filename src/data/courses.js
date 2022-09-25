@@ -699,6 +699,7 @@ const courses = [
         weight: 4,
     },
     { name: 'Bảo trì phần mềm', key: 'CT244', weight: 3 },
+    { name: 'Kiểm Chứng Mô Hình', key: 'CT287', weight: 3 },
     { name: 'Tương tác người máy', key: 'CT245', weight: 2 },
     { name: 'Lập trình .NET', key: 'CT246', weight: 3 },
     { name: 'Phát triển phần mềm tác nghiệp', key: 'CT249', weight: 2 },

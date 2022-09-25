@@ -123,8 +123,9 @@ export default function Test() {
                         <input
                             type="text"
                             name="key"
+                            maxlength="6"
                             onChange={(e) => setKey(e.target.value)}
-                            className="md:w-[10%] w-[40%] bg-primary border text-blue-500"
+                            className="md:w-[10%] w-[40%] bg-primary border text-blue-500 uppercase"
                         />
                         <button
                             onClick={getInputCourses}

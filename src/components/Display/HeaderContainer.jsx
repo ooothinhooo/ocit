@@ -324,7 +324,7 @@ function HeaderContainer() {
                         )}
                     </div>
                     <div
-                        className="hidden md:flex w justify-between items-center w-full  md:w-auto md:order-1 bg-primary mb-4"
+                        className="hidden md:flex lg:flex xl:flex justify-between items-center w-full  md:w-auto md:order-1 bg-primary mb-4"
                         id="mobile-menu-2"
                     >
                         <ul className="flex  flex-col p-4  bg-primary rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -340,7 +340,6 @@ function HeaderContainer() {
                             <li>
                                 <Link
                                     to="/collections"
-                                    href="#"
                                     className="text-md text-gray-100 block py-1 pr-2 pl-2  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700  md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Sản Phẩm
@@ -357,7 +356,6 @@ function HeaderContainer() {
                             <li>
                                 <Link
                                     to="/resources"
-                                    href="#"
                                     className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Tài Nguyên
