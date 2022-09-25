@@ -1,33 +1,33 @@
 import React from 'react';
-import { AiTwotoneLike, AiOutlineLike } from 'react-icons/ai';
-import { GrLike } from 'react-icons/gr';
+import { AiTwotoneDislike, AiOutlineDislike } from 'react-icons/ai';
+import { GrDislike } from 'react-icons/gr';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../firebase.config';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
-export default function LikeArticle({ id, likes, colDB }) {
+export default function Dislike({ id, dislikes, colDB }) {
     const [user] = useAuthState(auth);
-    const newArr = likes.sort(() => Math.random() - 0.5);
-    const arrLikes = newArr.slice(0, 5);
-    const likesRef = doc(db, colDB, id);
+    // const newArr = dislikes.sort(() => Math.random() - 0.5);
+    // const arrLikes = newArr.slice(0, 5);
+    const dislikesRef = doc(db, colDB, id);
     // console.log(likes);
     const handleLike = () => {
-        if (likes?.includes(user.photoURL)) {
-            updateDoc(likesRef, {
-                likes: arrayRemove(user.photoURL),
+        if (dislikes?.includes(user.photoURL)) {
+            updateDoc(dislikesRef, {
+                dislikes: arrayRemove(user.photoURL),
             })
                 .then(() => {
-                    console.log('unliked');
+                    console.log('undisliked');
                 })
                 .catch((e) => {
                     console.log(e);
                 });
         } else {
-            updateDoc(likesRef, {
-                likes: arrayUnion(user.photoURL),
+            updateDoc(dislikesRef, {
+                dislikes: arrayUnion(user.photoURL),
             })
                 .then(() => {
-                    console.log('liked');
+                    console.log('disliked');
                 })
                 .catch((e) => {
                     console.log(e);
@@ -38,24 +38,23 @@ export default function LikeArticle({ id, likes, colDB }) {
         <div
             onClick={handleLike}
             style={{
-                cursor: 'pointer',
-                color: likes?.includes(user.photoURL) ? 'red' : null,
+                color: dislikes?.includes(user.photoURL) ? 'red' : null,
             }}
-            className="text-2xl text-white flex items-center justify-center"
+            className="text-2xl text-white flex items-center justify-center cursor-pointer"
         >
-            {!likes?.includes(user.photoURL) ? (
+            {!dislikes?.includes(user.photoURL) ? (
                 <>
-                    <AiOutlineLike className="" />
+                    <AiOutlineDislike />
                 </>
             ) : (
                 <>
-                    <AiTwotoneLike className="text-red-500 " />
+                    <AiTwotoneDislike className="text-blue-500 " />
                 </>
             )}
             {/* <AiOutlineLike /> */}
             <span className="mx-2 flex">
-                {arrLikes &&
-                    arrLikes.map((item) => (
+                {dislikes &&
+                    dislikes.map((item) => (
                         <>
                             <img src={item} className="h-6 w-6 rounded-full left-2 " />
                         </>

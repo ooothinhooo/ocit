@@ -52,5 +52,6 @@ export { default as Articles } from './components/Articles'
 export { default as Comment } from './components/Comment'
 export { default as DeleteArticle } from './components/DeleteArticle'
 export { default as LikeArticle } from './components/LikeArticle'
+export { default as Dislike } from './components/Dislike';
 export { default as Navbar } from './components/Navbar'
 

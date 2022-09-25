@@ -4,6 +4,7 @@ import { auth, db } from '../../firebase.config';
 import DeleteArticle from './DeleteArticle';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import LikeArticle from './LikeArticle';
+import Dislike from './Dislike';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../context/StateProvider';
 import { AiOutlineLike } from 'react-icons/ai';
@@ -54,6 +55,7 @@ export default function Articles({ colDB }) {
                             createdBy,
                             userId,
                             likes,
+                            dislikes,
                             comments,
                         }) => (
                             <div className=" my-1 md:p-3 bg-light md:min-w-[799px] w-[93%] " key={id}>
@@ -84,15 +86,15 @@ export default function Articles({ colDB }) {
                                                 <span className="flex shadow-lg px-2 py-[2px]">
                                                     <span
                                                         className={` text-lg text-blue-300  ${
-                                                            likes?.length == 0 ? 'hidden' : ''
+                                                            likes?.length == -1 ? 'hidden' : ''
                                                         }`}
                                                     >
                                                         {user && user ? (
                                                             <span>{likes?.length}</span>
                                                         ) : (
                                                             <span className=" flex justify-center items-center">
+                                                                <AiOutlineLike className="text-2xl" />
                                                                 <span>{likes?.length}</span>
-                                                                <AiOutlineLike className="text-xl" />
                                                             </span>
                                                         )}
                                                     </span>
@@ -100,7 +102,25 @@ export default function Articles({ colDB }) {
                                                         {user && <LikeArticle id={id} likes={likes} colDB={colDB} />}
                                                     </span>
                                                 </span>
-
+                                                <span className="flex shadow-lg px-2 py-[2px]">
+                                                    <span
+                                                        className={` text-lg text-blue-300  ${
+                                                            likes?.length == 0 ? 'hidden' : ''
+                                                        }`}
+                                                    >
+                                                        {user && user ? (
+                                                            <span>{dislikes?.length}</span>
+                                                        ) : (
+                                                            <span className=" flex justify-center items-center">
+                                                                <span>{dislikes?.length}</span>
+                                                                <AiOutlineLike className="text-xl" />
+                                                            </span>
+                                                        )}
+                                                    </span>
+                                                    <span className="">
+                                                        {user && <Dislike id={id} dislikes={dislikes} colDB={colDB} />}
+                                                    </span>
+                                                </span>
                                                 {comments && comments.length > 0 && (
                                                     <span className="text-gray-200 text-md ml-2 flex shadow-lg px-2 py-[2px] ">
                                                         <span className="flex justify-center items-center">

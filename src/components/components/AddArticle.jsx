@@ -71,6 +71,7 @@ export default function AddArticle({ colDB }) {
                         createdBy: user.displayName,
                         userId: user.uid,
                         likes: [],
+                        dislikes: [],
                         comments: [],
                     })
                         .then(() => {
