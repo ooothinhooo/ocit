@@ -12,12 +12,12 @@ function CT242() {
     const [contentTab9, setContentTab9] = useState('');
     const [contentTab10, setContentTab10] = useState('');
     const [openTab, setOpenTab] = React.useState(6);
-    let tab5 = './data/MarkDown/CT242/Theory/B5.md';
-    let tab6 = './data/MarkDown/CT242/Theory/B6.md';
-    let tab7 = './data/MarkDown/CT242/Theory/B7.md';
-    let tab8 = './data/MarkDown/CT242/Theory/B8.md';
-    let tab9 = './data/MarkDown/CT242/Theory/B9.md';
-    let tab10 = './data/MarkDown/CT242/Theory/B10.md';
+    let tab5 = '../../data/MarkDown/CT242/Theory/B5.md';
+    let tab6 = '../../data/MarkDown/CT242/Theory/B6.md';
+    let tab7 = '../../data/MarkDown/CT242/Theory/B7.md';
+    let tab8 = '../../data/MarkDown/CT242/Theory/B8.md';
+    let tab9 = '../../data/MarkDown/CT242/Theory/B9.md';
+    let tab10 = '../../data/MarkDown/CT242/Theory/B10.md';
 
     useEffect(() => {
         fetch(tab5)

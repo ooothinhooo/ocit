@@ -2,7 +2,7 @@ import React from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import { Link } from 'react-router-dom';
-import Footer from './Footer';
+import Footer from './Display/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
 function UserProfile() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();

@@ -1,15 +1,15 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../firebase.config';
-import DeleteArticle from './DeleteArticle';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import LikeArticle from './LikeArticle';
-import Dislike from './Dislike';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../context/StateProvider';
 import { AiOutlineLike } from 'react-icons/ai';
 import { GiRapidshareArrow } from 'react-icons/gi';
-import Article from './Article';
+
+import DeleteArticle from './DeleteArticle';
+import Dislike from './Dislike';
+import LikeArticle from './LikeArticle';
 import Comment from './Comment';
 import {
     Accordion,

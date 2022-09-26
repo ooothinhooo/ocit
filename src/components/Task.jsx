@@ -57,7 +57,7 @@ function Task() {
                                                 </div>
                                             </CopyToClipboard>
                                         </div>
-                                        <Link to={item.link}>
+                                        <Link to={`/hocphan${item.link}`}>
                                             <div
                                                 data-tip="View"
                                                 class="tooltip text-gray-500 hover:text-gray-300 cursor-pointer"
@@ -81,7 +81,7 @@ function Task() {
                                         </Link>
                                     </div>
                                 </div>
-                                <Link to={item.link}>
+                                <Link to={`/hocphan${item.link}`}>
                                     <div class=" py-3 mt-4  text-gray-500 md:font-bold text-sm">
                                         <p class="float-left">#{item.category}</p>
                                         <p class="float-right">{item.flag == 'true' ? <>Đã có</> : <>Chưa có</>}</p>

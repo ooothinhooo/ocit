@@ -1,5 +1,5 @@
 import React from 'react';
-import { logo } from '../img';
+import { logo } from '../../img';
 import { AnimatePresence, motion } from 'framer-motion';
 function Footer() {
     const IG = 'https://www.instagram.com/ooo.thinh.ooo/';

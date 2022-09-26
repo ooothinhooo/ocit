@@ -5,9 +5,8 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useStateValue } from '../context/StateProvider';
 
 import { HomeContainer, RowContainer, MenuContainer, CartContainer, Footer, Banner, BannerHome } from '../components';
-import Task from './Task';
 
-function MainContainer() {
+function HomePage() {
     const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
 
     const [scrollValue, setScrollValue] = useState(0);
@@ -90,4 +89,4 @@ function MainContainer() {
     );
 }
 
-export default MainContainer;
+export default HomePage;

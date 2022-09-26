@@ -13,7 +13,7 @@ function CT112() {
     const [contentTab7, setContentTab7] = useState('');
     const [contentTab8, setContentTab8] = useState('');
     const [openTab, setOpenTab] = React.useState(3);
-    var link = './data/MarkDown/CT112/';
+    var link = '../../data/MarkDown/CT112/';
     let tab1 = link + 'C1_TongQuan.md';
     let tab2 = link + 'C2_ThanhPhanMMT.md';
     let tab3 = link + 'C3_TangVatLy.md';
@@ -46,10 +46,11 @@ function CT112() {
         fetch(tab7)
             .then((res) => res.text())
             .then((text) => setContentTab7(text));
-        fetch(tab8)
+        fetch(tab6)
             .then((res) => res.text())
-            .then((text) => setContentTab8(text));
+            .then((text) => setContent(text));
     }, []);
+
     const tab = [
         {
             id: 1,

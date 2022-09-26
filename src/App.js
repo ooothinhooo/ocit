@@ -19,7 +19,7 @@ import {
     AddArticle,
     Article,
 } from './components';
-import { Admin, HocPhan, Thanks, TraCuu } from './pages';
+import { Admin, HocPhan, HomePage, Thanks, TraCuu } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
@@ -92,7 +92,7 @@ function App() {
                         <Route path="/test" element={<Test />} />
                         {user && user.email === ROOT_USER_EMAIL ? (
                             <>
-                                <Route path="/home" element={<MainContainer />} />
+                                <Route path="/home" element={<HomePage />} />
                                 <Route path="/*" element={<Admin />} />
                                 <Route path="/createItem" element={<CreateContainer />} />
                                 <Route path="/createHocPhan" element={<CreateHocPhan />} />
@@ -103,7 +103,7 @@ function App() {
                             </>
                         ) : (
                             <>
-                                <Route path="/*" element={<MainContainer />} />
+                                <Route path="/*" element={<HomePage />} />
                             </>
                         )}
                         {/* link to page */}
@@ -114,22 +114,22 @@ function App() {
                         {user && user ? (
                             <>
                                 <>
-                                    <Route path="/CT242" element={<CT242 />} />
-                                    <Route path="/CT112" element={<CT112 />} />
-                                    <Route path="/CT761" element={<CT176 />} />
-                                    <Route path="/CT178" element={<CT178 />} />
-                                    <Route path="/CT179" element={<CT179 />} />
-                                    <Route path="/CT180" element={<CT180 />} />
-                                    <Route path="/CT188" element={<CT188 />} />
-                                    <Route path="/CT190" element={<CT190 />} />
-                                    <Route path="/CT239" element={<CT239 />} />
-                                    <Route path="/CT240" element={<CT240 />} />
-                                    <Route path="/CT241" element={<CT241 />} />
-                                    <Route path="/CT242" element={<CT242 />} />
-                                    <Route path="/CT244" element={<CT244 />} />
-                                    <Route path="/CT287" element={<CT287 />} />
-                                    <Route path="/CT296" element={<CT296 />} />
-                                    <Route path="/CT449" element={<CT449 />} />
+                                    <Route path="/hocphan/CT242" element={<CT242 />} />
+                                    <Route path="/hocphan/CT112" element={<CT112 />} />
+                                    <Route path="/hocphan/CT761" element={<CT176 />} />
+                                    <Route path="/hocphan/CT178" element={<CT178 />} />
+                                    <Route path="/hocphan/CT179" element={<CT179 />} />
+                                    <Route path="/hocphan/CT180" element={<CT180 />} />
+                                    <Route path="/hocphan/CT188" element={<CT188 />} />
+                                    <Route path="/hocphan/CT190" element={<CT190 />} />
+                                    <Route path="/hocphan/CT239" element={<CT239 />} />
+                                    <Route path="/hocphan/CT240" element={<CT240 />} />
+                                    <Route path="/hocphan/CT241" element={<CT241 />} />
+                                    <Route path="/hocphan/CT242" element={<CT242 />} />
+                                    <Route path="/hocphan/CT244" element={<CT244 />} />
+                                    <Route path="/hocphan/CT287" element={<CT287 />} />
+                                    <Route path="/hocphan/CT296" element={<CT296 />} />
+                                    <Route path="/hocphan/CT449" element={<CT449 />} />
                                 </>
                                 ,
                             </>

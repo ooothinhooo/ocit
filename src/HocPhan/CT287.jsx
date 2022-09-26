@@ -8,10 +8,10 @@ function CT287() {
     const [contentTab3, setContentTab3] = useState('');
     const [contentTab4, setContentTab4] = useState('');
 
-    let tab1 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
-    let tab2 = './data/MarkDown/CT287/Practice/NFA.md';
-    let tab3 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
-    let tab4 = './data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
+    let tab1 = '../../data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
+    let tab2 = '../../data/MarkDown/CT287/Practice/NFA.md';
+    let tab3 = '../../data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
+    let tab4 = '../../data/MarkDown/CT287/Practice/Deterministic_Finite_Automata.md';
 
     const data = [
         {

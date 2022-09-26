@@ -9,7 +9,6 @@ export { default as UserProfile } from './UserProfile';
 export { default as ViewCartItem } from './ViewCartItem';
 export { default as CartItem } from './CartItem';
 export { default as ChildrenMenu } from './ChildrenMenu';
-export { default as Footer } from './Footer';
 export { default as Header } from './Header';
 export { default as Loader } from './Loader';
 export { default as Tabs } from './Tabs';
@@ -20,6 +19,7 @@ export { default as Task } from './Task';
 export { default as Unfinished } from './Unfinished';
 //TODO: components >> Display
 export { default as HeaderContainer } from './Display/HeaderContainer';
+export { default as Footer } from './Display/Footer';
 export { default as Test } from './Display/Test';
 
 //TODO: admin
@@ -40,18 +40,18 @@ export { default as Product_OCIT } from './Admin/View/Product_OCIT';
 export { default as Order_OCIT } from './Admin/View/Order_OCIT';
 
 //! children
-export { default as ToggleModal } from './children/ToggleModal'
+export { default as ToggleModal } from './children/ToggleModal';
 export { default as AccordionContainer } from './children/AccordionContainer';
 export { default as MarkDownContainer } from './children/MarkDownContainer';
 export { default as CartNameHP } from './children/CartNameHP';
 
-//! components
-export { default as AddArticle } from './components/AddArticle'
-export { default as Article } from './components/Article'
-export { default as Articles } from './components/Articles'
-export { default as Comment } from './components/Comment'
-export { default as DeleteArticle } from './components/DeleteArticle'
-export { default as LikeArticle } from './components/LikeArticle'
-export { default as Dislike } from './components/Dislike';
-export { default as Navbar } from './components/Navbar'
+//! Comments
+export { default as AddArticle } from './Comments/AddArticle';
+export { default as Article } from './Comments/Article';
+export { default as Articles } from './Comments/Articles';
+export { default as Comment } from './Comments/Comment';
+export { default as DeleteArticle } from './Comments/DeleteArticle';
+export { default as LikeArticle } from './Comments/LikeArticle';
+export { default as Dislike } from './Comments/Dislike';
+export { default as Navbar } from './Comments/Navbar';
 

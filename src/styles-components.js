@@ -98,19 +98,19 @@ export const note = styled.button`
 `;
 
 export const pre = styled.button`
-    font-size: 16px;
-    font-family: sans-serif;
-    color: #d3cedf;
-    text-align: left;
-    padding: 8px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-right: 0px;
-    margin-left: 0px;
-    border-bottom: 0.2rem ridge #af0171;
-    border-left: 0.5rem double #c3ff99;
-    // border-top: 0.5rem double #1c6758;
-    // border-right: 4px solid #16213e;
+    // font-size: 16px;
+    // font-family: sans-serif;
+    // color: #d3cedf;
+    // text-align: left;
+    // padding: 8px;
+    // margin-top: 8px;
+    // margin-bottom: 8px;
+    // margin-right: 0px;
+    // margin-left: 0px;
+    // border-bottom: 0.2rem ridge #af0171;
+    // border-left: 0.5rem double #c3ff99;
+    // // border-top: 0.5rem double #1c6758;
+    // // border-right: 4px solid #16213e;
 `;
 
 export const danger = styled.div`

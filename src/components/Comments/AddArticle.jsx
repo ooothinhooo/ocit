@@ -21,7 +21,6 @@ export default function AddArticle({ colDB }) {
         createdAt: Timestamp.now().toDate(),
     });
 
-    console.log(formData.description.length);
     if (formData.description.length > 3000) {
         alert('Bạn đã comments nhiều chữ quá');
     }
