@@ -20,6 +20,7 @@ import {
 } from 'react-accessible-accordion';
 // Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
+import { avatars } from '../../img';
 export default function Articles({ colDB }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
 
@@ -69,7 +70,7 @@ export default function Articles({ colDB }) {
                                         <img
                                             class="md:w-12 md:h-12 w-10 h-10 border-2 border-gray-300 rounded-full"
                                             alt="Anonymous's avatar"
-                                            src={userPhotoURL}
+                                            src={userPhotoURL ? userPhotoURL : avatars}
                                         />
                                         <div class="flex-col mt-1">
                                             <div class="flex items-center flex-1 px-4 font-bold leading-tight">
@@ -82,31 +83,29 @@ export default function Articles({ colDB }) {
                                                 {description.substring(0, 3000)}
                                             </div>
                                             {/* <Link to={`/${colDB}/${id}`}> */}
-                                            <div className="block  md:flex  w-fit py-1 px-3 mr-2">
-                                                <span className="flex shadow-lg px-2 py-[2px]">
+                                            <div className="block  md:flex  w-fit py-1 px-3 md:mr-2">
+                                                <span className="flex shadow-lg px-1 py-[2px] rounded-lg md:mr-2">
                                                     <span
-                                                        className={` text-lg text-blue-300  ${
-                                                            likes?.length == -1 ? 'hidden' : ''
-                                                        }`}
+                                                        className={` text-lg text-blue-300  
+                                                        `}
                                                     >
                                                         {user && user ? (
                                                             <span>{likes?.length}</span>
                                                         ) : (
-                                                            <span className=" flex justify-center items-center">
+                                                            <span className=" flex justify-center items-center mr-2">
                                                                 <AiOutlineLike className="text-2xl" />
                                                                 <span>{likes?.length}</span>
                                                             </span>
                                                         )}
                                                     </span>
-                                                    <span className="">
+                                                    <span className=" rounded-lg">
                                                         {user && <LikeArticle id={id} likes={likes} colDB={colDB} />}
                                                     </span>
                                                 </span>
-                                                <span className="flex shadow-lg px-2 py-[2px]">
+                                                {/* <span className="flex shadow-lg px-1 py-[2px]  rounded-lg">
                                                     <span
-                                                        className={` text-lg text-blue-300  ${
-                                                            likes?.length == 0 ? 'hidden' : ''
-                                                        }`}
+                                                        className={` text-lg text-blue-300  
+                                                        `}
                                                     >
                                                         {user && user ? (
                                                             <span>{dislikes?.length}</span>
@@ -117,26 +116,32 @@ export default function Articles({ colDB }) {
                                                             </span>
                                                         )}
                                                     </span>
-                                                    <span className="">
+                                                    <span className=" rounded-lg">
                                                         {user && <Dislike id={id} dislikes={dislikes} colDB={colDB} />}
                                                     </span>
-                                                </span>
-                                                {comments && comments.length > 0 && (
-                                                    <span className="text-gray-200 text-md ml-2 flex shadow-lg px-2 py-[2px] ">
-                                                        <span className="flex justify-center items-center">
-                                                            <GiRapidshareArrow className="mr-1" /> {comments?.length}{' '}
-                                                            Phản hồi
+                                                </span> */}
+                                                <span className="flex shadow-lg px-1 py-[2px] rounded-lg md:mr-2">
+                                                    {comments && comments.length > 0 && (
+                                                        <span className="text-gray-200 text-md flex">
+                                                            <span className="flex justify-center items-center">
+                                                                <GiRapidshareArrow className="mr-1" />{' '}
+                                                                <span className="mx-[3px] text-green-500">
+                                                                    {' '}
+                                                                    {comments?.length}{' '}
+                                                                </span>{' '}
+                                                                Phản hồi
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                )}
-                                                <span>
+                                                    )}
+                                                </span>
+
+                                                {/* </Link> */}
+                                                <span className="mx-2 top-0 right-0 flex ">
                                                     {user && user.uid === userId && (
                                                         <DeleteArticle id={id} imageUrl={userPhotoURL} colDB={colDB} />
                                                     )}
                                                 </span>
                                             </div>
-
-                                            {/* </Link> */}
                                         </div>
                                     </div>
                                 </div>

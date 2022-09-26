@@ -19,8 +19,9 @@ export default function DeleteArticle({ id, imageUrl, colDB }) {
         }
     };
     return (
-        <div onClick={handleDelete} className="cursor-pointer">
+        <div onClick={handleDelete} className="cursor-pointer flex p-1 border rounded-md">
             <TiDelete className="text-white text-2xl" />
+            Xoá
         </div>
     );
 }

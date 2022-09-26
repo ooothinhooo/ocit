@@ -12,7 +12,7 @@ export default function Comment({ id, colDB }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
 
     const [comment, setComment] = useState('');
-    console.log(comment);
+    // console.log(comment);
     if (comment.length > 3000) {
         alert('Bạn viết quá nhiều rồi ');
     }

@@ -41,7 +41,7 @@ export default function LikeArticle({ id, likes, colDB }) {
                 cursor: 'pointer',
                 color: likes?.includes(user.photoURL) ? 'red' : null,
             }}
-            className="text-2xl text-white flex items-center justify-center"
+            className="text-2xl text-white flex items-center justify-center "
         >
             {!likes?.includes(user.photoURL) ? (
                 <>
@@ -49,15 +49,19 @@ export default function LikeArticle({ id, likes, colDB }) {
                 </>
             ) : (
                 <>
-                    <AiTwotoneLike className="text-red-500 " />
+                    <AiTwotoneLike className="text-red-500 mr-2" />
                 </>
             )}
             {/* <AiOutlineLike /> */}
-            <span className="mx-2 flex">
+            <span className="mx-2 flex ml-2">
                 {arrLikes &&
-                    arrLikes.map((item) => (
+                    arrLikes.map((item, index) => (
                         <>
-                            <img src={item} className="h-6 w-6 rounded-full left-2 " />
+                            <img
+                                key={index}
+                                src={item}
+                                className={`-ml-[10px] h-6 w-6 rounded-full left-2 z-[${index}]`}
+                            />
                         </>
                     ))}
             </span>

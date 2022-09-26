@@ -48,15 +48,15 @@ export default function Dislike({ id, dislikes, colDB }) {
                 </>
             ) : (
                 <>
-                    <AiTwotoneDislike className="text-blue-500 " />
+                    <AiTwotoneDislike className="text-blue-500 mr-2 " />
                 </>
             )}
             {/* <AiOutlineLike /> */}
             <span className="mx-2 flex">
                 {dislikes &&
-                    dislikes.map((item) => (
+                    dislikes.map((item, index) => (
                         <>
-                            <img src={item} className="h-6 w-6 rounded-full left-2 " />
+                            <img src={item} className={`-ml-[10px] h-6 w-6 rounded-full left-2 z-[${index}]`} />
                         </>
                     ))}
             </span>
