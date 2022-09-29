@@ -44,6 +44,7 @@ export { default as ToggleModal } from './children/ToggleModal';
 export { default as AccordionContainer } from './children/AccordionContainer';
 export { default as MarkDownContainer } from './children/MarkDownContainer';
 export { default as CartNameHP } from './children/CartNameHP';
+export { default as Accordion2 } from './children/Accordion2';
 
 //! Comments
 export { default as AddArticle } from './Comments/AddArticle';

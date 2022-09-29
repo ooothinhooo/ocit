@@ -29,7 +29,8 @@ Thiết kế một DFA có tập kí tự đầu vào là {0, 1} chấp nhận c
 Thiết kế một DFA có tập kí tự đầu vào là {0, 1} chấp nhận tcác chuỗi nhị phân có số lượng số 0 là chẵn.
 <img src="https://i.ibb.co/v1ynR1G/image.png" alt="image" border="0">
 </aside>
-
+<br />
+##DFA More
 <Code>
 <p>Thiết kế một DFA có tập kí tự đầu vào là {/, a, r} chỉ  chấp nhận tất cả các chuỗi đầu vào là chú thích 1 dòng trong Java. Với r là ký tự xuống dòng, a là ký tự bất kỳ.</p>
 <img src="https://i.ibb.co/SfzrMFt/image.png" alt="image" border="0">

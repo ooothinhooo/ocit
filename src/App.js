@@ -42,6 +42,7 @@ import {
 } from './HocPhan';
 import ProductPage from './pages/ProductPage';
 import Resources from './pages/Resources';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
@@ -90,6 +91,7 @@ function App() {
                 <main className="mt-10 md:mt-8 px-4 md:px-16  py-2 w-full  bg-primary">
                     <Routes>
                         <Route path="/test" element={<Test />} />
+
                         {user && user.email === ROOT_USER_EMAIL ? (
                             <>
                                 <Route path="/home" element={<HomePage />} />
@@ -155,6 +157,7 @@ function App() {
                                 </div>
                             }
                         />
+                        {/* <Route path="*" element={<NotFoundPage />} /> */}
                     </Routes>
                 </main>
                 {/* <DocViewer documents={docs} /> */}

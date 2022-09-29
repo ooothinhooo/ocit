@@ -10,18 +10,18 @@ function Task() {
     return (
         <>
             <div
-                className=" grid md:grid-cols-3 md:gap-3 w-full  h-full bg-primary "
+                className=" grid md:grid-cols-3 md:gap-3 w-full  h-full bg-primary md:-mx-[18px] "
                 // :className="{ 'overflow-hidden': isSideMenuOpen}"
             >
                 {OCIT_HOCPHAN &&
                     OCIT_HOCPHAN.map((item) => (
                         <div class="md:w-[80%] m-2 w-[90%]   ">
                             <div
-                                className={`bg-gray-800 text-white   rounded-xl  shadow-lg p-4 ${
+                                className={`bg-gray-800 text-white   rounded-xl  shadow-lg p-4  ${
                                     item.flag == 'true' ? 'border border-blue-200' : ''
                                 }`}
                             >
-                                <div class="flex items-center justify-between">
+                                <div class="flex items-center justify-between ">
                                     <div class="flex items-center space-x-2">
                                         <div class="text-sm text-gray-600">{item?.MaHP}</div>
                                         <div class="md:text-md text-sm md:font-bold">{item?.TenHP}</div>

@@ -85,38 +85,14 @@ export const categories = [
     },
     {
         id: 3,
-        name: 'CT180',
-        title: 'Cơ sở dữ liệu',
-        urlParamName: 'CT180',
-    },
-    {
-        id: 4,
-        name: 'CT188',
-        title: 'Nhập môn lập trình web',
-        urlParamName: 'CT188',
-    },
-    {
-        id: 5,
         name: 'CT239',
         title: 'Niên Luận Cơ Sở Ngành',
         urlParamName: 'CT239',
     },
     {
-        id: 6,
-        name: 'CT223',
-        title: 'Quản Lý Dự Án Phần Mềm',
-        urlParamName: 'CT223',
-    },
-    {
-        id: 7,
+        id: 4,
         name: 'CT240',
         title: 'Nguyên Lý Xây Dựng Phần Mềm',
         urlParamName: 'CT240',
-    },
-    {
-        id: 8,
-        name: 'CT241',
-        title: 'Phân Tích Yêu Cầu Phần Mềm',
-        urlParamName: 'CT241',
     },
 ];

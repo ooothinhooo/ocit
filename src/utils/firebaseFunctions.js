@@ -55,6 +55,7 @@ export const removeAccents = (str) => {
 //TODO getAll food items
 export const getAllOCIT = async () => {
     const items = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+
     return items.docs.map((doc) => doc.data());
 };
 
@@ -189,6 +190,7 @@ export const updateItem_OCIT_HOCPHAN = async (oid, updates) => {
 //! get order to user
 export const getOrder_OCIT = async () => {
     const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('oid', 'desc')));
+
     // const items = await getDocs(query(collection(firestore, 'ORDER'), orderBy('date', 'desc')));
     return items.docs.map((doc) => doc.data());
 };
@@ -235,7 +237,7 @@ export const order_OCIT = async (data) => {
 export const deleteItem_Order = async (index) => {
     const db = getFirestore();
     const OCIT = await getDocs(query(collection(firestore, 'ORDER'), orderBy('oid', 'desc')));
-    // console.log(OCIT);
+
     const ooid = OCIT.docs[index].id;
     // console.log(ooid);
     const docRef = doc(db, 'ORDER', ooid);
@@ -270,7 +272,6 @@ export const deleteItem_Order = async (index) => {
             console.log(error);
         });
 };
-
 
 
 

@@ -25,7 +25,9 @@ export default function Test() {
         <>
             <div className="w-full h-full m-auto justify-center items-center">
                 <div className="flex m-auto justify-center items-center -mt-4">
-                    <span className="md:text-md text-sm">NHẬP MÃ HỌC PHẦN NÓ SẼ TẠO MỘT NHÓM CHAT CHO BẠN</span>
+                    <span className="md:text-md text-sm text-gray-100">
+                        NHẬP MÃ HỌC PHẦN NÓ SẼ TẠO MỘT NHÓM CHAT CHO BẠN
+                    </span>
                 </div>
                 <div>
                     <div className="flex m-auto justify-center items-center my-2">

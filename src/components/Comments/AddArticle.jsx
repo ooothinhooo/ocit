@@ -90,13 +90,12 @@ export default function AddArticle({ colDB }) {
             {!user ? (
                 <>
                     <div className="  md:w-[90%] w-full ">
-                        <div class="flex items-center justify-center md:m-auto ">
-                            <div class="relative md:w-[80%] w-full flex items-center justify-center  ">
-                                <div class="hidden mr-2 md:block md:relative  md:flex md:absolute inset-y-0 left-0 items-center   pointer-events-none">
+                        <div className="flex items-center justify-center md:m-auto ">
+                            <div className="relative md:w-[80%] w-full flex items-center justify-center  ">
+                                <div className="hidden mr-2 md:block md:relative  md:flex md:absolute inset-y-0 left-0 items-center   pointer-events-none">
                                     <img className="w-14 h-14 rounded-lg" src={avatars} />
                                 </div>
                                 <span
-                                    readonly
                                     class="bg-primary border border-gray-300 text-gray-50 text-sm
                                      focus:ring-blue-500 focus:border-blue-500  w-[75%] py-3 px-1
                                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -106,7 +105,7 @@ export default function AddArticle({ colDB }) {
                                 </span>
                                 <button
                                     onClick={handlePublish}
-                                    class="md:w-14 h-14 rounded-lg justify-center items-center 
+                                    className="md:w-14 h-14 rounded-lg justify-center items-center 
                                     flex ml-2 py-2.5 px-3  text-sm font-medium text-white
                                  bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 
                                  focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700

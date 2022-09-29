@@ -31,15 +31,15 @@ function MenuContainer() {
                 <div className="w-full flex flex-col items-center justify-center">
                     <p
                         className="text-2xl font-semibold capitalize  text-headingColor relative 
-                    before:absolute before:rounded-lg before:content before:w-16 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-orange-400
+                    before:absolute before:rounded-lg before:content before:w-16 before:h-1 before:-bottom-2 before:left-0
+                     before:bg-gradient-to-tr from-orange-400
                     to-orange-600 transition-all ease-in-out duration-100 mr-auto"
                     >
                         Product List
                     </p>
                     <div
-                        className="w-full md:flex md:gap-8 mr-2  grid grid-cols-4 items-center justify-start 
-                lg:justify-center
-                py-6 overflow-x-scroll lg:scrollbar-none"
+                        className="w-full md:flex md:gap-8 md:mr-2  grid grid-cols-4 items-center justify-center
+                        py-6  scrollbar-none"
                     >
                         {categories &&
                             categories.map((category, index) => (
@@ -48,10 +48,9 @@ function MenuContainer() {
                                     onClick={() => setFilter(category.urlParamName)}
                                     key={category?.id}
                                     className={`group  ${filter === category.urlParamName ? 'bg-cardNumBg' : 'bg-card'}
-                            md:w-24  md:h-28 w-16 h-18 p-2 m-2
-                            cursor-pointer
+                                    md:w-[130px]  md:h-28 w-16 h-18 p-2 md:m-2  cursor-pointer
                             rounded-lg drop-shadow-xl flex flex-col 
-                            gap-3 items-center justify-center 
+                            gap-3  items-center justify-center 
                             hover:bg-cardNumBg`}
                                 >
                                     <div
