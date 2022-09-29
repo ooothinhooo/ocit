@@ -9,6 +9,8 @@ import { actionType } from '../../context/reducer';
 import Swal from 'sweetalert2';
 import { app } from '../../firebase.config.js';
 import { logo } from '../../img';
+import logo2 from '../../img/logo2.png';
+
 function Login() {
     const [{ user, LOGINSHOW }, dispatch] = useStateValue();
     const firebaseAuth = getAuth(app);
@@ -80,12 +82,12 @@ function Login() {
                         LOGINSHOW ? '' : 'hidden'
                     } fixed justify-center top-0 left-0 right-0 bottom-0 m-auto w-full h-screen bg-primary opacity-25 drop-shadow-md flex z-[222]`}
                 >
-                    <div className="md:w-[73%] md:h-[78%] w-[90%] h-[88%] rounded-lg flex m-auto items-center bg-white justify-center">
+                    <div className="md:w-[73%] md:h-[85%] w-[90%] h-[90%] rounded-lg flex m-auto items-center bg-white justify-center">
                         <div class=" flex    mx-auto my-8">
                             <div class=" max-w-xl mx-auto w-full flex items-center ">
                                 <div class=" my-4 max-w-sm text-center  ">
                                     <div class="flex items-center justify-center m-3">
-                                        <img class="w-16 h-16 " src={logo} />
+                                        <img class="w-40 scale-150 " src={logo2} />
                                     </div>
                                     <p class="text-primary text-2xl  font-bold mb-10">
                                         Đăng Nhập Vào <span class="text-red-500">OCIT</span>

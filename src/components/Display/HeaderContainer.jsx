@@ -9,6 +9,7 @@ import { app } from '../../firebase.config.js';
 import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
 import Logo from '../../img/logo.png';
+import logo2 from '../../img/logo2.png';
 import Avatar from '../../img/avatar.png';
 import Swal from 'sweetalert2';
 import Login from '../children/Login.jsx';
@@ -86,9 +87,9 @@ function HeaderContainer() {
                 className="bg-primary h-full  px-2 sm:px-4 py-2.5  dark:bg-gray-900"
             >
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
-                    <Link to={'/'} className="flex items-center gap-2   ">
-                        <img src={Logo} alt="" className="w-10 object-cover" />
-                        <p className="text-red-600 text-xl font-bold"> OCIT </p>
+                    <Link to={'/'} className="flex items-center gap-2  ml-4 ">
+                        <img src={logo2} alt="" className="w-[130px] object-cover scale-150" />
+                        {/* <p className="text-red-600 text-xl font-bold"> OCIT </p> */}
                     </Link>
                     <Login />
                     <div className="flex items-center md:order-2">
