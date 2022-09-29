@@ -91,8 +91,8 @@ export const categories = [
     },
     {
         id: 4,
-        name: 'CT240',
-        title: 'Nguyên Lý Xây Dựng Phần Mềm',
-        urlParamName: 'CT240',
+        name: 'CT241',
+        title: 'Phân Tích Yêu Cầu Phần Mềm',
+        urlParamName: 'CT241',
     },
 ];
