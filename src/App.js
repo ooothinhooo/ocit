@@ -100,7 +100,7 @@ function App() {
                         {ROOT_USER_EMAIL.map((root) => {
                             return (
                                 <>
-                                    {user && userAuthState.uid === root ? (
+                                    {user && userAuthState?.uid === root ? (
                                         <>
                                             <Route path="/home" element={<HomePage />} />
                                             <Route path="/*" element={<Admin />} />
