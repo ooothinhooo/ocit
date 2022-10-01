@@ -34,10 +34,16 @@ export { default as UpdateProduct } from './Admin/OCIT/UpdateProduct';
 //! OCIT HOCPHAN
 export { default as CreateHocPhan } from './Admin/OCIT_HOCPHAN/CreateHocPhan';
 
+
+
+//! Data
+export { default as CreateData } from './Admin/DataHocPhan/CreateData'
+export { default as UpdateData } from './Admin/DataHocPhan/UpdateData'
 //! View
 export { default as HocPhan_OCIT } from './Admin/View/HocPhan_OCIT';
 export { default as Product_OCIT } from './Admin/View/Product_OCIT';
 export { default as Order_OCIT } from './Admin/View/Order_OCIT';
+export { default as ViewHocPhan } from './Admin/View/ViewHocPhan'
 
 //! children
 export { default as ToggleModal } from './children/ToggleModal';

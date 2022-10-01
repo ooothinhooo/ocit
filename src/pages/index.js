@@ -5,3 +5,13 @@ export { default as Resources } from './Resources';
 export { default as Admin } from './Admin';
 export { default as TraCuu } from './TraCuu';
 export { default as HomePage } from './HomePage';
+ //! blog routes
+
+ export { default as Blog } from './blog/Blog'
+ export { default as RenderBlog } from './blog/RenderBlog'
+ export { default as WriteBlog } from './blog/WriteBlog'
+
+
+ //!Data Hoc Phan
+
+ export { default as DataHocPhan } from './Data_HocPhan/DataHocPhan'

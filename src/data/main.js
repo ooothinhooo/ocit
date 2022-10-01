@@ -1,0 +1,1 @@
+export const ROOT_USER_EMAIL = ['SyH7aiL0bAcXnIbfHb4tOIKXlZH2', 'obu2VGUxX5S1kYVGYMHne48nBfN2'];

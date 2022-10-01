@@ -56,8 +56,6 @@ function CreateHocPhan() {
                     MaHP: maHP.toUpperCase(),
                     TenHP: tenHP,
                     imgCreator: 'https://i.ibb.co/rxJfJ6G/image.png',
-                    // imgCreator: imagesCreator,
-
                     creator: creator,
                     flag: flag,
                     category: category,

@@ -18,8 +18,11 @@ import {
     Articles,
     AddArticle,
     Article,
+    CreateData,
+    ViewHocPhan,
+    UpdateData,
 } from './components';
-import { Admin, HocPhan, HomePage, Thanks, TraCuu } from './pages';
+import { Admin, HocPhan, HomePage, Thanks, TraCuu, Blog, RenderBlog, WriteBlog, DataHocPhan } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
@@ -43,10 +46,13 @@ import {
 import ProductPage from './pages/ProductPage';
 import Resources from './pages/Resources';
 import NotFoundPage from './pages/NotFoundPage';
-
+import { auth } from './firebase.config';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { ROOT_USER_EMAIL } from './data/main';
 function App() {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
-    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
+    // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
+    const [userAuthState] = useAuthState(auth);
 
     const fetchData = async () => {
         await getAllOCIT().then((data) => {
@@ -91,23 +97,32 @@ function App() {
                 <main className="mt-10 md:mt-8 px-4 md:px-16  py-2 w-full  bg-primary">
                     <Routes>
                         <Route path="/test" element={<Test />} />
+                        {ROOT_USER_EMAIL.map((root) => {
+                            return (
+                                <>
+                                    {user && userAuthState.uid === root ? (
+                                        <>
+                                            <Route path="/home" element={<HomePage />} />
+                                            <Route path="/*" element={<Admin />} />
+                                            <Route path="/createItem" element={<CreateContainer />} />
+                                            <Route path="/createHocPhan" element={<CreateHocPhan />} />
+                                            <Route path="/viewproduct" element={<ViewProductsList />} />
+                                            <Route path="/update/:uid" element={<UpdateProduct />} />
+                                            <Route path="/products/:uid" element={<ViewCartItem />} />
+                                            <Route path="/data/markdown/hocphan/create" element={<CreateData />} />
+                                            <Route path="/data/markdown/hocphan/update/:id" element={<UpdateData />} />
 
-                        {user && user.email === ROOT_USER_EMAIL ? (
-                            <>
-                                <Route path="/home" element={<HomePage />} />
-                                <Route path="/*" element={<Admin />} />
-                                <Route path="/createItem" element={<CreateContainer />} />
-                                <Route path="/createHocPhan" element={<CreateHocPhan />} />
-                                <Route path="/viewproduct" element={<ViewProductsList />} />
-                                <Route path="/update/:uid" element={<UpdateProduct />} />
-                                <Route path="/products/:uid" element={<ViewCartItem />} />
-                                {/* <Route path="/admin" element={<Admin />} /> */}
-                            </>
-                        ) : (
-                            <>
-                                <Route path="/*" element={<HomePage />} />
-                            </>
-                        )}
+                                            {/* <Route path="/admin" element={<Admin />} /> */}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Route path="/*" element={<HomePage />} />
+                                        </>
+                                    )}
+                                </>
+                            );
+                        })}
+
                         {/* link to page */}
                         <Route path="/profile/:uid" element={<UserProfile />} />
                         <Route path="/contact" element={<Contact />} />
@@ -116,6 +131,11 @@ function App() {
                         {user && user ? (
                             <>
                                 <>
+                                    <Route path="/data/hocphan/:filter/:title/:id" element={<ViewHocPhan />} />
+                                    //blog post routes
+                                    <Route path="/blog" element={<Blog />} />
+                                    <Route path="/blog/post/:id" element={<RenderBlog />} />
+                                    <Route path="/publish/post" element={<WriteBlog />} />
                                     <Route path="/hocphan/CT242" element={<CT242 />} />
                                     <Route path="/hocphan/CT112" element={<CT112 />} />
                                     <Route path="/hocphan/CT761" element={<CT176 />} />
@@ -139,6 +159,7 @@ function App() {
                             <></>
                         )}
                         <Route path="/hocphan" element={<HocPhan />} />
+                        <Route path="/data/hocphan" element={<DataHocPhan />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/collections" element={<ProductPage />} />
                         <Route path="/tracuu" element={<TraCuu />} />

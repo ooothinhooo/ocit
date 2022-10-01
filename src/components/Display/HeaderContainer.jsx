@@ -1,40 +1,25 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-
 import { Link } from 'react-router-dom';
 import { FaShoppingBasket } from 'react-icons/fa';
-
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { app } from '../../firebase.config.js';
+import Swal from 'sweetalert2';
+import { auth } from '../../firebase.config';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
 import Logo from '../../img/logo.png';
 import logo2 from '../../img/logo2.png';
 import Avatar from '../../img/avatar.png';
-import Swal from 'sweetalert2';
 import Login from '../children/Login.jsx';
-
+import { ROOT_USER_EMAIL } from '../../data/main';
 function HeaderContainer() {
-    const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
-    const firebaseAuth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
     const [{ user, cartShow, LOGINSHOW, cartItems }, dispatch] = useStateValue();
+    const [userAuthState] = useAuthState(auth);
+    // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
+    // console.log(user);
+
     const [isMenu, setIsMenu] = useState(false);
-    const login = async () => {
-        if (!user) {
-            const { user } = await signInWithPopup(firebaseAuth, provider);
-            const { refreshToken, providerData } = user;
-            localStorage.setItem('user', JSON.stringify(providerData[0]));
-            dispatch({
-                type: actionType.SET_USER,
-                user: providerData[0],
-            });
-            window.location = '/';
-        } else {
-            Swal.fire('Đăng Nhập Thất Bại', 'Vui Lòng Thử Lại', 'error');
-        }
-    };
+
     //logout function
     const logout = () => {
         setIsMenu(false);
@@ -207,7 +192,7 @@ function HeaderContainer() {
                                             </li>
                                             <li>
                                                 <Link
-                                                    to="/hocphan"
+                                                    to="/data/hocphan"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
@@ -232,6 +217,15 @@ function HeaderContainer() {
                                                     Tra Cứu
                                                 </Link>
                                             </li>
+                                            <li>
+                                                <Link
+                                                    to="/blog"
+                                                    onClick={handleSetisMenu}
+                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                >
+                                                    Blog
+                                                </Link>
+                                            </li>
                                         </>
                                         <li>
                                             {user && user ? (
@@ -248,6 +242,42 @@ function HeaderContainer() {
                                                 <></>
                                             )}
                                         </li>
+                                        <li>
+                                            {user && user ? (
+                                                <Link to={'/publish/post'}>
+                                                    <p
+                                                        className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
+                                                        onClick={() => setIsMenu(false)}
+                                                    >
+                                                        {' '}
+                                                        Write Blog
+                                                    </p>
+                                                </Link>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </li>
+                                        {ROOT_USER_EMAIL.map((item) => {
+                                            return (
+                                                <>
+                                                    <li>
+                                                        {user && userAuthState.uid == item ? (
+                                                            <Link to={'/data/markdown/hocphan/create'}>
+                                                                <p
+                                                                    className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
+                                                                    onClick={() => setIsMenu(false)}
+                                                                >
+                                                                    {' '}
+                                                                    Write Data Học Phần
+                                                                </p>
+                                                            </Link>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </li>
+                                                </>
+                                            );
+                                        })}
 
                                         <li>
                                             {user && user ? (
@@ -348,7 +378,7 @@ function HeaderContainer() {
                             </li>
                             <li>
                                 <Link
-                                    to="/hocphan"
+                                    to="/data/hocphan"
                                     className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Học Phần
@@ -368,6 +398,14 @@ function HeaderContainer() {
                                     className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Tra Cứu
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/blog"
+                                    className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                >
+                                    Blog
                                 </Link>
                             </li>
                         </ul>

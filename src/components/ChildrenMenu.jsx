@@ -1,12 +1,13 @@
 import React from 'react';
 import { categories } from '../utils/data';
+import courses from '../data/courses';
 import { AnimatePresence, motion } from 'framer-motion';
 function ChildrenMenu({ filter }) {
     // console.log(filter);
     function render() {
-        const html = categories.map((item) => {
+        const html = courses.map((item) => {
             return (
-                <div className={filter != item.name ? 'hidden' : ''}>
+                <div className={filter != item.key ? 'hidden' : ''}>
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -29,7 +30,7 @@ function ChildrenMenu({ filter }) {
                         </svg>
                         <span class="sr-only">Info</span>
                         <div>
-                            <span class="font-medium">{item.title}</span>
+                            <span class="font-medium">{item.name}</span>
                         </div>
                     </motion.div>
                 </div>

@@ -15,7 +15,7 @@ import { firestore, storage } from '../firebase.config';
 import { initializeApp } from 'firebase/app';
 import { getAuth, sendEmailVerification } from 'firebase/auth';
 import Swal from 'sweetalert2';
-
+var today = new Date();
 export const makeid = (length) => {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -162,7 +162,7 @@ export const updateItem_OCIT_HOCPHAN = async (oid, updates) => {
     // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
     // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
     const db = getFirestore();
-
+    console.log(oid);
     const docRef = doc(db, 'OCIT', oid);
 
     const data = {
@@ -273,7 +273,37 @@ export const deleteItem_Order = async (index) => {
         });
 };
 
+//update data hocphan
+export const update_Data_HocPhan = async (id, updates) => {
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+    // const oid = OCIT.docs[index].id;
+    // console.log(pushArr[index]);
+    // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
+    // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
+    const db = getFirestore();
+    console.log(id);
+    const docRef = doc(db, 'OCIT_DATA_HOCPHAN', id);
+    console.log(docRef);
+    const data = {
+        userPhotoURL: updates.userPhotoURL,
+        tag: updates.tag,
+        description: updates.description,
+        title: updates.title,
+        imageUrl: updates.imageURL,
+        createdBy: updates.createdBy,
+        userId: updates.userId,
+        render: false,
+        date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+    };
 
+    setDoc(docRef, data)
+        .then((docRef) => {
+            console.log('Entire Document has been updated successfully');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
 
 
 
