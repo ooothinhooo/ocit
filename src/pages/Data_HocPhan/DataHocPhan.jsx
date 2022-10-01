@@ -12,7 +12,7 @@ import { removeAccents } from '../../utils/firebaseFunctions';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { AiFillCode } from 'react-icons/ai';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChildrenMenu } from '../../components';
+import { ChildrenMenu, AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../../components';
 import ListDataHocPhan from './ListDataHocPhan';
 
 const colDB = 'OCIT_DATA_HOCPHAN';
@@ -83,6 +83,13 @@ function Data_HocPhan() {
             </div>
             <div className="">
                 <ListDataHocPhan arr={arr} filter={filter} title={title} />
+            </div>
+
+            <div className="mt-6">
+                <AddArticle colDB="cmt_hocphan" />
+                <div className="h-full">
+                    <Articles colDB="cmt_hocphan" />
+                </div>
             </div>
         </div>
     );
