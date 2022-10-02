@@ -146,7 +146,7 @@ function BannerHome() {
                                     {user && user ? (
                                         <>
                                             <Link
-                                                to="/hocphan"
+                                                to="/data/hocphan"
                                                 className="mt-3 text-indigo-500 inline-flex items-center"
                                             >
                                                 Truy Cập Học Phần

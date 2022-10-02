@@ -39,7 +39,7 @@ function Data_HocPhan() {
     let str = arr[0]?.title ? arr[0]?.title : '';
     str = removeAccents(str);
     let title = str.replace(/\s/g, '');
-    const data = [{ MAHP: 'CT112' }, { MAHP: 'CT287' }, { MAHP: 'CT178' }, { MAHP: 'CT239' }];
+    const data = [{ MAHP: 'CT112' }, { MAHP: 'CT287' }, { MAHP: 'CT180' }, { MAHP: 'CT242' }];
     return (
         <div className="-mt-4">
             {/* <Unfinished data="CT449 - Phát Triển Ứng Dụng Web" /> */}

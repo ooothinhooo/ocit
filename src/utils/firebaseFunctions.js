@@ -101,10 +101,9 @@ export const updateItem = async (oid, updates) => {
     // console.log(pushArr[index]);
     // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
     // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
+    console.log(oid);
     const db = getFirestore();
-
     const docRef = doc(db, 'OCIT', oid);
-
     const data = {
         id: oid,
         title: updates.title,
@@ -273,37 +272,80 @@ export const deleteItem_Order = async (index) => {
         });
 };
 
-//update data hocphan
-export const update_Data_HocPhan = async (id, updates) => {
+//* data hocphan_DATA ocit
+////TODO getAll food items
+export const getAllOCIT_DATA_HOCPHAN = async () => {
+    const items = await getDocs(query(collection(firestore, 'OCIT_DATA_HOCPHAN'), orderBy('id', 'asc')));
+    console.log(items.docs.map(doc));
+    return items.docs.map((doc) => doc.data());
+};
+//TODO saving new items
+export const Upload_OCIT_DATA_HOCPHAN = async (data) => {
+    await setDoc(doc(firestore, 'OCIT_DATA_HOCPHAN', `${data.path.split(' ').join('').toUpperCase()}`), data, {
+        merge: true,
+    });
+};
+//TODO delete item ocit hocphan
+export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
+    const db = getFirestore();
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT_DATA_HOCPHAN'), orderBy('MaHP', 'asc')));
+    // const oid = OCIT.docs[index].id;
+    // console.log(oid);
+    const docRef = doc(db, 'OCIT_DATA_HOCPHAN', oid);
+
+    deleteDoc(docRef)
+        .then(() => {
+            alert('Entire Document has been deleted successfully.');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+//TODO update item ocit hocphan
+export const updateItem_OCIT_DATA_HOCPHAN = async (oid, updates) => {
     // const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
     // const oid = OCIT.docs[index].id;
     // console.log(pushArr[index]);
     // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
     // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
     const db = getFirestore();
-    console.log(id);
-    const docRef = doc(db, 'OCIT_DATA_HOCPHAN', id);
-    console.log(docRef);
+    console.log(oid);
+    const docRef = doc(db, 'OCIT_DATA_HOCPHAN', oid);
+
     const data = {
-        userPhotoURL: updates.userPhotoURL,
-        tag: updates.tag,
-        description: updates.description,
+        id: oid,
+        makeCode: updates.makeCode,
         title: updates.title,
-        imageUrl: updates.imageURL,
+        description: updates.description,
+        tag: updates.tag.toUpperCase(),
         createdBy: updates.createdBy,
-        userId: updates.userId,
-        render: false,
-        date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+        PhoToCreater: updates.PhoToCreater,
+        createrID: updates.createrID,
+        date: updates.date,
+        path: updates.path,
     };
 
     setDoc(docRef, data)
         .then((docRef) => {
             console.log('Entire Document has been updated successfully');
+            // alert('Entire Document has been deleted successfully.');
         })
         .catch((error) => {
             console.log(error);
         });
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

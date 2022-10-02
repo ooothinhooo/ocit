@@ -1,9 +1,7 @@
 import './App.css';
 import React, { useRef, useEffect } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-
 import {
     MainContainer,
     CreateContainer,
@@ -26,23 +24,6 @@ import { Admin, HocPhan, HomePage, Thanks, TraCuu, Blog, RenderBlog, WriteBlog, 
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
-import {
-    CT112,
-    CT176,
-    CT178,
-    CT179,
-    CT180,
-    CT188,
-    CT190,
-    CT239,
-    CT240,
-    CT241,
-    CT242,
-    CT244,
-    CT287,
-    CT296,
-    CT449,
-} from './HocPhan';
 import ProductPage from './pages/ProductPage';
 import Resources from './pages/Resources';
 import NotFoundPage from './pages/NotFoundPage';
@@ -110,7 +91,10 @@ function App() {
                                             <Route path="/update/:uid" element={<UpdateProduct />} />
                                             <Route path="/products/:uid" element={<ViewCartItem />} />
                                             <Route path="/data/markdown/hocphan/create" element={<CreateData />} />
-                                            <Route path="/data/markdown/hocphan/update/:id" element={<UpdateData />} />
+                                            <Route
+                                                path="/data/markdown/hocphan/update/:id/:makeCode"
+                                                element={<UpdateData />}
+                                            />
 
                                             {/* <Route path="/admin" element={<Admin />} /> */}
                                         </>
@@ -136,7 +120,7 @@ function App() {
                                     <Route path="/blog" element={<Blog />} />
                                     <Route path="/blog/post/:id" element={<RenderBlog />} />
                                     <Route path="/publish/post" element={<WriteBlog />} />
-                                    <Route path="/hocphan/CT242" element={<CT242 />} />
+                                    {/* <Route path="/hocphan/CT242" element={<CT242 />} />
                                     <Route path="/hocphan/CT112" element={<CT112 />} />
                                     <Route path="/hocphan/CT761" element={<CT176 />} />
                                     <Route path="/hocphan/CT178" element={<CT178 />} />
@@ -151,7 +135,7 @@ function App() {
                                     <Route path="/hocphan/CT244" element={<CT244 />} />
                                     <Route path="/hocphan/CT287" element={<CT287 />} />
                                     <Route path="/hocphan/CT296" element={<CT296 />} />
-                                    <Route path="/hocphan/CT449" element={<CT449 />} />
+                                    <Route path="/hocphan/CT449" element={<CT449 />} /> */}
                                 </>
                                 ,
                             </>

@@ -9,6 +9,12 @@ import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../../firebase.config';
 import { useStateValue } from '../../../context/StateProvider';
+import {
+    Upload_OCIT_DATA_HOCPHAN,
+    getAllOCIT_DATA_HOCPHAN,
+    removeAccents,
+    makeid,
+} from '../../../utils/firebaseFunctions';
 const colDB = 'OCIT_DATA_HOCPHAN';
 function CreateData() {
     var today = new Date();
@@ -18,14 +24,15 @@ function CreateData() {
     const [value, setValue] = React.useState('');
     const [otitle, setoTitle] = React.useState('');
     const [tag, setTag] = React.useState('');
+    const [makeCode, setMakeCode] = useState(makeid(6));
     const [progress, setProgress] = useState(0);
-
+    // getAllOCIT_DATA_HOCPHAN();
     const [articles, setArticles] = useState([]);
     // console.log(articles);
     // const [user] = useAuthState(auth);
     useEffect(() => {
         const articleRef = collection(db, colDB);
-        const q = query(articleRef, orderBy('createdAt', 'desc'));
+        const q = query(articleRef);
         onSnapshot(q, (snapshot) => {
             const articles = snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -34,12 +41,11 @@ function CreateData() {
             setArticles(articles);
         });
     }, []);
+    console.log(articles);
 
     const code = articles.filter((item) => {
         return (item.tag = 'CT112');
     });
-
-    console.log(code);
 
     const [formData, setFormData] = useState({
         title: '',
@@ -104,6 +110,47 @@ function CreateData() {
             },
         );
     };
+
+    const saveDetails = () => {
+        // setIsLoading(true);
+        try {
+            if (!otitle || !value || !tag) {
+                alert('thieu dư lieu');
+            } else {
+                const data = {
+                    makeCode: makeCode.split(' ').join('').toUpperCase(),
+                    id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                        .split(' ')
+                        .join('')
+                        .toUpperCase()}${user.uid}`,
+                    title: otitle,
+                    description: value,
+                    tag: tag.toUpperCase(),
+                    createdBy: user.displayName,
+                    PhoToCreater: user.photoURL,
+                    createrID: user.uid,
+                    date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
+                    path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                        .split(' ')
+                        .join('')
+                        .toUpperCase()}${user.uid}`,
+                };
+                // saveItem(data);
+                Upload_OCIT_DATA_HOCPHAN(data);
+                // setIsLoading(false);
+                // setFields(true);
+                alert(`Data Uploaded ${otitle.toUpperCase()} successfully`);
+                // clearData();
+                // setAlertStatus('success');
+                setTimeout(() => {
+                    // setFields(false);
+                }, 4000);
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
+
     return (
         <div className="h-full w-full justify-center items-center">
             <div className="my-2 flex justify-center items-center ">
@@ -122,7 +169,8 @@ function CreateData() {
                     onChange={(e) => setTag(e.target.value)}
                 />
                 <button
-                    onClick={handlePublish}
+                    // onClick={handlePublish}
+                    onClick={saveDetails}
                     className="md:w-14 h-14 rounded-lg justify-center items-center 
                                     flex ml-2 py-2.5 px-3  text-sm font-medium text-white
                                  bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 

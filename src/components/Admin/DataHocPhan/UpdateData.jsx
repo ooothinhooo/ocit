@@ -6,15 +6,18 @@ import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../../firebase.config';
 import { useStateValue } from '../../../context/StateProvider';
-import { update_Data_HocPhan } from '../../../utils/firebaseFunctions';
+// import { update_Data_HocPhan } from '../../../utils/firebaseFunctions';
 import { useParams } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
+import {updateItem_OCIT_DATA_HOCPHAN, removeAccents, makeid} from '../../../utils/firebaseFunctions' 
 const colDB = 'OCIT_DATA_HOCPHAN';
 function UpdateData() {
     var today = new Date();
     let { id } = useParams();
-    // console.log(id);
+    let { makeCode }  = useParams();
+    console.log(id);
+    console.log(makeCode);
+
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const photo = user && user.photoURL ? user.photoURL : '';
 
@@ -34,7 +37,7 @@ function UpdateData() {
     }, []);
 
     const code = articles.filter((item) => {
-        return item.id === id;
+        return item.makeCode === makeCode;
     });
     console.log(code[0]);
 
@@ -105,32 +108,86 @@ function UpdateData() {
             },
         );
     };
+    // const saveDetails = (index) => {
+    //     setIsLoading(true);
+    //     try {
+    //         const data = {
+    //             id: `${category.split(' ').join('').toUpperCase()}${removeAccents(title)
+    //                 .split(' ')
+    //                 .join('')
+    //                 .toUpperCase()}${price}${code.split(' ').join('').toUpperCase()}}`,
+    //             title: title,
+    //             imageURL: imagesAssets,
+    //             category: category,
+    //             calories: calories,
+    //             qty: 1,
+    //             price: price,
+    //             description: description,
+    //             code: code.toUpperCase(),
+    //             date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+    //         };
+    //         // updateItem(subPath, data);
+
+    //         // try {
+    //         //     deleteItemBtn(subPath);
+    //         //     // window.location.reload();
+    //         // } catch (e) {
+    //         //     console.error(e);
+    //         // }
+           
+    //         setTimeout(() => {
+    //             setFields(false);
+    //             window.location = '/';
+    //             // window.location.reload();
+    //         }, 4000);
+    //     } catch (e) {
+           
+    //     }
+    // };
+
     const saveDetails = (index) => {
-        // setIsLoading(true);
+       
         try {
-            const updates = {
-                userPhotoURL: user.photoURL,
-                tag: tag,
-                description: value,
+            const data = {
+                makeCode: makeCode.split(' ').join('').toUpperCase(),
+                id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                    .split(' ')
+                    .join('')
+                    .toUpperCase()}`,
                 title: otitle,
+                description: value,
+                tag: tag.toUpperCase(),
                 createdBy: user.displayName,
-                userId: user.uid,
-                render: false,
-                date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                PhoToCreater: photo,
+                createrID: user.uid,
+                date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
+                path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                    .split(' ')
+                    .join('')
+                    .toUpperCase()}${user.uid}`,
             };
             // updateItem(subPath, data);
-            update_Data_HocPhan(id, updates);
-            setTimeout(() => {
-                window.location = '/';
-                // window.location.reload();
-            }, 4000);
+            updateItem_OCIT_DATA_HOCPHAN(id,data)
+            // try {
+            //     deleteItemBtn(subPath);
+            //     // window.location.reload();
+            // } catch (e) {
+            //     console.error(e);
+            // }
+            // setIsLoading(false);
+            // setFields(true);
+            // setMsg('Data Uploaded successfully');
+            // clearData();
+            // setAlertStatus('success');
+            // setTimeout(() => {
+            //     setFields(false);
+            //     window.location = '/';
+            //     // window.location.reload();
+            // }, 4000);
         } catch (e) {
-            setTimeout(() => {}, 4000);
-
-            // fetchData();
+           alert(e)
         }
     };
-
     return (
         <div className="h-full w-full justify-center items-center">
             <div className="my-2 flex justify-center items-center ">
