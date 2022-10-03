@@ -78,7 +78,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                                         </svg>
                                                     </button> */}
 
-                                                <span className={`flex p-2 right-0 ${!Bars ? '' : 'hidden'}`}>
+                                                <span className={`flex p-2 right-0 `}>
                                                     {user && user?.uid == item?.createrID ? (
                                                         <>
                                                             <Link
