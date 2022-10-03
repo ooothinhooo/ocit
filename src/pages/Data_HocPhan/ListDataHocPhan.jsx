@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineBars } from 'react-icons/ai';
 import { useStateValue } from '../../context/StateProvider';
 import { ROOT_USER_EMAIL } from '../../data/main';
 import { deleteItem_OCIT_DATA_HOCPHAN } from '../../utils/firebaseFunctions';
 import Swal from 'sweetalert2';
 function ListDataHocPhan({ arr, filter, title }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
+
     // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
     // console.log(user.uid == ROOT_USER_EMAIL[0]);
     // console.log(user);
@@ -35,153 +37,97 @@ function ListDataHocPhan({ arr, filter, title }) {
                 arr?.map((item) => {
                     return (
                         <div className="mr-2 mb-1">
-                            <Link to={`/data/hocphan/${filter}/${title}/${item.id}`}>
-                                <div class="">
-                                    {user && user?.uid == item?.createrID ? (
-                                        <>
-                                            <div class="bg-gray-500 text-white rounded-lg  w-[98%] space-y-6 p-3">
-                                                <div class="flex space-x-4 items-center ">
-                                                    <div class="w-12 h-12">
-                                                        <img
-                                                            alt="avatar"
-                                                            className="w-full rounded-lg"
-                                                            src={item.PhoToCreater}
-                                                        />
-                                                    </div>
-
-                                                    <div class="space-y-2">
-                                                        <div class="flex space-x-2 items-center">
-                                                            <h2 class="text-base"> {item.title} </h2>
-                                                            {user && user?.uid == item?.createrID ? (
-                                                                <>
-                                                                    <Link
-                                                                        to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}
-                                                                    >
-                                                                        <h2 class="text-sm border p-1 rounded-md">
-                                                                            {' '}
-                                                                            Update{' '}
-                                                                        </h2>
-                                                                    </Link>
-                                                                    <button
-                                                                        className="border p-1 rounded-lg"
-                                                                        onClick={(e) => deleteItem(item.id)}
-                                                                    >
-                                                                        Xoá
-                                                                    </button>
-                                                                </>
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                            <svg
-                                                                class="h-4 w-4 text-blue-500"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                stroke="currentColor"
-                                                                stroke-width="2"
-                                                            >
-                                                                <path
-                                                                    stroke-linecap="round"
-                                                                    stroke-linejoin="round"
-                                                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                                />
-                                                            </svg>
-                                                            {/* <div class="  text-xs text-slate-400">posted an update</div> */}
-                                                        </div>
-                                                        <p class=" text-xs text-slate-400">{item?.date}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div>
-                                                    <p class="text-sm leading-6 text-slate-300">
-                                                        {item.description.substring(0, 100) + '...'}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <div class="bg-slate-800 text-white rounded-lg  w-[98%] space-y-6 p-3">
-                                                <div class="flex space-x-4 items-center ">
-                                                    <div class="w-12 h-12">
-                                                        <img
-                                                            alt="avatar"
-                                                            className="w-full rounded-lg"
-                                                            src={item.PhoToCreater}
-                                                        />
-                                                    </div>
-
-                                                    <div class="space-y-2">
-                                                        <div class="flex space-x-2 items-center">
-                                                            <h2 class="text-base"> {item.title} </h2>
-                                                            {user && user?.uid == item?.createrID ? (
-                                                                <>
-                                                                    <Link
-                                                                        to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}
-                                                                    >
-                                                                        <h2 class="text-sm border p-1 rounded-md">
-                                                                            {' '}
-                                                                            Update{' '}
-                                                                        </h2>
-                                                                    </Link>
-                                                                    <button
-                                                                        className="border p-1 rounded-lg"
-                                                                        onClick={(e) => deleteItem(item.id)}
-                                                                    >
-                                                                        Xoá
-                                                                    </button>
-                                                                </>
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                            <svg
-                                                                class="h-4 w-4 text-blue-500"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                stroke="currentColor"
-                                                                stroke-width="2"
-                                                            >
-                                                                <path
-                                                                    stroke-linecap="round"
-                                                                    stroke-linejoin="round"
-                                                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                                />
-                                                            </svg>
-                                                            {/* <div class="  text-xs text-slate-400">posted an update</div> */}
-                                                        </div>
-                                                        <p class=" text-xs text-slate-400">{item?.date}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div>
-                                                    <p class="text-sm leading-6 text-slate-300">
-                                                        {item.description.substring(0, 100) + '...'}
-                                                    </p>
-                                                </div>
-
-                                                {/* <div class="flex justify-between pt-5">
-                                            <svg
-                                                class="h-4 w-4 text-red-500"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                stroke-width="2"
+                            <div class="">
+                                {user && user?.uid == item?.createrID ? (
+                                    <>
+                                        <div class="flex flex-wrap justify-center space-x-2 items-center">
+                                            <span
+                                                class="mx-4 justify-end items-center rounded-full text-gray-500 bg-gray-200 font-semibold
+                                                 text-sm flex align-center 
+                                                 cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
                                             >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
-                                                />
-                                            </svg>
+                                                <Link to={`/data/hocphan/${filter}/${title}/${item.id}`}>
+                                                    <span
+                                                        className="justify-end items-center rounded-full text-gray-500 bg-gray-200 font-semibold
+                                                 text-sm flex align-center 
+                                                 cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
+                                                    >
+                                                        <img
+                                                            class="rounded-full w-14 h-14 max-w-none"
+                                                            alt="A"
+                                                            src={item.PhoToCreater}
+                                                        />
+                                                        <span class="flex items-center px-3 py-2">{item.title}</span>
+                                                    </span>
+                                                </Link>
+                                                {/* <button class="bg-transparent hover focus:outline-none">
+                                                        <svg
+                                                            aria-hidden="true"
+                                                            focusable="false"
+                                                            data-prefix="fas"
+                                                            data-icon="times"
+                                                            class="w-3 mr-4"
+                                                            role="img"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 352 512"
+                                                        >
+                                                            <path
+                                                                fill="currentColor"
+                                                                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                                                            ></path>
+                                                        </svg>
+                                                    </button> */}
 
-                                            <div class="text-slate-400 text-sm">
-                                                <p>23 Comments</p>
-                                            </div>
-                                        </div> */}
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            </Link>
+                                                <span className={`flex p-2 right-0 ${!Bars ? '' : 'hidden'}`}>
+                                                    {user && user?.uid == item?.createrID ? (
+                                                        <>
+                                                            <Link
+                                                                className="bg-primary rounded-lg px-1 mr-2"
+                                                                to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}
+                                                            >
+                                                                <h2 class="text-sm b p-1 rounded-md"> Update </h2>
+                                                            </Link>
+                                                            <button
+                                                                className="bg-primary border p-1 rounded-lg"
+                                                                onClick={(e) => deleteItem(item.id)}
+                                                            >
+                                                                Xoá
+                                                            </button>
+                                                        </>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div class="flex flex-wrap justify-center space-x-2 items-center">
+                                            <span
+                                                class="mx-4 justify-end items-center rounded-full text-gray-500 bg-gray-200 font-semibold
+                                                 text-sm flex align-center 
+                                                 cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
+                                            >
+                                                <Link to={`/data/hocphan/${filter}/${title}/${item.id}`}>
+                                                    <span
+                                                        className="justify-end items-center rounded-full text-gray-500 bg-gray-300 font-semibold
+                                                 text-sm flex align-center 
+                                                 cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
+                                                    >
+                                                        <img
+                                                            class="rounded-full w-14 h-14 max-w-none"
+                                                            alt="A"
+                                                            src={item.PhoToCreater}
+                                                        />
+                                                        <span class="flex items-center px-3 py-2">{item.title}</span>
+                                                    </span>
+                                                </Link>
+                                            </span>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </div>
                     );
                 })}
