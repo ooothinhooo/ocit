@@ -4,17 +4,18 @@ import ReactDOM from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage, db, auth } from '../../../firebase.config';
-import { useStateValue } from '../../../context/StateProvider';
+import { storage, db, auth } from '../../firebase.config';
+import { useStateValue } from '../../context/StateProvider';
 // import { update_Data_HocPhan } from '../../../utils/firebaseFunctions';
 import { useParams } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import {updateItem_OCIT_DATA_HOCPHAN, removeAccents, makeid} from '../../../utils/firebaseFunctions' 
-const colDB = 'OCIT_DATA_HOCPHAN';
-function UpdateData() {
+import { updateItem_Blog, removeAccents, makeid } from '../../utils/firebaseFunctions';
+
+const colDB = 'Blog';
+function UpdateBlog() {
     var today = new Date();
     let { id } = useParams();
-    let { makeCode }  = useParams();
+    let { makeCode } = useParams();
     console.log(id);
     console.log(makeCode);
 
@@ -50,29 +51,122 @@ function UpdateData() {
     const [otitle, setoTitle] = React.useState('');
     const [tag, setTag] = React.useState('');
     const [progress, setProgress] = useState(0);
+
+    const handlePublish = () => {
+        console.log(otitle);
+        if (!value || !otitle) {
+            alert('Please fill all the fields');
+            return;
+        }
+
+        const storageRef = ref(storage, `/images/${Date.now()}${formData.image.name}`);
+        const uploadImage = uploadBytesResumable(storageRef, formData.image);
+        uploadImage.on(
+            'state_changed',
+            (snapshot) => {
+                const progressPercent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(progressPercent);
+            },
+            (err) => {
+                console.log(err);
+            },
+            () => {
+                setFormData({
+                    description: '',
+                    image: '',
+                });
+
+                getDownloadURL(uploadImage.snapshot.ref).then((url) => {
+                    const articleRef = collection(db, colDB);
+
+                    addDoc(articleRef, {
+                        // title: formData.title,
+                        userPhotoURL: user.photoURL,
+                        tag: tag,
+                        description: value,
+                        title: otitle,
+                        imageUrl: url,
+                        createdAt: Timestamp.now().toDate(),
+                        createdBy: user.displayName,
+                        userId: user.uid,
+                        render: false,
+                        date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                        // likes: [],
+                        // dislikes: [],
+                        // comments: [],
+                    })
+                        .then((articleRef) => {
+                            console.log(articleRef.id);
+                            alert('Article added successfully');
+                            setValue('');
+                            setoTitle('');
+                            setProgress(0);
+                        })
+                        .catch((err) => {
+                            toast('Error adding article', { type: 'error' });
+                        });
+                });
+            },
+        );
+    };
+    // const saveDetails = (index) => {
+    //     setIsLoading(true);
+    //     try {
+    //         const data = {
+    //             id: `${category.split(' ').join('').toUpperCase()}${removeAccents(title)
+    //                 .split(' ')
+    //                 .join('')
+    //                 .toUpperCase()}${price}${code.split(' ').join('').toUpperCase()}}`,
+    //             title: title,
+    //             imageURL: imagesAssets,
+    //             category: category,
+    //             calories: calories,
+    //             qty: 1,
+    //             price: price,
+    //             description: description,
+    //             code: code.toUpperCase(),
+    //             date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+    //         };
+    //         // updateItem(subPath, data);
+
+    //         // try {
+    //         //     deleteItemBtn(subPath);
+    //         //     // window.location.reload();
+    //         // } catch (e) {
+    //         //     console.error(e);
+    //         // }
+
+    //         setTimeout(() => {
+    //             setFields(false);
+    //             window.location = '/';
+    //             // window.location.reload();
+    //         }, 4000);
+    //     } catch (e) {
+
+    //     }
+    // };
+
     const saveDetails = (index) => {
         try {
             const data = {
                 makeCode: makeCode.split(' ').join('').toUpperCase(),
-                id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                id: `${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
                     .split(' ')
                     .join('')
                     .toUpperCase()}`,
                 title: otitle,
                 description: value,
-                tag: tag.toUpperCase(),
                 createdBy: user.displayName,
                 PhoToCreater: photo,
                 createrID: user.uid,
                 date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
-                path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                path: `${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
                     .split(' ')
                     .join('')
                     .toUpperCase()}${user.uid}`,
             };
             // updateItem(subPath, data);
-            updateItem_OCIT_DATA_HOCPHAN(id, data);
-            window.location = '/';
+            updateItem_Blog(id, data);
             // try {
             //     deleteItemBtn(subPath);
             //     // window.location.reload();
@@ -84,11 +178,12 @@ function UpdateData() {
             // setMsg('Data Uploaded successfully');
             // clearData();
             // setAlertStatus('success');
-            // setTimeout(() => {
-            //     setFields(false);
-            //     window.location = '/';
-            //     // window.location.reload();
-            // }, 4000);
+            setTimeout(() => {
+                // setFields(false);
+                window.location = '/blog';
+                // window.location = '/';
+                // window.location.reload();
+            }, 1500);
         } catch (e) {
             alert(e);
         }
@@ -120,16 +215,6 @@ function UpdateData() {
                         onChange={(e) => setoTitle(e.target.value)}
                     />
                 </div>
-                <div className="w-full">
-                    <p>{code[0]?.tag}</p>
-                    <input
-                        type="text"
-                        className="h-10 w-full bg-primary border text-lg text-blue-400"
-                        placeholder="Tag"
-                        value={tag}
-                        onChange={(e) => setTag(e.target.value)}
-                    />
-                </div>
 
                 <button
                     onClick={saveDetails}
@@ -156,4 +241,4 @@ function UpdateData() {
     );
 }
 
-export default UpdateData;
+export default UpdateBlog;

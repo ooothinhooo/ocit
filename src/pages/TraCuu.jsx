@@ -7,6 +7,9 @@ export default function Test() {
     // const [keyFind, setKeyFind] = useState('');
     const [year, setYear] = useState('2022-2023');
     const [HocKi, setHocKi] = useState('2');
+    const [dbCmt, setDbCmt] = useState('');
+    const [flag, setFlag] = useState(false);
+    // const [courses, setCourses] = useState([]);
     const courses = data.filter(function (item) {
         return item.key === key.toUpperCase();
     });
@@ -15,12 +18,7 @@ export default function Test() {
     const weight = courses.length > 0 ? courses[0].weight : '';
     const MaHP = courses.length > 0 ? courses[0].key : '';
 
-    const dbCmt = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
-    // console.log(courses[0]);
-    // console.log(year);
-    // console.log(HocKi);
-    // console.log(dbCmt);
-    const getInputCourses = () => {};
+    const COLDBCMT = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
     return (
         <>
             <div className="w-full h-full m-auto justify-center items-center">
@@ -129,10 +127,7 @@ export default function Test() {
                             onChange={(e) => setKey(e.target.value)}
                             className="md:w-[10%] w-[40%] bg-primary border text-blue-500 uppercase"
                         />
-                        <button
-                            onClick={getInputCourses}
-                            class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400"
-                        >
+                        <button class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400">
                             <span className="md:text-xl text-md">Tìm</span>
                         </button>
                     </div>
@@ -144,12 +139,12 @@ export default function Test() {
                     <p className="text-black text-md p-2 shadow-lg mx-2">Tín chỉ: {weight}</p>
                 </div>
                 <div className="h-full w-full ">
-                    {courses.length > 0 && !key == '' ? (
+                    {courses.length > 0 && MaHP ? (
                         <>
                             <div className="mt-2">
-                                <AddArticle colDB={dbCmt} />
+                                <AddArticle colDB={COLDBCMT} />
                                 <div className="h-full">
-                                    <Articles colDB={dbCmt} />
+                                    <Articles colDB={COLDBCMT} />
                                 </div>
                             </div>
                         </>

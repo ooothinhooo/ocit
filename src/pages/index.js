@@ -10,6 +10,7 @@ export { default as HomePage } from './HomePage';
  export { default as Blog } from './blog/Blog'
  export { default as RenderBlog } from './blog/RenderBlog'
  export { default as WriteBlog } from './blog/WriteBlog'
+ export { default as UploadBlog } from './blog/UpdateBlog';
 
 
  //!Data Hoc Phan

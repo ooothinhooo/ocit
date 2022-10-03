@@ -41,12 +41,7 @@ function CreateData() {
             setArticles(articles);
         });
     }, []);
-    console.log(articles);
-
-    const code = articles.filter((item) => {
-        return (item.tag = 'CT112');
-    });
-
+    // console.log(articles);
     const [formData, setFormData] = useState({
         title: '',
         description: '',

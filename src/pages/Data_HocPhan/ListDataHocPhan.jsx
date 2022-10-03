@@ -8,8 +8,8 @@ function ListDataHocPhan({ arr, filter, title }) {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
     // console.log(user.uid == ROOT_USER_EMAIL[0]);
-    console.log(user);
-    console.log(arr);
+    // console.log(user);
+    // console.log(arr);
     function deleteItem(id) {
         Swal.fire({
             title: 'Bạn Chắc Chắn Muốn Xoá Chứ',

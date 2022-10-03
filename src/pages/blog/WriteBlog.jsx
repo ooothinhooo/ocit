@@ -5,17 +5,24 @@ import MDEditor from '@uiw/react-md-editor';
 // No import is required in the WebPack.
 // import "@uiw/react-md-editor/dist/markdown-editor.css";
 // import { Timestamp, collection, addDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
+
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../firebase.config';
 import { useStateValue } from '../../context/StateProvider';
+import { Upload_Blog, removeAccents, makeid } from '../../utils/firebaseFunctions';
 const colDB = 'Blog';
 function WriteBlog() {
+    var today = new Date();
+
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const photo = user && user.photoURL ? user.photoURL : '';
 
     const [value, setValue] = React.useState('');
     const [otitle, setoTitle] = React.useState('');
+    const [makeCode, setMakeCode] = useState(makeid(6));
+
     const [progress, setProgress] = useState(0);
 
     const [formData, setFormData] = useState({
@@ -81,6 +88,53 @@ function WriteBlog() {
             },
         );
     };
+
+    const saveDetails = () => {
+        // setIsLoading(true);
+        try {
+            if (!otitle || !value) {
+                alert('Thiếu Dữ Liệu');
+            } else {
+                const data = {
+                    makeCode: makeCode.split(' ').join('').toUpperCase(),
+                    id: `${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                        .split(' ')
+                        .join('')
+                        .toUpperCase()}${user.uid}`,
+                    title: otitle,
+                    description: value,
+                    createdBy: user.displayName,
+                    PhoToCreater: user.photoURL,
+                    createrID: user.uid,
+                    date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
+                    path: `${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                        .split(' ')
+                        .join('')
+                        .toUpperCase()}${user.uid}`,
+                };
+                // saveItem(data);
+                Upload_Blog(data);
+                // setIsLoading(false);
+                // setFields(true);
+                // alert(`Data Uploaded ${otitle.toUpperCase()} successfully`);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: `Data Uploaded ${otitle.toUpperCase()} successfully`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                // clearData();
+                // setAlertStatus('success');
+                setTimeout(() => {
+                    // setFields(false);
+                    window.location = '/blog';
+                }, 500);
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
     return (
         <div className="h-full w-full justify-center items-center">
             <div className="my-2 flex justify-center items-center ">
@@ -92,7 +146,7 @@ function WriteBlog() {
                     onChange={(e) => setoTitle(e.target.value)}
                 />
                 <button
-                    onClick={handlePublish}
+                    onClick={saveDetails}
                     className="md:w-14 h-14 rounded-lg justify-center items-center 
                                     flex ml-2 py-2.5 px-3  text-sm font-medium text-white
                                  bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 

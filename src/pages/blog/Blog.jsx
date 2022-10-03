@@ -20,7 +20,7 @@ function Blog() {
 
     useEffect(() => {
         const articleRef = collection(db, 'Blog');
-        const q = query(articleRef, orderBy('createdAt', 'desc'));
+        const q = query(articleRef, orderBy('date', 'desc'));
         onSnapshot(q, (snapshot) => {
             const articles = snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -29,8 +29,8 @@ function Blog() {
             setArticles(articles);
         });
     }, []);
-    console.log(articles);
-    articles.map((item) => console.log(item));
+    // console.log(articles);
+    // articles.map((item) => console.log(item));
     return (
         <div className="md:grid md:grid-cols-3 md:gap-3">
             {articles.map((item) => {
@@ -45,7 +45,7 @@ function Blog() {
                                 <div class="flex justify-center md:justify-end -mt-16">
                                     <img
                                         class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
-                                        src={item.userPhotoURL}
+                                        src={item.PhoToCreater}
                                     />
                                 </div>
                                 <div>

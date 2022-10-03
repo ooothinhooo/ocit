@@ -18,7 +18,7 @@ import ListDataHocPhan from './ListDataHocPhan';
 const colDB = 'OCIT_DATA_HOCPHAN';
 function Data_HocPhan() {
     const [articles, setArticles] = useState([]);
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState('CT112');
     // console.log(articles);
     // const [user] = useAuthState(auth);
     useEffect(() => {
@@ -35,7 +35,7 @@ function Data_HocPhan() {
     const arr = articles?.filter((item) => {
         return item.tag === filter;
     });
-    console.log(articles);
+    // console.log(articles);
     let str = arr[0]?.title ? arr[0]?.title : '';
     str = removeAccents(str);
     let title = str.replace(/\s/g, '');

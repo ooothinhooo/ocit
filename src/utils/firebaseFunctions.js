@@ -296,6 +296,13 @@ export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
     deleteDoc(docRef)
         .then(() => {
             alert('Entire Document has been deleted successfully.');
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Entire Document has been deleted successfully.',
+                showConfirmButton: false,
+                timer: 1500,
+            });
         })
         .catch((error) => {
             console.log(error);
@@ -329,20 +336,88 @@ export const updateItem_OCIT_DATA_HOCPHAN = async (oid, updates) => {
         .then((docRef) => {
             console.log('Entire Document has been updated successfully');
             // alert('Entire Document has been deleted successfully.');
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Entire Document has been update successfully.',
+                showConfirmButton: false,
+                timer: 1500,
+            });
         })
         .catch((error) => {
             console.log(error);
         });
 };
 
+//Todo Blog
+//TODO saving new items
+export const Upload_Blog = async (data) => {
+    await setDoc(doc(firestore, 'Blog', `${data.path.split(' ').join('').toUpperCase()}`), data, {
+        merge: true,
+    });
+};
+//TODO delete item blog
+export const deleteItem_Blog = async (oid) => {
+    const db = getFirestore();
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT_DATA_HOCPHAN'), orderBy('MaHP', 'asc')));
+    // const oid = OCIT.docs[index].id;
+    // console.log(oid);
+    const docRef = doc(db, 'Blog', oid);
 
+    deleteDoc(docRef)
+        .then(() => {
+            // alert('Entire Document has been deleted successfully.');
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Entire Document has been deleted successfully.',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+//TODO update item blog
+export const updateItem_Blog = async (oid, updates) => {
+    // const OCIT = await getDocs(query(collection(firestore, 'OCIT'), orderBy('id', 'desc')));
+    // const oid = OCIT.docs[index].id;
+    // console.log(pushArr[index]);
+    // await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').update(updates);
+    // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
+    const db = getFirestore();
+    console.log(oid);
+    const docRef = doc(db, 'Blog', oid);
 
+    const data = {
+        id: oid,
+        makeCode: updates.makeCode,
+        title: updates.title,
+        description: updates.description,
+        createdBy: updates.createdBy,
+        PhoToCreater: updates.PhoToCreater,
+        createrID: updates.createrID,
+        date: updates.date,
+        path: updates.path,
+    };
 
-
-
-
-
-
+    setDoc(docRef, data)
+        .then((docRef) => {
+            // console.log('Entire Document has been updated successfully');
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Entire Document has been updated successfully',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            // alert('Entire Document has been deleted successfully.');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
 
 
 

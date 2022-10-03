@@ -30,6 +30,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import { auth } from './firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ROOT_USER_EMAIL } from './data/main';
+import UpdateBlog from './pages/blog/UpdateBlog';
 function App() {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
@@ -75,7 +76,7 @@ function App() {
             <div className="w-screen h-auto flex flex-col bg-primary">
                 {/* <Header /> */}
                 <HeaderContainer />
-                <main className="mt-10 md:mt-8 px-4 md:px-16  py-2 w-full  bg-primary">
+                <main className="mt-10 md:mt-8 px-2 md:px-6  py-2 w-full  bg-primary">
                     <Routes>
                         <Route path="/test" element={<Test />} />
                         {ROOT_USER_EMAIL.map((root) => {
@@ -120,6 +121,7 @@ function App() {
                                     <Route path="/blog" element={<Blog />} />
                                     <Route path="/blog/post/:id" element={<RenderBlog />} />
                                     <Route path="/publish/post" element={<WriteBlog />} />
+                                    <Route path="/publish/update/:id/:makeCode" element={<UpdateBlog />} />
                                     {/* <Route path="/hocphan/CT242" element={<CT242 />} />
                                     <Route path="/hocphan/CT112" element={<CT112 />} />
                                     <Route path="/hocphan/CT761" element={<CT176 />} />
