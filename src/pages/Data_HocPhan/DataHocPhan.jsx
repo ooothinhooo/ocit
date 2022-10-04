@@ -77,7 +77,7 @@ function Data_HocPhan() {
                             </motion.div>
                         ))}
                 </div>
-                <div className="m-1  flex justify-center items-center">
+                <div className="my-2 -mt-2 flex justify-center items-center">
                     <ChildrenMenu filter={filter} />
                 </div>
             </div>
@@ -85,7 +85,7 @@ function Data_HocPhan() {
                 <ListDataHocPhan arr={arr} filter={filter} title={title} />
             </div>
 
-            <div className="mt-6">
+            <div className="mt-12">
                 <AddArticle colDB="cmt_hocphan" />
                 <div className="h-full">
                     <Articles colDB="cmt_hocphan" />

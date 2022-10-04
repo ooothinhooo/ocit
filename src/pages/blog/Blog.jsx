@@ -38,8 +38,8 @@ function Blog() {
                     <Link to={`/blog/post/${item.id}`}>
                         <div className="">
                             <div
-                                class={` max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 
-                            
+                                class={` max-w-md py-4 px-8 bg-white hover:bg-gray-400 hover:text-primary shadow-lg rounded-lg my-20 
+                            transition-transform ease-in-out 
                             `}
                             >
                                 <div class="flex justify-center md:justify-end -mt-16">

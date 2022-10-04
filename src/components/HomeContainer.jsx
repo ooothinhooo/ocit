@@ -9,7 +9,7 @@ function HomeContainer() {
                 id: 1,
                 title: 'Sudoku Game',
                 decp: 'CT239',
-                price: '550',
+                price: '999',
                 imageURL:
                     'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FCT239-%2FN7HG5-CT239SUDOKU.PNG?alt=media&token=403af963-7ec5-4870-8586-c0ce282252dc',
             },
@@ -17,7 +17,7 @@ function HomeContainer() {
                 id: 2,
                 title: 'DIJKSTRA Tìm Đường Đi Ngắn Nhất',
                 decp: 'CT239',
-                price: '530',
+                price: '999',
                 imageURL:
                     'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT239%2FCT239-NLCS%2FGCFYN-CT239DIJSKTRA.PNG?alt=media&token=4ea9f17e-18da-4134-9e33-c3858eef55f6',
             },
@@ -25,7 +25,7 @@ function HomeContainer() {
                 id: 3,
                 title: 'Project CT178',
                 decp: 'CT178',
-                price: '140',
+                price: '999',
                 imageURL:
                     'https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp154.appspot.com/o/app%2Focit%2FImages%2FCT178%2FCT178-PROJECT%2FBJ3MG-CT178PROJECT.PNG?alt=media&token=51a67716-7c81-4e4b-a98e-6ddbedd85edb',
             },
@@ -82,8 +82,12 @@ function HomeContainer() {
                         <span className="text-cardNumBg text-[3rem] lg:text-[5rem] ">Tôi Có</span>
                     </p>
                     <p className="text-base text-white text-center md:text-left md:w-[80%]">
-                        Liên hệ với tôi để nhận thêm nhiều thứ mới .Tôi nhận làm một số bài thực hành và project cho một
-                        số môn. Hãy liên hệ để thoả thuận và biết thêm nhiều chi tiết. Cảm ơn các bạn đã ghé qua
+                        {/* Liên hệ với tôi để nhận thêm nhiều thứ mới .Tôi nhận làm một số bài thực hành và project cho một
+                        số môn. Hãy liên hệ để thoả thuận và biết thêm nhiều chi tiết. Cảm ơn các bạn đã ghé qua */}
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
 
                     <button

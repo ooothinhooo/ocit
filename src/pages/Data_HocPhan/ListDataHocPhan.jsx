@@ -32,24 +32,25 @@ function ListDataHocPhan({ arr, filter, title }) {
         });
     }
     return (
-        <div className="md:grid md:gap-x-8 md:gap-y-4 md:grid-cols-3 justify-center items-center">
+        <div className="bg-cardOverlay py-4 rounded-xl   my-2 md:grid md:gap-x-8 md:gap-y-4 md:grid-cols-3 justify-center items-center">
             {arr.length > 0 &&
                 arr?.map((item) => {
                     return (
-                        <div className="mr-2 mb-1">
+                        <div className="mr-2 mb-1 my-2">
                             <div class="">
                                 {user && user?.uid == item?.createrID ? (
                                     <div className="block justify-center">
                                         <div className=" m-auto  justify-center  items-center">
                                             <div class="flex flex-wrap justify-center space-x-2 items-center">
                                                 <span
-                                                    class="mx-4 justify-end items-center rounded-full text-gray-500 bg-gray-200 font-semibold
+                                                    class=" mx-4 justify-end items-center rounded-full text-gray-500 bg-gray-200  font-semibold
                                                  text-sm flex align-center 
                                                  cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
                                                 >
                                                     <Link to={`/data/hocphan/${filter}/${title}/${item.id}`}>
                                                         <span
-                                                            className="justify-end items-center rounded-full text-gray-500 bg-gray-200 font-semibold
+                                                            className="justify-end items-center rounded-full text-gray-500 bg-gray-200
+                                                            hover:bg-blue-400 hover:text-primary font-semibold
                                                  text-sm flex align-center 
                                                  cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
                                                         >
@@ -118,7 +119,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                                 <Link to={`/data/hocphan/${filter}/${title}/${item.id}`}>
                                                     <span
                                                         className="justify-end items-center rounded-full text-gray-500 bg-gray-300 font-semibold
-                                                 text-sm flex align-center 
+                                                 text-sm flex align-center hover:bg-blue-400 hover:text-primary 
                                                  cursor-pointer active:bg-gray-300 transition duration-300 ease w-max"
                                                     >
                                                         <img
