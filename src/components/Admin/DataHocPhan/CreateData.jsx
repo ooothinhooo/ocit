@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../../firebase.config';
 import { useStateValue } from '../../../context/StateProvider';
+import Swal from 'sweetalert2';
+
 import {
     Upload_OCIT_DATA_HOCPHAN,
     getAllOCIT_DATA_HOCPHAN,
@@ -134,12 +136,19 @@ function CreateData() {
                 Upload_OCIT_DATA_HOCPHAN(data);
                 // setIsLoading(false);
                 // setFields(true);
-                alert(`Data Uploaded ${otitle.toUpperCase()} successfully`);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Entire Document has been Upload successfully.',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
                 // clearData();
                 // setAlertStatus('success');
                 setTimeout(() => {
                     // setFields(false);
-                }, 4000);
+                    window.location = '/data/hocphan';
+                }, 100);
             }
         } catch (e) {
             alert(e);

@@ -6,12 +6,16 @@ import { actionType } from '../context/reducer';
 import { Link } from 'react-router-dom';
 import Footer from './Display/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
-import { deleteItem_Blog } from '../utils/firebaseFunctions';
+import { deleteItem_Blog, deleteItem_OCIT_DATA_HOCPHAN, removeAccents } from '../utils/firebaseFunctions';
+import Swal from 'sweetalert2';
+import { title } from '@uiw/react-md-editor';
+
 function UserProfile() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
     const [articlesBlog, setArticlesBlog] = useState([]);
     const [articlesOrder, setArticlesOrder] = useState([]);
+    const [articlesDataHocPhan, setArticlesDataHocPhan] = useState([]);
     useEffect(() => {
         const articleRef = collection(db, 'Blog');
         const q = query(articleRef, orderBy('date', 'desc'));
@@ -42,11 +46,45 @@ function UserProfile() {
         return item.google_id === user.uid;
     });
 
-    function handlerDeleteItem(id) {
+    useEffect(() => {
+        const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
+        const q = query(articleRef, orderBy('date', 'desc'));
+        onSnapshot(q, (snapshot) => {
+            const articles = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setArticlesDataHocPhan(articles);
+        });
+    }, []);
+    const DataHocPhandb = articlesDataHocPhan.filter((item) => {
+        return item.createrID === user.uid;
+    });
+    console.log(DataHocPhandb);
+    function handlerDeleteItemBlog(id) {
         deleteItem_Blog(id);
         setTimeout(() => {
             window.location = '/';
         }, 1500);
+    }
+    function deleteItem_DataHocPhan(id) {
+        Swal.fire({
+            title: 'Bạn Chắc Chắn Muốn Xoá Chứ',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                deleteItem_OCIT_DATA_HOCPHAN(id);
+                setTimeout(() => {
+                    window.location = '/data/hocphan';
+                }, 1500);
+            }
+        });
     }
     return (
         <AnimatePresence>
@@ -80,19 +118,20 @@ function UserProfile() {
                         </div>
                     </div>
                 </div>
+                <h2 className="md:text-3xl text-xl text-red-500 my-2">Các Blog Của Bạn</h2>
                 <div className="md:grid md:grid-cols-3 md:gap-3">
                     {blogdb.map((item) => {
                         return (
                             <Link to={`/blog/post/${item.id}`}>
                                 <div className="">
                                     <div
-                                        class={` max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 
+                                        class={` m-auto justify-center items-center max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 
                                         
                                         `}
                                     >
                                         <div class="flex items-center justify-center md:justify-start -mt-16">
                                             <span
-                                                onClick={(e) => handlerDeleteItem(item.id)}
+                                                onClick={(e) => handlerDeleteItemBlog(item.id)}
                                                 className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl"
                                             >
                                                 Delete
@@ -113,6 +152,57 @@ function UserProfile() {
                                             </h2>
                                             <p class="mt-2 text-gray-600 text-sm">
                                                 {item.description.substring(0, 100) + '...'}
+                                            </p>
+                                        </div>
+                                        {/* <div class="flex justify-end mt-4">
+                                <a href="#" class="text-xl font-medium text-indigo-500">
+                                    John Doe
+                                </a>
+                            </div> */}
+                                    </div>
+                                </div>
+                            </Link>
+                        );
+                    })}
+                </div>
+                <div className="w-full h-[2px] bg-slate-500 "></div>
+                <h2 className="md:text-3xl text-xl text-red-500 my-2">Các Bài Học Bạn Đã Thêm</h2>
+                <div className="md:grid md:grid-cols-3 md:gap-3 ">
+                    {DataHocPhandb.map((item) => {
+                        return (
+                            <Link to={`/data/hocphan/${item.tag}/${removeAccents(item.title)}/${item.id}`}>
+                                <div className="">
+                                    <div
+                                        class={`m-auto justify-center items-center max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 
+                                        
+                                        `}
+                                    >
+                                        <div class="flex items-center justify-center md:justify-start -mt-16">
+                                            <span
+                                                onClick={(e) => deleteItem_DataHocPhan(item.id)}
+                                                className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl"
+                                            >
+                                                Delete
+                                            </span>
+                                            <Link to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}>
+                                                <span className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl">
+                                                    Update
+                                                </span>
+                                            </Link>
+                                            <img
+                                                class="w-20 h-20 ml-6 object-cover rounded-full border-2 border-indigo-500"
+                                                src={item.PhoToCreater}
+                                            />
+                                            <span className="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full">
+                                                {item.tag}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h2 class="text-gray-800 text-xl font-semibold">
+                                                {item.title.substring(0, 50) + '...'}
+                                            </h2>
+                                            <p class="mt-2 text-gray-600 text-sm">
+                                                {item.description.substring(0, 66) + '...'}
                                             </p>
                                         </div>
                                         {/* <div class="flex justify-end mt-4">

@@ -295,7 +295,7 @@ export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
 
     deleteDoc(docRef)
         .then(() => {
-            alert('Entire Document has been deleted successfully.');
+            // alert('Entire Document has been deleted successfully.');
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -303,6 +303,7 @@ export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
                 showConfirmButton: false,
                 timer: 1500,
             });
+            window.location = '/data/hocphan';
         })
         .catch((error) => {
             console.log(error);
