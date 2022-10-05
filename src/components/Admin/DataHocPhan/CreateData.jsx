@@ -2,9 +2,6 @@ import { collection, onSnapshot, orderBy, query, Timestamp, addDoc, doc } from '
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
-// No import is required in the WebPack.
-// import "@uiw/react-md-editor/dist/markdown-editor.css";
-// import { Timestamp, collection, addDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../../firebase.config';
@@ -132,23 +129,7 @@ function CreateData() {
                         .join('')
                         .toUpperCase()}${user.uid}`,
                 };
-                // saveItem(data);
                 Upload_OCIT_DATA_HOCPHAN(data);
-                // setIsLoading(false);
-                // setFields(true);
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Entire Document has been Upload successfully.',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                // clearData();
-                // setAlertStatus('success');
-                setTimeout(() => {
-                    // setFields(false);
-                    window.location = '/data/hocphan';
-                }, 100);
             }
         } catch (e) {
             alert(e);

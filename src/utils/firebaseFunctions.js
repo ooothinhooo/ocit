@@ -284,6 +284,17 @@ export const Upload_OCIT_DATA_HOCPHAN = async (data) => {
     await setDoc(doc(firestore, 'OCIT_DATA_HOCPHAN', `${data.path.split(' ').join('').toUpperCase()}`), data, {
         merge: true,
     });
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Entire Document has been Upload successfully.',
+        showConfirmButton: false,
+        timer: 1500,
+    });
+    setTimeout(() => {
+        // setFields(false);
+        window.location = '/data/hocphan';
+    }, 1500);
 };
 //TODO delete item ocit hocphan
 export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
