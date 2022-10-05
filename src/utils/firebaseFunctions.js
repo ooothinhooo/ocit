@@ -291,10 +291,31 @@ export const Upload_OCIT_DATA_HOCPHAN = async (data) => {
         showConfirmButton: false,
         timer: 1500,
     });
-    setTimeout(() => {
-        // setFields(false);
-        window.location = '/data/hocphan';
-    }, 1500);
+    let timerInterval;
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Entire Document has been Upload successfully.',
+        html: 'I will close in <b></b> milliseconds.',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector('b');
+            timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft();
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        },
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            window.location = '/data/hocphan';
+        }
+    });
+  
 };
 //TODO delete item ocit hocphan
 export const deleteItem_OCIT_DATA_HOCPHAN = async (oid) => {
