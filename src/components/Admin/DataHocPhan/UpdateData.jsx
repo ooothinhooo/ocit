@@ -72,7 +72,7 @@ function UpdateData() {
             };
             // updateItem(subPath, data);
             updateItem_OCIT_DATA_HOCPHAN(id, data);
-            window.location = '/';
+
             // try {
             //     deleteItemBtn(subPath);
             //     // window.location.reload();

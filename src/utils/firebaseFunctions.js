@@ -367,14 +367,36 @@ export const updateItem_OCIT_DATA_HOCPHAN = async (oid, updates) => {
 
     setDoc(docRef, data)
         .then((docRef) => {
-            console.log('Entire Document has been updated successfully');
-            // alert('Entire Document has been deleted successfully.');
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Entire Document has been update successfully.',
+                title: 'Entire Document has been Upload successfully.',
                 showConfirmButton: false,
                 timer: 1500,
+            });
+            let timerInterval;
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Entire Document has been Upload successfully.',
+                html: 'I will close in <b></b> milliseconds.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const b = Swal.getHtmlContainer().querySelector('b');
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft();
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                },
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location = '/data/hocphan';
+                }
             });
         })
         .catch((error) => {

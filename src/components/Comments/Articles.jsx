@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useStateValue } from '../../context/StateProvider';
 import { AiOutlineLike } from 'react-icons/ai';
 import { GiRapidshareArrow } from 'react-icons/gi';
+import { AnimatePresence, motion, useViewportScroll, useTransform } from 'framer-motion';
 
 import DeleteArticle from './DeleteArticle';
 import Dislike from './Dislike';
@@ -41,7 +42,7 @@ export default function Articles({ colDB }) {
 
     return (
         <>
-            <div className="mb-14 m-auto items-center justify-center">
+            <motion.div className="mb-14 m-auto items-center justify-center">
                 {articles.length === 0 ? (
                     <p>No articles found!</p>
                 ) : (
@@ -59,7 +60,14 @@ export default function Articles({ colDB }) {
                             dislikes,
                             comments,
                         }) => (
-                            <div
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ rotate: 0, scale: 1 }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 160,
+                                    damping: 20,
+                                }}
                                 className="m-auto items-center justify-center my-1 md:p-3 bg-light md:min-w-[799px] w-[99%] "
                                 key={id}
                             >
@@ -199,11 +207,11 @@ export default function Articles({ colDB }) {
                                         </AccordionItemPanel>
                                     </AccordionItem>
                                 </Accordion>
-                            </div>
+                            </motion.div>
                         ),
                     )
                 )}
-            </div>
+            </motion.div>
             {/* <Article colDB={colDB} /> */}
         </>
     );

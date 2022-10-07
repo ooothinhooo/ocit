@@ -116,7 +116,12 @@ function RowContainer({ flag, data, scrollValue }) {
                     {data && data.length > 0 ? (
                         data.map((item) => (
                             <>
-                                <div
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ rotate: 360, scale: 1 }}
+                                    // transition={{ type: 'spring', bounce: 0.25 }}
+                                    // animate={{ baseFrequency: 0.5 } as any}
+                                    transition={{ type: 'spring', mass: 0.2 }}
                                     key={item.id}
                                     className="w-[150px] h-250 min-h-[200px] min-w[180px]
                         md:w-340  md:min-w-[240px] 
@@ -159,7 +164,7 @@ function RowContainer({ flag, data, scrollValue }) {
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             </>
                         ))
                     ) : (

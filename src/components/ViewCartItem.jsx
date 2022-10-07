@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { Fragment, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { AiFillAndroid } from 'react-icons/ai';
 
@@ -15,7 +16,7 @@ function ViewCartItem({ isModal, setIsModal, item }) {
     // const item = itemData[0];
     console.log(item);
     return (
-        <>
+        <AnimatePresence>
             <div className={isModal ? 'hidden' : ''}>
                 <div
                     aria-hidden="true"
@@ -86,7 +87,7 @@ function ViewCartItem({ isModal, setIsModal, item }) {
                     </div>
                 </div>
             </div>
-        </>
+        </AnimatePresence>
     );
 }
 
