@@ -10,6 +10,7 @@ import { storage } from '../../../firebase.config';
 import { saveItem, getAllOCIT, makeid, removeAccents } from '../../../utils/firebaseFunctions';
 import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
+import MDEditor from '@uiw/react-md-editor';
 
 function CreateContainer() {
     var today = new Date();
@@ -295,15 +296,21 @@ function CreateContainer() {
                                 ))}
                         </select>
                     </div>
-
-                    <textarea
+                    <MDEditor
+                        className="w-full bg-primary"
+                        height={500}
+                        value={description}
+                        // onChange={(e) => setValue(e.target.value)}
+                        onChange={setDescription}
+                    />
+                    {/* <textarea
                         id="message"
                         rows="22"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         class="block p-2.5 w-full text-sm bg-primary text-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Your message..."
-                    ></textarea>
+                    ></textarea> */}
                 </div>
             </motion.div>
             <div className="flex items-center w-full">

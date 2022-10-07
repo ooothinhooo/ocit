@@ -86,10 +86,10 @@ export default function AddArticle({ colDB }) {
     };
 
     return (
-        <div className="m-auto  w-full ">
+        <div className=" m-auto items-center justify-center w-full ">
             {!user ? (
                 <>
-                    <div className="  md:w-[90%] w-full ">
+                    <div className="m-auto items-center justify-center  md:w-[90%] w-full ">
                         <div className="flex items-center justify-center md:m-auto ">
                             <div className="relative md:w-[80%] w-full flex items-center justify-center  ">
                                 <div className="hidden mr-2 md:block md:relative  md:flex md:absolute inset-y-0 left-0 items-center   pointer-events-none">
@@ -119,7 +119,7 @@ export default function AddArticle({ colDB }) {
                 </>
             ) : (
                 <>
-                    <div className="  md:w-[90%] w-full ">
+                    <div className="m-auto items-center justify-center  md:w-[90%] w-full ">
                         <div class="flex items-center justify-center md:m-auto ">
                             <div class="relative md:w-[80%] w-full flex items-center justify-center  ">
                                 <div class="hidden mr-2 md:block md:relative  md:flex md:absolute inset-y-0 left-0 items-center   pointer-events-none">

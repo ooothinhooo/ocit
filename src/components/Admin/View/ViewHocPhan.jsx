@@ -1,24 +1,14 @@
-import { collection, onSnapshot, orderBy, query, Timestamp, addDoc } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
-import { ChildrenMenu, AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../../../components';
-
-// No import is required in the WebPack.
-// import '@uiw/react-md-editor/dist/markdown-editor.css';
-// import { Timestamp, collection, addDoc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { removeAccents } from '../../../utils/firebaseFunctions';
-import { storage, db, auth } from '../../../firebase.config';
-import { useStateValue } from '../../../context/StateProvider';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useParams } from 'react-router-dom';
+import { AddArticle, Articles } from '../../../components';
+import { db } from '../../../firebase.config';
 
 function ViewHocPhan() {
     let { id } = useParams();
     let { filter } = useParams();
-    let { title } = useParams();
+    // let { title } = useParams();
     const [articles, setArticles] = useState([]);
     // const [user] = useAuthState(auth);
     useEffect(() => {
@@ -32,7 +22,7 @@ function ViewHocPhan() {
             setArticles(articles);
         });
     }, []);
-    console.log(articles);
+    // console.log(articles);
     const arr = articles?.filter((item) => {
         return item?.id === id;
     });
@@ -147,6 +137,35 @@ function ViewHocPhan() {
                 // }}
             />
 
+            <div class="mt-2 left-0">
+                <div
+                    class="bg-white px-2 py-2 rounded-lg shadow hover:shadow-xl
+                 max-w-sm  transform hover:-translate-y-[0.125rem] 
+                 transition duration-100 ease-linear"
+                >
+                    <div class="w-full ">
+                        <span class="font-medium text-sm text-slate-400">Người Đăng Tải</span>
+                        {/* <button class="-mr-1 bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-600 h-5 w-5 rounded-full flex justify-center items-center">
+                            <svg class="h-2 w-2 fill-current items-center" viewBox="0 0 20 20">
+                                <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                            </svg>
+                        </button> */}
+                    </div>
+                    <div class="flex items-center  rounded-lg px-1 py-1 cursor-pointer">
+                        <div class="relative flex flex-shrink-0 items-end">
+                            <img class="h-10 w-10 rounded-full" src={arr[0]?.PhoToCreater} />
+                            <span class="absolute h-[10px] w-[10px] bg-green-400 rounded-full bottom-0 right-0 border-2 border-white"></span>
+                        </div>
+                        <div class="ml-3 ">
+                            <p class="font-semibold tracking-tight text-xs">{arr[0]?.createdBy}</p>
+
+                            <p class="text-[10px] text-blue-500 font-medium leading-4 opacity-75">
+                                Update {arr[0]?.date}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="mt-12">
                 <AddArticle colDB={CMT_DB} />
                 <div className="h-full">

@@ -5,7 +5,7 @@ import { NotFound } from '../img';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import Swal from 'sweetalert2';
-
+import MDEditor from '@uiw/react-md-editor';
 
 import { ViewCartItem } from '../components';
 import { Link } from 'react-router-dom';
@@ -186,10 +186,21 @@ function RowContainer({ flag, data, scrollValue }) {
                                 </div>
 
                                 <div className="p-6 space-y-6">
-                                    <div className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                        <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+                                    <div
+                                        data-color-mode="light"
+                                        className="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                                    >
+                                        <MDEditor.Markdown
+                                            source={itemProduct?.description}
+                                            linkTarget="_blank"
+
+                                            // previewOptions={{
+                                            //   linkTarget: "_blank"
+                                            // }}
+                                        />
+                                        {/* <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
                                             {itemProduct?.description}
-                                        </ReactMarkdown>
+                                        </ReactMarkdown> */}
                                     </div>
                                 </div>
                                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">

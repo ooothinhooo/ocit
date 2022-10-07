@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import MDEditor from '@uiw/react-md-editor';
+
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdCloudUpload, MdDelete, MdFastfood } from 'react-icons/md';
@@ -227,14 +229,21 @@ function UpdateProduct({ id }) {
                         outline-none border-none placeholder:text-gray-400 text-white"
                             />
                         </div>
-                        <textarea
+                        {/* <textarea
                             id="message"
                             rows="6"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             className="block bg-primary text-white p-2.5 w-full text-sm  rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Your message..."
-                        ></textarea>
+                        ></textarea> */}
+                        <MDEditor
+                            className="w-full bg-primary"
+                            height={400}
+                            value={description}
+                            // onChange={(e) => setValue(e.target.value)}
+                            onChange={setDescription}
+                        />
                         <div className="w-full flex flex-col md:flex-row items-center gap-3 ">
                             <div className="w-full">
                                 <select

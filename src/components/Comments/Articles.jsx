@@ -41,7 +41,7 @@ export default function Articles({ colDB }) {
 
     return (
         <>
-            <div className="mb-14">
+            <div className="mb-14 m-auto items-center justify-center">
                 {articles.length === 0 ? (
                     <p>No articles found!</p>
                 ) : (
@@ -59,7 +59,10 @@ export default function Articles({ colDB }) {
                             dislikes,
                             comments,
                         }) => (
-                            <div className=" my-1 md:p-3 bg-light md:min-w-[799px] w-[93%] " key={id}>
+                            <div
+                                className="m-auto items-center justify-center my-1 md:p-3 bg-light md:min-w-[799px] w-[99%] "
+                                key={id}
+                            >
                                 <div
                                     class={`flex-col w-full py-2 md:mx-auto mt-1 bg-chat px-2 mr-1
                                     border-gray-200 sm:px-4 sm:py-4 md:px-4 rounded-lg  md:w-2/3
