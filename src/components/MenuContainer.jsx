@@ -44,7 +44,19 @@ function MenuContainer() {
                         {categories &&
                             categories.map((category, index) => (
                                 <motion.div
-                                    whileTap={{ scale: 0.8 }}
+                                    whileHover={{ scale: 1.2, rotate: 0 }}
+                                    whileTap={{
+                                        scale: 0.8,
+                                        rotate: 10,
+                                        borderRadius: '10%',
+                                    }}
+                                    initial={{ scale: 0 }}
+                                    animate={{ rotate: -7, scale: 1 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 260,
+                                        damping: 20,
+                                    }}
                                     onClick={() => setFilter(category.urlParamName)}
                                     key={category?.id}
                                     className={`group  ${filter === category.urlParamName ? 'bg-cardNumBg' : 'bg-card'}

@@ -109,7 +109,7 @@ function RowContainer({ flag, data, scrollValue }) {
                     exit={{ y: -10, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     ref={rowContainer}
-                    className={`w-full flex items-center my-12 scroll-smooth scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-100 ${
+                    className={`w-full flex items-center my-12 scroll-smooth scrollbar overflow-y-hidden scrollbar-thumb-gray-500 scrollbar-track-gray-100 ${
                         flag ? 'overflow-x-scroll overflow-auto ' : 'overflow-x-hidden flex-wrap justify-center '
                     }`}
                 >
@@ -190,18 +190,17 @@ function RowContainer({ flag, data, scrollValue }) {
                                     </h3>
                                 </div>
 
-                                <div className="p-6 space-y-6">
+                                <div className=" p-6 space-y-6">
                                     <div
                                         data-color-mode="light"
-                                        className="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                                        className=" h-[300px]  overflow-y-scroll text-base leading-relaxed text-gray-500 dark:text-gray-400"
                                     >
                                         <MDEditor.Markdown
                                             source={itemProduct?.description}
                                             linkTarget="_blank"
-
-                                            // previewOptions={{
-                                            //   linkTarget: "_blank"
-                                            // }}
+                                            previewOptions={{
+                                                linkTarget: '_blank',
+                                            }}
                                         />
                                         {/* <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
                                             {itemProduct?.description}

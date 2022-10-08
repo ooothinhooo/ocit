@@ -1,15 +1,26 @@
 import { deleteDoc, doc } from 'firebase/firestore';
-import React from 'react';
+import React, { useState } from 'react';
 import { db, storage } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
 import { TiDelete } from 'react-icons/ti';
+import Swal from 'sweetalert2';
+
 export default function DeleteArticle({ id, imageUrl, colDB }) {
+    // const [temp, setTemp] = useState(false);
     const handleDelete = async () => {
-        if (window.confirm('Are you sure you want to delete this article?')) {
+        if (
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        ) {
             try {
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
                 await deleteDoc(doc(db, colDB, id));
-                toast('Article deleted successfully', { type: 'success' });
                 const storageRef = ref(storage, imageUrl);
                 await deleteObject(storageRef);
             } catch (error) {
@@ -18,6 +29,22 @@ export default function DeleteArticle({ id, imageUrl, colDB }) {
             }
         }
     };
+
+    function sw() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+            } else {
+            }
+        });
+    }
     return (
         <div onClick={handleDelete} className="cursor-pointer flex p-1 border rounded-md">
             <TiDelete className="text-white text-2xl" />
