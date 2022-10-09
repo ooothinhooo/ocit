@@ -6,6 +6,7 @@ export { default as RowContainer } from './RowContainer';
 export { default as MenuContainer } from './MenuContainer';
 export { default as CartContainer } from './CartContainer';
 export { default as UserProfile } from './UserProfile';
+export { default as UserProfileID } from './UserProfileID';
 export { default as ViewCartItem } from './ViewCartItem';
 export { default as CartItem } from './CartItem';
 export { default as ChildrenMenu } from './ChildrenMenu';

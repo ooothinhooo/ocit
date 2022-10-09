@@ -44,7 +44,7 @@ export default function Articles({ colDB }) {
         <>
             <motion.div className="mb-14 m-auto items-center justify-center">
                 {articles.length === 0 ? (
-                    <p>No articles found!</p>
+                    <p>Hãy Là Người Đầu Tiên Bình Luận!</p>
                 ) : (
                     articles.map(
                         ({
@@ -85,7 +85,9 @@ export default function Articles({ colDB }) {
                                         />
                                         <div class="flex-col mt-1">
                                             <div class="flex items-center flex-1 px-4 font-bold leading-tight">
-                                                <span class="text-blue-400">{createdBy}</span>
+                                                <Link to={`/profile/id/${userId}/${createdBy}`}>
+                                                    <span class="text-blue-400 hover:text-pink-600">{createdBy}</span>
+                                                </Link>
                                                 <span class="ml-2 text-xs font-normal text-gray-500">
                                                     {createdAt.toDate().toDateString()}
                                                 </span>

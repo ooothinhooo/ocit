@@ -19,6 +19,7 @@ import {
     CreateData,
     ViewHocPhan,
     UpdateData,
+    UserProfileID,
 } from './components';
 import { Admin, HocPhan, HomePage, Thanks, TraCuu, Blog, RenderBlog, WriteBlog, DataHocPhan } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
@@ -110,6 +111,7 @@ function App() {
 
                         {/* link to page */}
                         <Route path="/profile/:uid" element={<UserProfile />} />
+                        <Route path="/profile/id/:id/:name" element={<UserProfileID />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/xincamon" element={<Thanks />} />
 

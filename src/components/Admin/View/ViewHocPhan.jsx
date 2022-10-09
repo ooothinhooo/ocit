@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { AddArticle, Articles } from '../../../components';
 import { db } from '../../../firebase.config';
 
+
 function ViewHocPhan() {
     let { id } = useParams();
     let { filter } = useParams();
@@ -26,7 +27,7 @@ function ViewHocPhan() {
     const arr = articles?.filter((item) => {
         return item?.id === id;
     });
-    // console.log(arr[0]?.title);
+    // console.log(arr[0]);
 
     const CMT_DB = 'CMT_VIEW_HOCPHAN' + '/' + filter + '/' + id;
     return (
@@ -151,19 +152,22 @@ function ViewHocPhan() {
                             </svg>
                         </button> */}
                     </div>
-                    <div class="flex items-center  rounded-lg px-1 py-1 cursor-pointer">
-                        <div class="relative flex flex-shrink-0 items-end">
-                            <img class="h-10 w-10 rounded-full" src={arr[0]?.PhoToCreater} />
-                            <span class="absolute h-[10px] w-[10px] bg-green-400 rounded-full bottom-0 right-0 border-2 border-white"></span>
-                        </div>
-                        <div class="ml-3 ">
-                            <p class="font-semibold tracking-tight text-xs">{arr[0]?.createdBy}</p>
+                    <Link to={`/profile/id/${arr[0]?.createrID}/${arr[0]?.createdBy}`}>
+                        <div class="flex items-center  rounded-lg px-1 py-1 cursor-pointer hover:bg-slate-300">
+                            <div class="relative flex flex-shrink-0 items-end ">
+                                <img class="h-10 w-10 rounded-full" src={arr[0]?.PhoToCreater} />
+                                <span class="absolute h-[10px] w-[10px] bg-green-400 rounded-full bottom-0 right-0 border-2 border-white"></span>
+                            </div>
 
-                            <p class="text-[10px] text-blue-500 font-medium leading-4 opacity-75">
-                                Update {arr[0]?.date}
-                            </p>
-                        </div>
-                    </div>
+                            <div class="ml-3 ">
+                                <p class="font-semibold tracking-tight text-xs">{arr[0]?.createdBy}</p>
+
+                                <p class="text-[10px] text-blue-500 font-medium leading-4 opacity-75">
+                                    Update {arr[0]?.date}
+                                </p>
+                            </div>
+                        </div>{' '}
+                    </Link>
                 </div>
             </div>
             <div className="mt-12">

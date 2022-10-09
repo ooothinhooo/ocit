@@ -1,17 +1,9 @@
 import { collection, onSnapshot, orderBy, query, Timestamp, addDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import MDEditor from '@uiw/react-md-editor';
-// No import is required in the WebPack.
-// import "@uiw/react-md-editor/dist/markdown-editor.css";
-// import { Timestamp, collection, addDoc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../firebase.config';
-import { useStateValue } from '../../context/StateProvider';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import { RenderBlog } from '..';
+import { AnimatePresence, motion, useViewportScroll, useTransform } from 'framer-motion';
 
 function Blog() {
     const [articles, setArticles] = useState([]);
@@ -37,12 +29,25 @@ function Blog() {
                 return (
                     <Link to={`/blog/post/${item.id}`}>
                         <div className="">
-                            <div
-                                class={` max-w-md py-4 px-8 bg-white hover:bg-gray-400 hover:text-primary shadow-lg rounded-lg my-20 
-                            transition-transform ease-in-out 
+                            <motion.div
+                                whileHover={{
+                                    scale: 0.96,
+                                    rotate: 1,
+                                }}
+                                whileTap={{
+                                    scale: 0.8,
+                                    rotate: -10,
+                                    borderRadius: '100%',
+                                }}
+                                class={`max-w-md py-4 px-8 bg-white hover:bg-[#EEF1FF]
+                                 hover:text-primary shadow-lg rounded-lg my-20 
+                                    transition-transform ease-in-out 
                             `}
                             >
-                                <div class="flex justify-center md:justify-end -mt-16">
+                                <div
+                                    class="flex items-center  justify-center md:justify-end 
+                                hover:justify-start -mt-16"
+                                >
                                     <img
                                         class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
                                         src={item.PhoToCreater}
@@ -61,7 +66,7 @@ function Blog() {
                                     John Doe
                                 </a>
                             </div> */}
-                            </div>
+                            </motion.div>
                         </div>
                     </Link>
                 );
