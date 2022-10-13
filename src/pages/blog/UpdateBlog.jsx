@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../firebase.config';
 import { useStateValue } from '../../context/StateProvider';
-// import { update_Data_HocPhan } from '../../../utils/firebaseFunctions';
 import { useParams } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { updateItem_Blog, removeAccents, makeid } from '../../utils/firebaseFunctions';
-
+import { removeAccents, makeid } from '../../utils/firebaseFunctions';
+import { updateItem_Blog } from '../../Firebase/Blog';
 const colDB = 'Blog';
 function UpdateBlog() {
     var today = new Date();
@@ -109,7 +108,6 @@ function UpdateBlog() {
             },
         );
     };
-    // const saveDetails = (index) => {
     //     setIsLoading(true);
     //     try {
     //         const data = {
@@ -167,22 +165,8 @@ function UpdateBlog() {
             };
             // updateItem(subPath, data);
             updateItem_Blog(id, data);
-            // try {
-            //     deleteItemBtn(subPath);
-            //     // window.location.reload();
-            // } catch (e) {
-            //     console.error(e);
-            // }
-            // setIsLoading(false);
-            // setFields(true);
-            // setMsg('Data Uploaded successfully');
-            // clearData();
-            // setAlertStatus('success');
             setTimeout(() => {
-                // setFields(false);
                 window.location = '/blog';
-                // window.location = '/';
-                // window.location.reload();
             }, 1500);
         } catch (e) {
             alert(e);

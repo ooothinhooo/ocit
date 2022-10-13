@@ -2,39 +2,40 @@ import './App.css';
 import React, { useRef, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Contact, HeaderContainer, Test } from './components';
 import {
-    MainContainer,
-    CreateContainer,
+    Admin,
+    HocPhan,
+    HomePage,
+    Thanks,
+    TraCuu,
+    Blog,
+    RenderBlog,
+    WriteBlog,
+    UpdateBlog,
+    DataHocPhan,
     UserProfile,
+    UserProfileID,
+    CreateContainer,
     ViewProductsList,
-    Contact,
-    HeaderContainer,
     UpdateProduct,
-    ViewCartItem,
-    Test,
     CreateHocPhan,
-    Articles,
-    AddArticle,
-    Article,
     CreateData,
     ViewHocPhan,
     UpdateData,
-    UserProfileID,
-} from './components';
-import { Admin, HocPhan, HomePage, Thanks, TraCuu, Blog, RenderBlog, WriteBlog, DataHocPhan } from './pages';
-import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './utils/firebaseFunctions';
+    Resources,
+    ProductPage,
+} from './pages';
+import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './Firebase/index.js';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
-import ProductPage from './pages/ProductPage';
-import Resources from './pages/Resources';
-import NotFoundPage from './pages/NotFoundPage';
 import { auth } from './firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ROOT_USER_EMAIL } from './data/main';
-import UpdateBlog from './pages/blog/UpdateBlog';
 function App() {
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
+    // console.log(user.photoURL);
     const [userAuthState] = useAuthState(auth);
 
     const fetchData = async () => {
@@ -91,7 +92,6 @@ function App() {
                                             <Route path="/createHocPhan" element={<CreateHocPhan />} />
                                             <Route path="/viewproduct" element={<ViewProductsList />} />
                                             <Route path="/update/:uid" element={<UpdateProduct />} />
-                                            <Route path="/products/:uid" element={<ViewCartItem />} />
                                             <Route path="/data/markdown/hocphan/create" element={<CreateData />} />
                                             <Route
                                                 path="/data/markdown/hocphan/update/:id/:makeCode"
@@ -124,22 +124,6 @@ function App() {
                                     <Route path="/blog/post/:id" element={<RenderBlog />} />
                                     <Route path="/publish/post" element={<WriteBlog />} />
                                     <Route path="/publish/update/:id/:makeCode" element={<UpdateBlog />} />
-                                    {/* <Route path="/hocphan/CT242" element={<CT242 />} />
-                                    <Route path="/hocphan/CT112" element={<CT112 />} />
-                                    <Route path="/hocphan/CT761" element={<CT176 />} />
-                                    <Route path="/hocphan/CT178" element={<CT178 />} />
-                                    <Route path="/hocphan/CT179" element={<CT179 />} />
-                                    <Route path="/hocphan/CT180" element={<CT180 />} />
-                                    <Route path="/hocphan/CT188" element={<CT188 />} />
-                                    <Route path="/hocphan/CT190" element={<CT190 />} />
-                                    <Route path="/hocphan/CT239" element={<CT239 />} />
-                                    <Route path="/hocphan/CT240" element={<CT240 />} />
-                                    <Route path="/hocphan/CT241" element={<CT241 />} />
-                                    <Route path="/hocphan/CT242" element={<CT242 />} />
-                                    <Route path="/hocphan/CT244" element={<CT244 />} />
-                                    <Route path="/hocphan/CT287" element={<CT287 />} />
-                                    <Route path="/hocphan/CT296" element={<CT296 />} />
-                                    <Route path="/hocphan/CT449" element={<CT449 />} /> */}
                                 </>
                                 ,
                             </>
@@ -151,21 +135,6 @@ function App() {
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/collections" element={<ProductPage />} />
                         <Route path="/tracuu" element={<TraCuu />} />
-                        <Route path="/article/:id" element={<Article />} />
-
-                        <Route
-                            path="/cmt"
-                            element={
-                                <div className="h-full">
-                                    <div className="col-md-4">
-                                        <AddArticle />
-                                    </div>
-                                    <div className="col-md-8">
-                                        <Articles />
-                                    </div>
-                                </div>
-                            }
-                        />
                         {/* <Route path="*" element={<NotFoundPage />} /> */}
                     </Routes>
                 </main>

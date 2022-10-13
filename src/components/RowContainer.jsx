@@ -7,10 +7,6 @@ import { actionType } from '../context/reducer';
 import Swal from 'sweetalert2';
 import MDEditor from '@uiw/react-md-editor';
 
-import { ViewCartItem } from '../components';
-import { Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 function RowContainer({ flag, data, scrollValue }) {
     // const MySwal = withReactContent(Swal);
@@ -32,16 +28,6 @@ function RowContainer({ flag, data, scrollValue }) {
             title: 'DIJKSTRA',
         },
     ]);
-    function unique(arr) {
-        var formArr = arr.sort();
-        var newArr = [formArr[0]];
-        for (let i = 1; i < formArr.length; i++) {
-            if (formArr[i]?.id !== formArr[i - 1]?.id) {
-                newArr.push(formArr[i]);
-            }
-        }
-        return newArr;
-    }
 
     const addToCart = () => {
         dispatch({

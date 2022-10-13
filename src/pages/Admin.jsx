@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
-import { HocPhan_OCIT, Order_OCIT, Product_OCIT } from '../components';
+import { HocPhan_OCIT, Order_OCIT, Product_OCIT } from '../pages';
 import { logo } from '../img';
 import { FiTrendingUp } from 'react-icons/fi';
 import { MdProductionQuantityLimits } from 'react-icons/md';

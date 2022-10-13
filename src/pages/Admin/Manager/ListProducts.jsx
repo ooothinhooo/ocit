@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { NotFound } from '../../../img';
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
-import { deleteItem, pushArr } from '../../../utils/firebaseFunctions';
+import { deleteItem } from '../../../Firebase/OCIT';
 
 function ListProducts({ flag, data, scrollValue }) {
     const rowContainer = useRef();

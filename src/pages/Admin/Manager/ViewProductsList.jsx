@@ -1,8 +1,7 @@
 import React from 'react';
 import { useStateValue } from '../../../context/StateProvider';
-import MenuProductList from './MenuProductList';
-import ListProducts from './ListProducts';
-import MenuContainer from '../../MenuContainer';
+import { MenuProductList, ListProducts } from '../../../pages';
+
 import { AnimatePresence, motion } from 'framer-motion';
 const color = 'rose';
 function ViewProductsList({ tab }) {

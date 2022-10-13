@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
-import { deleteItem } from '../../../utils/firebaseFunctions';
+import { deleteItem } from '../../../Firebase/OCIT';
 
 function Product_OCIT() {
     const [{ OCIT }, dispatch] = useStateValue();

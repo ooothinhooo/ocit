@@ -4,9 +4,11 @@ import { auth, db } from '../firebase.config';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import { Link } from 'react-router-dom';
-import Footer from './Display/Footer';
+import Footer from '../components/Display/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
-import { deleteItem_Blog, deleteItem_OCIT_DATA_HOCPHAN, removeAccents } from '../utils/firebaseFunctions';
+import { deleteItem_OCIT_DATA_HOCPHAN, removeAccents } from '../utils/firebaseFunctions';
+import { deleteItem_Blog } from '../Firebase/Blog';
+
 import Swal from 'sweetalert2';
 import { title } from '@uiw/react-md-editor';
 

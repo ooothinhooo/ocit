@@ -1,38 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineBars } from 'react-icons/ai';
-import { useStateValue } from '../../context/StateProvider';
-import { ROOT_USER_EMAIL } from '../../data/main';
-import { deleteItem_OCIT_DATA_HOCPHAN } from '../../utils/firebaseFunctions';
-import Swal from 'sweetalert2';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function ListDataHocPhan({ arr, filter, title }) {
-    const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
-    const [flag, setFlag] = useState(false);
-    // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
-    // console.log(user.uid == ROOT_USER_EMAIL[0]);
-    // console.log(user);
-    // console.log(arr);
-    function deleteItem(id) {
-        Swal.fire({
-            title: 'Bạn Chắc Chắn Muốn Xoá Chứ',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-                deleteItem_OCIT_DATA_HOCPHAN(id);
-                setTimeout(() => {
-                    window.location = '/data/hocphan';
-                }, 3000);
-            }
-        });
-    }
     return (
         <AnimatePresence exitBeforeEnter>
             <div className=" py-4 rounded-xl   my-2 md:grid md:gap-x-8 md:gap-y-4 md:grid-cols-3 justify-center items-center">
@@ -56,7 +26,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                             <div class="w-full flex items-center justify-between">
                                                 <span class="font-medium text-sm text-[#3B9AE1]">
                                                     {' '}
-                                                    {item.title.length < 34
+                                                    {item?.title.length < 34
                                                         ? item.title
                                                         : item.title.substring(0, 33) + '...'}
                                                 </span>
@@ -71,7 +41,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                                         Người đăng Tải:{' '}
                                                     </span>
                                                     <span class="font-semibold tracking-tight text-xs">
-                                                        {item.createdBy}
+                                                        {item?.createdBy}
                                                     </span>
                                                     <p class="text-xs leading-4 pt-2 italic opacity-70">
                                                         {item?.description.substring(0, 100)}

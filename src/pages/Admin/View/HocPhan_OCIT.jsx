@@ -1,10 +1,27 @@
-import React from 'react';
+import { collection, onSnapshot, orderBy, query, Timestamp, addDoc, doc } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { storage, db, auth } from '../../../firebase.config';
+
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
 import { deleteItem_OCIT_HOCPHAN } from '../../../utils/firebaseFunctions';
 
 function HocPhan_OCIT() {
     const [{ OCIT, OCIT_HOCPHAN }, dispatch] = useStateValue();
+    const colDB = 'OCIT_DATA_HOCPHAN';
+    const [articles, setArticles] = useState([]);
+    useEffect(() => {
+        const articleRef = collection(db, colDB);
+        const q = query(articleRef, orderBy('date', 'desc'));
+        onSnapshot(q, (snapshot) => {
+            const articles = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setArticles(articles);
+        });
+    }, []);
+
     const deleteBtn_OCIT_HOCPHAN = (index, MaHP) => {
         try {
             deleteItem_OCIT_HOCPHAN(index);
@@ -35,7 +52,7 @@ function HocPhan_OCIT() {
                         </tr>
                     </thead>
                     <tbody class="bg-primary">
-                        {OCIT_HOCPHAN?.map((item, index) => (
+                        {articles?.map((item, index) => (
                             <>
                                 {' '}
                                 <tr class="text-white ">
@@ -44,15 +61,15 @@ function HocPhan_OCIT() {
                                             <div class="relative rounded-full hidden w-10 h-10 mr-3  md:block">
                                                 <img
                                                     class="object-cover rounded-full w-full h-full "
-                                                    src={item?.imgCreator}
+                                                    src={item?.PhoToCreater}
                                                     alt=""
                                                     loading="lazy"
                                                 />
                                                 <div class="absolute inset-0 shadow-inner" aria-hidden="true"></div>
                                             </div>
                                             <div>
-                                                <p class="font-semibold">{item?.TenHP}</p>
-                                                <p class="text-xs text-gray-600 dark:text-gray-400">{item?.MaHP}</p>
+                                                <p class="font-semibold">{item?.title}</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-400">{item?.tag}</p>
                                             </div>
                                         </div>
                                     </td>

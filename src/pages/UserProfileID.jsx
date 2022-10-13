@@ -4,7 +4,7 @@ import { auth, db } from '../firebase.config';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import { Link, useParams } from 'react-router-dom';
-import Footer from './Display/Footer';
+import Footer from '../components/Display/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
 import { deleteItem_Blog, deleteItem_OCIT_DATA_HOCPHAN, removeAccents } from '../utils/firebaseFunctions';
 import Swal from 'sweetalert2';
@@ -62,32 +62,7 @@ function UserProfile() {
     const DataHocPhandb = articlesDataHocPhan.filter((item) => {
         return item.createrID === id;
     });
-    // console.log(DataHocPhandb);
-    function handlerDeleteItemBlog(id) {
-        deleteItem_Blog(id);
-        setTimeout(() => {
-            window.location = '/';
-        }, 1500);
-    }
-    function deleteItem_DataHocPhan(id) {
-        Swal.fire({
-            title: 'Bạn Chắc Chắn Muốn Xoá Chứ',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-                deleteItem_OCIT_DATA_HOCPHAN(id);
-                setTimeout(() => {
-                    window.location = '/data/hocphan';
-                }, 1500);
-            }
-        });
-    }
+
     const icon = {
         hidden: {
             opacity: 0,

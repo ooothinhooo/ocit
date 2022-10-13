@@ -8,22 +8,15 @@ import { MdShoppingBasket } from 'react-icons/md';
 import { BsCodeSquare, BsFileEarmarkPdf } from 'react-icons/bs';
 import { GrMoney } from 'react-icons/gr';
 import { categories } from '../../../utils/data';
-import Loader from '../../Loader';
+import { Loader, RowContainer } from '../../../components';
 import { storage } from '../../../firebase.config';
-import {
-    saveItem,
-    getAllOCIT,
-    updateItem,
-    pushArr,
-    deleteItemBtn,
-    makeid,
-    removeAccents,
-} from '../../../utils/firebaseFunctions';
+
+import { updateItem } from '../../../Firebase/OCIT';
+import { getAllOCIT, makeid, removeAccents } from '../../../Firebase';
+
 import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
 
-import RowContainer from '../../RowContainer';
-import Banner from '../../Banner';
 function UpdateProduct({ id }) {
     var today = new Date();
     const [title, setTitle] = useState('');

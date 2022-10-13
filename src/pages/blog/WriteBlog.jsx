@@ -2,29 +2,22 @@ import { collection, onSnapshot, orderBy, query, Timestamp, addDoc } from 'fireb
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
-// No import is required in the WebPack.
-// import "@uiw/react-md-editor/dist/markdown-editor.css";
-// import { Timestamp, collection, addDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
-
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../firebase.config';
 import { useStateValue } from '../../context/StateProvider';
-import { Upload_Blog, removeAccents, makeid } from '../../utils/firebaseFunctions';
+import { removeAccents, makeid } from '../../utils/firebaseFunctions';
+import { Upload_Blog } from '../../Firebase/Blog';
 const colDB = 'Blog';
 function WriteBlog() {
     var today = new Date();
-
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const photo = user && user.photoURL ? user.photoURL : '';
-
     const [value, setValue] = React.useState('');
     const [otitle, setoTitle] = React.useState('');
     const [makeCode, setMakeCode] = useState(makeid(6));
-
     const [progress, setProgress] = useState(0);
-
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -32,63 +25,6 @@ function WriteBlog() {
         userPhotoURL: photo,
         createdAt: Timestamp.now().toDate(),
     });
-    const handlePublish = () => {
-        console.log(otitle);
-        if (!value || !otitle) {
-            alert('Please fill all the fields');
-            return;
-        }
-
-        const storageRef = ref(storage, `/images/${Date.now()}${formData.image.name}`);
-
-        const uploadImage = uploadBytesResumable(storageRef, formData.image);
-
-        uploadImage.on(
-            'state_changed',
-            (snapshot) => {
-                const progressPercent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                setProgress(progressPercent);
-            },
-            (err) => {
-                console.log(err);
-            },
-            () => {
-                setFormData({
-                    description: '',
-                    image: '',
-                });
-
-                getDownloadURL(uploadImage.snapshot.ref).then((url) => {
-                    const articleRef = collection(db, colDB);
-                    addDoc(articleRef, {
-                        // title: formData.title,
-                        userPhotoURL: user.photoURL,
-                        description: value,
-                        title: otitle,
-                        imageUrl: url,
-                        createdAt: Timestamp.now().toDate(),
-                        createdBy: user.displayName,
-                        userId: user.uid,
-                        render: false,
-                        // likes: [],
-                        // dislikes: [],
-                        // comments: [],
-                    })
-                        .then(() => {
-                            toast('Article added successfully', { type: 'success' });
-                            alert('Article added successfully');
-                            setValue('');
-                            setoTitle('');
-                            setProgress(0);
-                        })
-                        .catch((err) => {
-                            toast('Error adding article', { type: 'error' });
-                        });
-                });
-            },
-        );
-    };
-
     const saveDetails = () => {
         // setIsLoading(true);
         try {

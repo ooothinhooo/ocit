@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { storage } from '../../../firebase.config';
-import { saveOCIT_HocPhan, getAllOCIT_HOCPHAN, makeid, removeAccents } from '../../../utils/firebaseFunctions';
+
+import { saveOCIT_HocPhan } from '../../../Firebase/HocPhan';
+import { getAllOCIT_HOCPHAN, makeid, removeAccents } from '../../../Firebase';
 import { useStateValue } from '../../../context/StateProvider';
 import { actionType } from '../../../context/reducer';
 
