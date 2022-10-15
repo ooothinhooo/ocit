@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaShoppingBasket } from 'react-icons/fa';
+import { FaShoppingBasket, FaUserAstronaut } from 'react-icons/fa';
+import { BiBookAdd, BiHome } from 'react-icons/bi';
+import { GiBlackBook } from 'react-icons/gi';
+import { BsChatRightDots, BsBlockquoteRight } from 'react-icons/bs';
+import { AiOutlineFileAdd, AiOutlineShoppingCart } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { auth } from '../../firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -12,6 +16,7 @@ import logo2 from '../../img/logo2.png';
 import Avatar from '../../img/avatar.png';
 import Login from '../children/Login.jsx';
 import { ROOT_USER_EMAIL } from '../../data/main';
+import * as Scroll from 'react-scroll';
 function HeaderContainer() {
     const [{ user, cartShow, LOGINSHOW, cartItems }, dispatch] = useStateValue();
     const [userAuthState] = useAuthState(auth);
@@ -46,6 +51,9 @@ function HeaderContainer() {
     const handleSetisMenu = () => {
         setIsMenu(!isMenu);
     };
+    if (onscroll) {
+        console.log('hi');
+    }
 
     const renderSwal = () => {
         Swal.fire({
@@ -148,8 +156,15 @@ function HeaderContainer() {
 
                         {isMenu && (
                             <>
-                                <div
-                                    className="z-50 my-6 mx-2 text-base top-12 right-3  inset-y-auto m-0 absolute
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ rotate: 0, scale: 1 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 260,
+                                        damping: 20,
+                                    }}
+                                    className="z-50 my-6 mx-2 md:min-w-[400px] md:w-auto md:right-3 md:max-h-[500px] md:h-auto w-full h-full text-base top-14 right-0  inset-y-auto m-0 absolute
                              bg-primary rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block"
                                     id="user-dropdown"
                                     data-popper-reference-hidden=""
@@ -157,49 +172,61 @@ function HeaderContainer() {
                                     data-popper-placement="bottom"
                                 >
                                     {user && user ? (
-                                        <div className="py-3 px-4">
-                                            <span className="block text-sm text-gray-100 dark:text-white">
-                                                {user.displayName}
-                                            </span>
-                                            <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                                                {user.email}
-                                            </span>
+                                        <div className="">
+                                            <div className="py-3 px-4">
+                                                <span className="block text-sm text-gray-100 dark:text-white">
+                                                    {user.displayName}
+                                                </span>
+                                                <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+                                                    {user.email}
+                                                </span>
+                                            </div>
+                                            {/* <span className="m-4">Close</span> */}
                                         </div>
                                     ) : (
                                         <></>
                                     )}
 
-                                    <ul className="py-1" aria-labelledby="user-menu-button">
+                                    <ul className="mx-2 py-2 px-1" aria-labelledby="user-menu-button">
                                         <>
                                             <li>
                                                 <Link
                                                     to="/"
-                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay  "
+                                                    className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay  "
                                                     onClick={handleSetisMenu}
                                                     aria-current="page"
                                                 >
-                                                    Home
+                                                    <span className="flex items-center justify-start">
+                                                        <BiHome className="mr-2" />
+                                                        Trang Chủ
+                                                    </span>
                                                 </Link>
                                             </li>
                                             <li>
                                                 <Link
                                                     to="/collections"
                                                     onClick={handleSetisMenu}
-                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                    className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
-                                                    Sản Phẩm
+                                                    <span className="flex items-center justify-start">
+                                                        <AiOutlineShoppingCart className="mr-2" />
+                                                        Sản Phẩm
+                                                    </span>
                                                 </Link>
                                             </li>
                                             <li>
                                                 <Link
                                                     to="/data/hocphan"
                                                     onClick={handleSetisMenu}
-                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                    className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
-                                                    Học Phần
+                                                    <span className="flex items-center justify-start">
+                                                        <GiBlackBook className="mr-2" />
+                                                        Tài Liệu
+                                                    </span>
                                                 </Link>
                                             </li>
-                                            <li>
+                                            {/* <li>
                                                 <Link
                                                     to="/resources"
                                                     onClick={handleSetisMenu}
@@ -207,23 +234,29 @@ function HeaderContainer() {
                                                 >
                                                     Tài Nguyên
                                                 </Link>
-                                            </li>
+                                            </li> */}
                                             <li>
                                                 <Link
                                                     to="/tracuu"
                                                     onClick={handleSetisMenu}
-                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                    className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
-                                                    Tra Cứu
+                                                    <span className="flex items-center justify-start">
+                                                        <BsChatRightDots className="mr-2" />
+                                                        Chat
+                                                    </span>
                                                 </Link>
                                             </li>
                                             <li>
                                                 <Link
                                                     to="/blog"
                                                     onClick={handleSetisMenu}
-                                                    className="md:hidden block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                    className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
-                                                    Blog
+                                                    <span className="flex items-center justify-start">
+                                                        <BsBlockquoteRight className="mr-2" />
+                                                        Blog
+                                                    </span>
                                                 </Link>
                                             </li>
                                         </>
@@ -231,11 +264,14 @@ function HeaderContainer() {
                                             {user && user ? (
                                                 <Link to={'/profile/' + user.uid}>
                                                     <p
-                                                        className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
+                                                        className=" block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay "
                                                         onClick={() => setIsMenu(false)}
                                                     >
                                                         {' '}
-                                                        View Profile
+                                                        <span className="flex items-center justify-start">
+                                                            <FaUserAstronaut className="mr-2" />
+                                                            Trang Cá Nhân
+                                                        </span>
                                                     </p>
                                                 </Link>
                                             ) : (
@@ -246,11 +282,14 @@ function HeaderContainer() {
                                             {user && user ? (
                                                 <Link to={'/publish/post'}>
                                                     <p
-                                                        className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
+                                                        className=" block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay "
                                                         onClick={() => setIsMenu(false)}
                                                     >
                                                         {' '}
-                                                        Write Blog
+                                                        <span className="flex items-center justify-start">
+                                                            <AiOutlineFileAdd className="mr-2" />
+                                                            Viết Blog
+                                                        </span>
                                                     </p>
                                                 </Link>
                                             ) : (
@@ -264,11 +303,14 @@ function HeaderContainer() {
                                                         {user && userAuthState.uid == item ? (
                                                             <Link to={'/data/markdown/hocphan/create'}>
                                                                 <p
-                                                                    className=" block py-2 px-4 text-sm text-gray-200 hover:bg-cardOverlay "
+                                                                    className=" block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay "
                                                                     onClick={() => setIsMenu(false)}
                                                                 >
                                                                     {' '}
-                                                                    Write Data Học Phần
+                                                                    <span className="flex items-center justify-start">
+                                                                        <BiBookAdd className="mr-2" />
+                                                                        Thêm Tài Liệu
+                                                                    </span>
                                                                 </p>
                                                             </Link>
                                                         ) : (
@@ -293,7 +335,7 @@ function HeaderContainer() {
                                             )}
                                         </li>
                                     </ul>
-                                </div>
+                                </motion.div>
                             </>
                         )}
                         {user && user ? (
@@ -389,7 +431,7 @@ function HeaderContainer() {
                                     </a>
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link
                                     to="/resources"
                                     className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -398,7 +440,7 @@ function HeaderContainer() {
                                         Tài Nguyên
                                     </a>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link
                                     to="/tracuu"

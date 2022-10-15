@@ -86,8 +86,8 @@ function App() {
                                 <>
                                     {user && userAuthState?.uid === root ? (
                                         <>
-                                            <Route path="/home" element={<HomePage />} />
                                             <Route path="/*" element={<Admin />} />
+                                            <Route path="/home" element={<HomePage />} />
                                             <Route path="/createItem" element={<CreateContainer />} />
                                             <Route path="/createHocPhan" element={<CreateHocPhan />} />
                                             <Route path="/viewproduct" element={<ViewProductsList />} />
