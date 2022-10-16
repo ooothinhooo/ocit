@@ -44,7 +44,6 @@ function Data_HocPhan() {
             setHP(HP);
         });
     }, []);
-    console.log(HP);
     const arr = articles?.filter((item) => {
         return item.tag === filter;
     });

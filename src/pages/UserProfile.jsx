@@ -62,7 +62,6 @@ function UserProfile() {
     const DataHocPhandb = articlesDataHocPhan.filter((item) => {
         return item.createrID === user.uid;
     });
-    console.log(DataHocPhandb);
     function handlerDeleteItemBlog(id) {
         deleteItem_Blog(id);
         setTimeout(() => {

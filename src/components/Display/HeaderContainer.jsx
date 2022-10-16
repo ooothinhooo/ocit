@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaShoppingBasket, FaUserAstronaut } from 'react-icons/fa';
 import { BiBookAdd, BiHome } from 'react-icons/bi';
+import { MdOutlineContentPaste } from 'react-icons/md';
 import { GiBlackBook } from 'react-icons/gi';
 import { BsChatRightDots, BsBlockquoteRight } from 'react-icons/bs';
 import { AiOutlineFileAdd, AiOutlineShoppingCart } from 'react-icons/ai';
@@ -11,21 +12,15 @@ import { auth } from '../../firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
-import Logo from '../../img/logo.png';
 import logo2 from '../../img/logo2.png';
 import Avatar from '../../img/avatar.png';
 import Login from '../children/Login.jsx';
 import { ROOT_USER_EMAIL } from '../../data/main';
-import * as Scroll from 'react-scroll';
+
 function HeaderContainer() {
     const [{ user, cartShow, LOGINSHOW, cartItems }, dispatch] = useStateValue();
     const [userAuthState] = useAuthState(auth);
-    // const ROOT_USER_EMAIL = 'ooothinhooo154@gmail.com';
-    // console.log(user);
-
     const [isMenu, setIsMenu] = useState(false);
-
-    //logout function
     const logout = () => {
         setIsMenu(false);
         localStorage.clear();
@@ -51,9 +46,6 @@ function HeaderContainer() {
     const handleSetisMenu = () => {
         setIsMenu(!isMenu);
     };
-    if (onscroll) {
-        console.log('hi');
-    }
 
     const renderSwal = () => {
         Swal.fire({
@@ -71,6 +63,27 @@ function HeaderContainer() {
         });
     };
     // console.log(user.photoURL);
+
+    const motion_container = {
+        hidden: { opacity: 1, scale: 0 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                delayChildren: 0,
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const motion_item = {
+        hidden: { y: 10, x: 100, opacity: 0 },
+        visible: {
+            y: 0,
+            x: 0,
+            opacity: 1,
+        },
+    };
     return (
         <AnimatePresence>
             <motion.nav
@@ -157,13 +170,6 @@ function HeaderContainer() {
                         {isMenu && (
                             <>
                                 <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ rotate: 0, scale: 1 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 260,
-                                        damping: 20,
-                                    }}
                                     className="z-50 my-6 mx-2 md:min-w-[400px] md:w-auto md:right-3 md:max-h-[500px] md:h-auto w-full h-full text-base top-14 right-0  inset-y-auto m-0 absolute
                              bg-primary rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block"
                                     id="user-dropdown"
@@ -187,9 +193,15 @@ function HeaderContainer() {
                                         <></>
                                     )}
 
-                                    <ul className="mx-2 py-2 px-1" aria-labelledby="user-menu-button">
+                                    <motion.ul
+                                        variants={motion_container}
+                                        initial="hidden"
+                                        animate="visible"
+                                        className="motion_container mx-2 py-2 px-1"
+                                        aria-labelledby="user-menu-button"
+                                    >
                                         <>
-                                            <li>
+                                            <motion.li className="motion_item" variants={motion_item}>
                                                 <Link
                                                     to="/"
                                                     className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay  "
@@ -197,35 +209,35 @@ function HeaderContainer() {
                                                     aria-current="page"
                                                 >
                                                     <span className="flex items-center justify-start">
-                                                        <BiHome className="mr-2" />
+                                                        <BiHome className="mr-2 text-blue-400" />
                                                         Trang Chủ
                                                     </span>
                                                 </Link>
-                                            </li>
-                                            <li>
+                                            </motion.li>
+                                            <motion.li className="motion_item" variants={motion_item}>
                                                 <Link
                                                     to="/collections"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
                                                     <span className="flex items-center justify-start">
-                                                        <AiOutlineShoppingCart className="mr-2" />
+                                                        <AiOutlineShoppingCart className="mr-2 text-blue-400" />
                                                         Sản Phẩm
                                                     </span>
                                                 </Link>
-                                            </li>
-                                            <li>
+                                            </motion.li>
+                                            <motion.li className="motion_item" variants={motion_item}>
                                                 <Link
                                                     to="/data/hocphan"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
                                                     <span className="flex items-center justify-start">
-                                                        <GiBlackBook className="mr-2" />
+                                                        <GiBlackBook className="mr-2 text-blue-400" />
                                                         Tài Liệu
                                                     </span>
                                                 </Link>
-                                            </li>
+                                            </motion.li>
                                             {/* <li>
                                                 <Link
                                                     to="/resources"
@@ -235,32 +247,32 @@ function HeaderContainer() {
                                                     Tài Nguyên
                                                 </Link>
                                             </li> */}
-                                            <li>
+                                            <motion.li className="motion_item" variants={motion_item}>
                                                 <Link
                                                     to="/tracuu"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
                                                     <span className="flex items-center justify-start">
-                                                        <BsChatRightDots className="mr-2" />
+                                                        <BsChatRightDots className="mr-2 text-blue-400" />
                                                         Chat
                                                     </span>
                                                 </Link>
-                                            </li>
-                                            <li>
+                                            </motion.li>
+                                            <motion.li className="motion_item" variants={motion_item}>
                                                 <Link
                                                     to="/blog"
                                                     onClick={handleSetisMenu}
                                                     className="md:hidden block py-2 px-4 text-lg text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                                                 >
                                                     <span className="flex items-center justify-start">
-                                                        <BsBlockquoteRight className="mr-2" />
+                                                        <BsBlockquoteRight className="mr-2 text-blue-400" />
                                                         Blog
                                                     </span>
                                                 </Link>
-                                            </li>
+                                            </motion.li>
                                         </>
-                                        <li>
+                                        <motion.li className="motion_item" variants={motion_item}>
                                             {user && user ? (
                                                 <Link to={'/profile/' + user.uid}>
                                                     <p
@@ -269,7 +281,7 @@ function HeaderContainer() {
                                                     >
                                                         {' '}
                                                         <span className="flex items-center justify-start">
-                                                            <FaUserAstronaut className="mr-2" />
+                                                            <FaUserAstronaut className="mr-2 text-blue-400" />
                                                             Trang Cá Nhân
                                                         </span>
                                                     </p>
@@ -277,8 +289,8 @@ function HeaderContainer() {
                                             ) : (
                                                 <></>
                                             )}
-                                        </li>
-                                        <li>
+                                        </motion.li>
+                                        <motion.li className="motion_item" variants={motion_item}>
                                             {user && user ? (
                                                 <Link to={'/publish/post'}>
                                                     <p
@@ -287,7 +299,7 @@ function HeaderContainer() {
                                                     >
                                                         {' '}
                                                         <span className="flex items-center justify-start">
-                                                            <AiOutlineFileAdd className="mr-2" />
+                                                            <AiOutlineFileAdd className="mr-2 text-blue-400" />
                                                             Viết Blog
                                                         </span>
                                                     </p>
@@ -295,11 +307,11 @@ function HeaderContainer() {
                                             ) : (
                                                 <></>
                                             )}
-                                        </li>
+                                        </motion.li>
                                         {ROOT_USER_EMAIL.map((item) => {
                                             return (
                                                 <>
-                                                    <li>
+                                                    <motion.li className="motion_item" variants={motion_item}>
                                                         {user && userAuthState.uid == item ? (
                                                             <Link to={'/data/markdown/hocphan/create'}>
                                                                 <p
@@ -308,7 +320,7 @@ function HeaderContainer() {
                                                                 >
                                                                     {' '}
                                                                     <span className="flex items-center justify-start">
-                                                                        <BiBookAdd className="mr-2" />
+                                                                        <BiBookAdd className="mr-2 text-blue-400" />
                                                                         Thêm Tài Liệu
                                                                     </span>
                                                                 </p>
@@ -316,12 +328,29 @@ function HeaderContainer() {
                                                         ) : (
                                                             <></>
                                                         )}
-                                                    </li>
+                                                    </motion.li>
                                                 </>
                                             );
                                         })}
-
-                                        <li>
+                                        <motion.li className="motion_item" variants={motion_item}>
+                                            {user && user ? (
+                                                <Link to={`/posts/drafts/+ user.uid`}>
+                                                    <p
+                                                        className=" block py-2 px-4 text-lg text-gray-200 hover:bg-cardOverlay "
+                                                        onClick={() => setIsMenu(false)}
+                                                    >
+                                                        {' '}
+                                                        <span className="flex items-center justify-start">
+                                                            <MdOutlineContentPaste className="mr-2 text-blue-400" />
+                                                            Quản Lý Nội Dung
+                                                        </span>
+                                                    </p>
+                                                </Link>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </motion.li>
+                                        <motion.li className="motion_item" variants={motion_item}>
                                             {user && user ? (
                                                 <p
                                                     // className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
@@ -333,8 +362,8 @@ function HeaderContainer() {
                                             ) : (
                                                 <></>
                                             )}
-                                        </li>
-                                    </ul>
+                                        </motion.li>
+                                    </motion.ul>
                                 </motion.div>
                             </>
                         )}

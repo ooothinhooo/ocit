@@ -25,6 +25,7 @@ import {
     UpdateData,
     Resources,
     ProductPage,
+    ContentManagementPage,
 } from './pages';
 import { getAllOCIT, getAllOCIT_HOCPHAN, getOrder_OCIT } from './Firebase/index.js';
 import { useStateValue } from './context/StateProvider';
@@ -111,6 +112,7 @@ function App() {
 
                         {/* link to page */}
                         <Route path="/profile/:uid" element={<UserProfile />} />
+                        <Route path="/posts/drafts/:uid" element={<ContentManagementPage />} />
                         <Route path="/profile/id/:id/:name" element={<UserProfileID />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/xincamon" element={<Thanks />} />

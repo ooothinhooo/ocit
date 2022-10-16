@@ -5,6 +5,7 @@ export { default as Resources } from './Resources';
 export { default as Admin } from './Admin';
 export { default as TraCuu } from './TraCuu';
 export { default as HomePage } from './HomePage';
+export { default as ContentManagementPage } from './ContentManagementPage';
 // export { default as MainContainer } from './MainContainer';
 export { default as UserProfile } from './UserProfile';
 export { default as UserProfileID } from './UserProfileID';
