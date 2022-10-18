@@ -39,11 +39,8 @@ export default function AddArticle({ colDB }) {
             alert('Please fill all the fields');
             return;
         }
-
         const storageRef = ref(storage, `/images/${Date.now()}${formData.image.name}`);
-
         const uploadImage = uploadBytesResumable(storageRef, formData.image);
-
         uploadImage.on(
             'state_changed',
             (snapshot) => {

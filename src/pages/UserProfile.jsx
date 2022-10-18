@@ -131,17 +131,7 @@ function UserProfile() {
                                         `}
                                     >
                                         <div class="flex items-center justify-center md:justify-start -mt-16">
-                                            <span
-                                                onClick={(e) => handlerDeleteItemBlog(item.id)}
-                                                className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl"
-                                            >
-                                                Delete
-                                            </span>
-                                            <Link to={`/publish/update/${item.id}/${item.makeCode}`}>
-                                                <span className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl">
-                                                    Update
-                                                </span>
-                                            </Link>
+                                           
                                             <img
                                                 class="w-20 h-20 ml-6 object-cover rounded-full border-2 border-indigo-500"
                                                 src={item.PhoToCreater}
@@ -179,17 +169,6 @@ function UserProfile() {
                                         `}
                                     >
                                         <div class="flex items-center justify-center md:justify-start -mt-16">
-                                            <span
-                                                onClick={(e) => deleteItem_DataHocPhan(item.id)}
-                                                className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl"
-                                            >
-                                                Delete
-                                            </span>
-                                            <Link to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}>
-                                                <span className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl">
-                                                    Update
-                                                </span>
-                                            </Link>
                                             <img
                                                 class="w-20 h-20 ml-6 object-cover rounded-full border-2 border-indigo-500"
                                                 src={item.PhoToCreater}

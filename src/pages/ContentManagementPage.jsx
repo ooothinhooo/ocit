@@ -1,14 +1,16 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../firebase.config';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Display/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
+import { collection, onSnapshot, orderBy, query,arrayRemove, arrayUnion, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
+import { auth, db, storage } from '../firebase.config';
+import { toast } from 'react-toastify';
+
+import { useStateValue } from '../context/StateProvider';
+import Footer from '../components/Display/Footer';
 import { deleteItem_OCIT_DATA_HOCPHAN, removeAccents } from '../utils/firebaseFunctions';
 import { deleteItem_Blog } from '../Firebase/Blog';
-
+import { FaLockOpen, FaLock } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { title } from '@uiw/react-md-editor';
 
@@ -61,13 +63,7 @@ function ContentManagementPage() {
     const DataHocPhandb = articlesDataHocPhan.filter((item) => {
         return item.createrID === user.uid;
     });
-    function handlerDeleteItemBlog(id) {
-        deleteItem_Blog(id);
-        setTimeout(() => {
-            window.location = '/';
-        }, 1500);
-    }
-    function deleteItem_DataHocPhan(id) {
+    function deleteFunc(colDB, id) {
         Swal.fire({
             title: 'Bạn Chắc Chắn Muốn Xoá Chứ',
             text: "You won't be able to revert this!",
@@ -78,14 +74,59 @@ function ContentManagementPage() {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-                deleteItem_OCIT_DATA_HOCPHAN(id);
-                setTimeout(() => {
-                    window.location = '/data/hocphan';
-                }, 1500);
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                // deleteItem_OCIT_DATA_HOCPHAN(id);
+                handleDelete(colDB, id);
             }
         });
     }
+
+    const handleView = (view, id, colDB) => {
+        const likesRef = doc(db, colDB, id);
+        if (view) {
+            updateDoc(likesRef, {
+                view: false,
+            })
+                .then(() => {
+                    // console.log('unliked');
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else {
+            updateDoc(likesRef, {
+                view: true,
+            })
+                .then(() => {
+                    // console.log('liked');
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+    };
+
+    const handleDelete = async (colDB, id) => {
+        if (
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        ) {
+            try {
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                await deleteDoc(doc(db, colDB, id));
+                const storageRef = ref(storage, id);
+                await deleteObject(storageRef);
+            } catch (error) {
+                toast('Error deleting article', { type: 'error' });
+                console.log(error);
+            }
+        }
+    };
     return (
         <AnimatePresence>
             <motion.div
@@ -98,39 +139,62 @@ function ContentManagementPage() {
                 <div className="w-full">
                     {blogdb.map((item) => {
                         return (
-                            <div className="block justify-start items-start w-full rounded-md bg-slate-400">
-                                <Link to={`/blog/post/${item.id}`}>
-                                    <div class="flex flex-col justify-start ">
-                                        <div
-                                            class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-2 
+                            <div className="block justify-start items-start w-full  my-1">
+                                <div class="flex flex-col justify-start ">
+                                    <div
+                                        class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-2 
                                         border border-white bg-white"
-                                        >
-                                            <div class="w-full bg-white flex flex-col space-y-2 ">
-                                                <div class="flex justify-between item-center">
-                                                    <p class="text-gray-500 font-medium block">{item?.createdBy}</p>
-                                                    <div class="flex ">
-                                                        <div class="bg-gray-200  hover:bg-blue-500 px-3 py-1 rounded-full text-xs font-medium text-gray-800 block mr-2">
-                                                            <span onClick={(e) => handlerDeleteItemBlog(item.id)}>
-                                                                Delete
-                                                            </span>
-                                                        </div>
-                                                        <div class="bg-gray-200 hover:bg-blue-500 px-3 py-1 rounded-full text-xs font-medium text-gray-800 block">
-                                                            <Link to={`/publish/update/${item.id}/${item.makeCode}`}>
-                                                                <span>Update</span>
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    >
+                                        <div class="w-full bg-white flex flex-col space-y-2 ">
+                                            <div class="flex justify-between item-center">
+                                                {/* <p class="text-gray-500 font-medium block">{item?.createdBy}</p> */}
                                                 <h3 class="font-black text-gray-800 md:text-xl text-xl">
                                                     {item.title.substring(0, 70) + '...'}
                                                 </h3>
-                                                <p class="text-sm text-gray-500 ">
-                                                    {item.description.substring(0, 160) + '...'}
-                                                </p>
+                                                <div class="flex ">
+                                                    <div class="bg-gray-200 hover:bg-blue-500 px-3 py-1 mx-2 rounded-full text-xs font-medium text-gray-800 block">
+                                                        <Link to={`/blog/post/${item.id}`}>
+                                                            <span>View</span>
+                                                        </Link>
+                                                    </div>
+
+                                                    <span
+                                                        //  onClick={(e) => setView(!view)}
+                                                        onClick={(e) => handleView(item.view, item.id, 'Blog')}
+                                                        className="text-xl p-1 mx-2 "
+                                                    >
+                                                        {!item?.view ? (
+                                                            <>
+                                                                <FaLock className="text-blue-700" />
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <FaLockOpen className="text-green-500" />
+                                                            </>
+                                                        )}
+                                                    </span>
+                                                    <div class="bg-gray-200  hover:bg-blue-500 px-3 py-1 rounded-full text-xs font-medium text-gray-800 block mx-2">
+                                                        <span
+                                                            onClick={(e) => deleteFunc('Blog', item.id)}
+                                                            // onClick={(e) => handleDelete('Blog', item.id)}
+                                                        >
+                                                            Delete
+                                                        </span>
+                                                    </div>
+                                                    <div class="bg-gray-200 hover:bg-blue-500 px-3 py-1 mx-2 rounded-full text-xs font-medium text-gray-800 block">
+                                                        <Link to={`/publish/update/${item.id}/${item.makeCode}`}>
+                                                            <span>Update</span>
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                            <p class="text-sm text-gray-500 ">
+                                                {item.description.substring(0, 160) + '...'}
+                                            </p>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         );
                     })}
@@ -155,6 +219,22 @@ function ContentManagementPage() {
                                                         </div>
                                                     </div>
                                                     <div class="relative font-normal text-xs sm:text-sm flex items-center text-gray-600">
+                                                        <span
+                                                            onClick={(e) =>
+                                                                handleView(item.view, item.id, 'OCIT_DATA_HOCPHAN')
+                                                            }
+                                                            className="text-4xl p-1 mr-1 "
+                                                        >
+                                                            {!item?.view ? (
+                                                                <>
+                                                                    <FaLock className="text-blue-700" />
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <FaLockOpen className="text-green-500" />
+                                                                </>
+                                                            )}
+                                                        </span>
                                                         <Link
                                                             to={`/data/hocphan/${item.tag}/${removeAccents(
                                                                 item.title,
@@ -172,8 +252,9 @@ function ContentManagementPage() {
                                                             </span>
                                                         </Link>
                                                         <span
-                                                            className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl"
-                                                            onClick={(e) => deleteItem_DataHocPhan(item.id)}
+                                                            className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl cursor-pointer hover:bg-green-600"
+                                                            onClick={(e) => deleteFunc('OCIT_DATA_HOCPHAN', item.id)}
+                                                            // onClick={(e) => handleDelete('OCIT_DATA_HOCPHAN', item.id)}
                                                         >
                                                             <span>Delete</span>
                                                         </span>

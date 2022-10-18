@@ -1,28 +1,18 @@
 import React, { useState } from 'react';
-import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
 import { HocPhan_OCIT, Order_OCIT, Product_OCIT } from '../pages';
-import { logo } from '../img';
+import { useStateValue } from '../context/StateProvider';
 import { FiTrendingUp } from 'react-icons/fi';
 import { MdProductionQuantityLimits } from 'react-icons/md';
 import { BiBook } from 'react-icons/bi';
+
 function Admin() {
     const [{ OCIT, OCIT_HOCPHAN, OCIT_ORDER }, dispatch] = useStateValue();
-
     const [userModal, setUserModal] = useState(true);
     const [productListModal, setProductListModal] = useState(false);
     const [orderListModal, setOrderListModal] = useState(false);
 
-    function setUserModalFunc() {
-        setUserModal(!userModal);
-    }
-    function handleSetProductListModal() {
-        setProductListModal(!productListModal);
-    }
-    function setOrderListModalFunc() {
-        setOrderListModal(!orderListModal);
-    }
     const data = [
         {
             label: 'Products List',
@@ -40,6 +30,7 @@ function Admin() {
             desc: <Order_OCIT />,
         },
     ];
+
     return (
         <>
             <div class="w-full flex h-screen bg-primary">

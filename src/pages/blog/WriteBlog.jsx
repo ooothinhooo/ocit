@@ -2,6 +2,8 @@ import { collection, onSnapshot, orderBy, query, Timestamp, addDoc } from 'fireb
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import MDEditor from '@uiw/react-md-editor';
+import { FaLockOpen, FaLock } from 'react-icons/fa';
+
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -18,6 +20,8 @@ function WriteBlog() {
     const [otitle, setoTitle] = React.useState('');
     const [makeCode, setMakeCode] = useState(makeid(6));
     const [progress, setProgress] = useState(0);
+    const [view, setView] = useState(true);
+
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -38,6 +42,7 @@ function WriteBlog() {
                         .join('')
                         .toUpperCase()}${user.uid}`,
                     title: otitle,
+                    view: view,
                     description: value,
                     createdBy: user.displayName,
                     PhoToCreater: user.photoURL,
@@ -81,6 +86,17 @@ function WriteBlog() {
                     value={otitle}
                     onChange={(e) => setoTitle(e.target.value)}
                 />
+                <span onClick={(e) => setView(!view)} className="text-4xl p-1  ml-2 ">
+                    {!view ? (
+                        <>
+                            <FaLock className="text-green-00" />
+                        </>
+                    ) : (
+                        <>
+                            <FaLockOpen className="text-pink-700" />
+                        </>
+                    )}
+                </span>
                 <button
                     onClick={saveDetails}
                     className="md:w-14 h-14 rounded-lg justify-center items-center 

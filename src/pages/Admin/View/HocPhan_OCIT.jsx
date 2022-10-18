@@ -1,6 +1,21 @@
-import { collection, onSnapshot, orderBy, query, Timestamp, addDoc, doc } from 'firebase/firestore';
+// import { collection, onSnapshot, orderBy, query, Timestamp, addDoc, doc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { storage, db, auth } from '../../../firebase.config';
+import {
+    collection,
+    onSnapshot,
+    orderBy,
+    query,
+    arrayRemove,
+    arrayUnion,
+    doc,
+    updateDoc,
+    deleteDoc,
+} from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
+import { FaLockOpen, FaLock } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
@@ -29,6 +44,71 @@ function HocPhan_OCIT() {
             console.error(e);
         }
     };
+
+    function deleteFunc(colDB, id) {
+        Swal.fire({
+            title: 'Bạn Chắc Chắn Muốn Xoá Chứ',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                // deleteItem_OCIT_DATA_HOCPHAN(id);
+                handleDelete(colDB, id);
+            }
+        });
+    }
+
+    const handleView = (view, id, colDB) => {
+        const likesRef = doc(db, colDB, id);
+        if (view) {
+            updateDoc(likesRef, {
+                view: false,
+            })
+                .then(() => {
+                    // console.log('unliked');
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else {
+            updateDoc(likesRef, {
+                view: true,
+            })
+                .then(() => {
+                    // console.log('liked');
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+    };
+
+    const handleDelete = async (colDB, id) => {
+        if (
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        ) {
+            try {
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                await deleteDoc(doc(db, colDB, id));
+                const storageRef = ref(storage, id);
+                await deleteObject(storageRef);
+            } catch (error) {
+                toast('Error deleting article', { type: 'error' });
+                console.log(error);
+            }
+        }
+    };
     return (
         <>
             {' '}
@@ -45,7 +125,7 @@ function HocPhan_OCIT() {
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-100 uppercase border-b  bg-gray-500">
                             <th class="px-4 py-3">Title</th>
-                            <th class="px-4 py-3">Price</th>
+                            {/* <th class="px-4 py-3">Price</th> */}
                             <th class="px-4 py-3">Category</th>
                             <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Actions</th>
@@ -69,16 +149,14 @@ function HocPhan_OCIT() {
                                             </div>
                                             <div>
                                                 <p class="font-semibold">{item?.title}</p>
-                                                <p class="text-xs text-gray-600 dark:text-gray-400">{item?.tag}</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                    {item?.createdBy}
+                                                </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-3 text-sm">{item?.flag}</td>
-                                    <td class="px-4 py-3 text-xs">
-                                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                            {item?.category}
-                                        </span>
-                                    </td>
+                                    {/* <td class="px-4 py-3 text-sm">{item?.flag}</td> */}
+                                    <td class=" text-sm justify-start items-center">{item?.tag}</td>
                                     <td class="px-4 py-3 text-sm">{item.date}</td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center space-x-4 text-sm">
@@ -100,7 +178,7 @@ function HocPhan_OCIT() {
                                             <button
                                                 class="flex hover:bg-green-100 hover:rounded-full hover:text-primary items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="Delete"
-                                                onClick={() => deleteBtn_OCIT_HOCPHAN(index, item?.MaHP)}
+                                                onClick={() => deleteFunc('OCIT_DATA_HOCPHAN', item.id)}
                                             >
                                                 <svg
                                                     class="w-5 h-5"
@@ -115,6 +193,22 @@ function HocPhan_OCIT() {
                                                     ></path>
                                                 </svg>
                                             </button>
+                                            <span
+                                                class="flex hover:bg-green-100 hover:rounded-full hover:text-primary items-center justify-between
+                                             px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 
+                                             focus:outline-none focus:shadow-outline-gray"
+                                                onClick={(e) => handleView(item.view, item.id, 'OCIT_DATA_HOCPHAN')}
+                                            >
+                                                {!item?.view ? (
+                                                    <>
+                                                        <FaLock className="text-blue-700" />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <FaLockOpen className="text-green-500" />
+                                                    </>
+                                                )}
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>

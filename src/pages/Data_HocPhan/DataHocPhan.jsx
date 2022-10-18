@@ -47,6 +47,9 @@ function Data_HocPhan() {
     const arr = articles?.filter((item) => {
         return item.tag === filter;
     });
+    const array = arr?.filter((item) => {
+        return item.view === true;
+    });
     // console.log(articles);
     let str = arr[0]?.title ? arr[0]?.title : '';
     str = removeAccents(str);
@@ -95,7 +98,7 @@ function Data_HocPhan() {
                 </div>
             </div>
             <div className="">
-                <ListDataHocPhan arr={arr} filter={filter} title={title} />
+                <ListDataHocPhan arr={array} filter={filter} title={title} />
             </div>
 
             <div className="mt-12">

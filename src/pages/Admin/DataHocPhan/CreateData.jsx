@@ -1,6 +1,7 @@
 import { collection, onSnapshot, orderBy, query, Timestamp, addDoc, doc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { FaLockOpen, FaLock } from 'react-icons/fa';
 import MDEditor from '@uiw/react-md-editor';
 import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -25,6 +26,7 @@ function CreateData() {
     const [tag, setTag] = React.useState('');
     const [makeCode, setMakeCode] = useState(makeid(6));
     const [progress, setProgress] = useState(0);
+    const [view, setView] = useState(true);
     // getAllOCIT_DATA_HOCPHAN();
     const [articles, setArticles] = useState([]);
     // console.log(articles);
@@ -118,6 +120,7 @@ function CreateData() {
                         .join('')
                         .toUpperCase()}${user.uid}`,
                     title: otitle,
+                    view: view,
                     description: value,
                     tag: tag.toUpperCase(),
                     createdBy: user.displayName,
@@ -139,6 +142,17 @@ function CreateData() {
     return (
         <div className="h-full w-full justify-center items-center">
             <div className="my-2 flex justify-center items-center ">
+                <span onClick={(e) => setView(!view)} className="text-4xl p-1 mr-1 ">
+                    {!view ? (
+                        <>
+                            <FaLock className="text-blue-700" />
+                        </>
+                    ) : (
+                        <>
+                            <FaLockOpen className="text-pink-700" />
+                        </>
+                    )}
+                </span>
                 <input
                     type="text"
                     className="h-10 w-full bg-primary border text-lg text-blue-400"
@@ -153,6 +167,7 @@ function CreateData() {
                     value={tag}
                     onChange={(e) => setTag(e.target.value)}
                 />
+
                 <button
                     // onClick={handlePublish}
                     onClick={saveDetails}

@@ -71,7 +71,7 @@ function HeaderContainer() {
             scale: 1,
             transition: {
                 delayChildren: 0,
-                staggerChildren: 0.1,
+                staggerChildren: 0.02,
             },
         },
     };

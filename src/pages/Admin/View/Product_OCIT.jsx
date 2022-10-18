@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { MdOutlinePriceChange } from 'react-icons/md';
 import { useStateValue } from '../../../context/StateProvider';
 import { Link } from 'react-router-dom';
 import { deleteItem } from '../../../Firebase/OCIT';
-
+import {
+    collection,
+    onSnapshot,
+    orderBy,
+    query,
+    arrayRemove,
+    arrayUnion,
+    doc,
+    updateDoc,
+    deleteDoc,
+} from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
+import { auth, db, storage } from '../../../firebase.config';
+import { toast } from 'react-toastify';
 function Product_OCIT() {
     const [{ OCIT }, dispatch] = useStateValue();
-
+    const [priceUp, setPriceUp] = useState('');
+    const [flag, setFlag] = useState(false);
+    const [flagUp, setFlagUp] = useState(false);
     const deleteBtn_OCIT = (index, title) => {
         try {
             // setMsg('Deleted ' + title + ' successfully');
@@ -16,6 +32,42 @@ function Product_OCIT() {
             console.error(e);
         }
     };
+
+    const updatePrice = (price, id, colDB) => {
+        setPriceUp('');
+        setFlag(!flag);
+    };
+    function update(price, id, colDB) {
+        console.log(id);
+        setFlag(!flag);
+        // updatePrice(price, id, colDB);
+        // updatePrice(price, id, colDB);
+        const likesRef = doc(db, colDB, id);
+
+        if (id) {
+            updateDoc(likesRef, {
+                price: priceUp,
+            })
+                .then(() => {
+                    console.log('unliked');
+
+                    setFlag(!flag);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else {
+            // updateDoc(likesRef, {
+            //     likes: arrayUnion(user.photoURL),
+            // })
+            //     .then(() => {
+            //         console.log('liked');
+            //     })
+            //     .catch((e) => {
+            console.log('error');
+            //     });
+        }
+    }
     return (
         <>
             <div className=" mb-2">
@@ -45,7 +97,7 @@ function Product_OCIT() {
                                     <tr class="text-white ">
                                         <td class="px-4 py-3">
                                             <div class="flex items-center text-sm">
-                                                <div class="relative hidden w-10 h-10 mr-3  md:block">
+                                                <div class=" z-1 relative hidden w-10 h-10 mr-3  md:block">
                                                     <img
                                                         class="object-cover w-full h-full "
                                                         src={item?.imageURL}
@@ -106,6 +158,39 @@ function Product_OCIT() {
                                                         ></path>
                                                     </svg>
                                                 </button>
+
+                                                <button
+                                                    class="flex items-center hover:bg-green-100 hover:rounded-full hover:text-primary justify-between px-2 py-2 text-md font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                    aria-label="Delete"
+                                                    onClick={() => update(item.price, item.id, 'OCIT')}
+                                                >
+                                                    <MdOutlinePriceChange className="text-xl" />
+                                                </button>
+                                                {flag ? (
+                                                    <>
+                                                        <div
+                                                            className=" z-50 fixed top-6 right-6 w-auto h-auto  justify-center items-center bg-green-300
+                             rounded divide-y  shadow  block "
+                                                        >
+                                                            <input
+                                                                type="number"
+                                                                value={priceUp}
+                                                                onChange={(e) => setPriceUp(e.target.value)}
+                                                                required
+                                                                placeholder="Price"
+                                                                className="w-full  h-auto  p-2 border-b  border-gray-300 text-md bg-transparent outline-none border-none placeholder:text-gray-400"
+                                                            />
+                                                            <button
+                                                                onClick={() => updatePrice(item.price, item.id, 'OCIT')}
+                                                                className="m-2 p-2 bg-green-500 rounded-md "
+                                                            >
+                                                                Update
+                                                            </button>
+                                                        </div>
+                                                    </>
+                                                ) : (
+                                                    <></>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
