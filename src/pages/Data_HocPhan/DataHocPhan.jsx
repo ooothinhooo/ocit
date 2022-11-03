@@ -34,7 +34,7 @@ function Data_HocPhan() {
         });
     }, []);
     useEffect(() => {
-        const articleRef = collection(db, 'OCIT_HOCPHAN');
+        const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
         const q = query(articleRef, orderBy('date', 'desc'));
         onSnapshot(q, (snapshot) => {
             const HP = snapshot.docs.map((doc) => ({
@@ -50,11 +50,24 @@ function Data_HocPhan() {
     const array = arr?.filter((item) => {
         return item.view === true;
     });
+    const DataHP = articles?.filter((item) => {
+        return item.tag === filter;
+    });
     // console.log(articles);
     let str = arr[0]?.title ? arr[0]?.title : '';
     str = removeAccents(str);
     let title = str.replace(/\s/g, '');
 
+    function unique(arr) {
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i].tag) === -1) {
+                newArr.push(arr[i].tag);
+            }
+        }
+        return newArr;
+    }
+    console.log(unique(HP));
     const data = [{ MAHP: 'CT112' }, { MAHP: 'CT287' }, { MAHP: 'CT180' }, { MAHP: 'CT242' }];
     return (
         <div className="-mt-4">
@@ -65,12 +78,12 @@ function Data_HocPhan() {
                         py-6  scrollbar-none"
                 >
                     {HP &&
-                        HP.map((category, index) => (
+                        unique(HP).map((category, index) => (
                             <motion.div
                                 whileTap={{ scale: 0.8 }}
-                                onClick={() => setFilter(category.MaHP)}
+                                onClick={() => setFilter(category)}
                                 key={category?.id}
-                                className={`group  ${filter === category.MaHP ? 'bg-cardNumBg' : 'bg-card'}
+                                className={`group  ${filter === category ? 'bg-cardNumBg' : 'bg-card'}
                                     md:w-[130px]  md:h-28 w-16 h-18 p-2 md:m-2  cursor-pointer
                             rounded-lg drop-shadow-xl flex flex-col 
                             gap-3  items-center justify-center 
@@ -78,18 +91,18 @@ function Data_HocPhan() {
                             >
                                 <div
                                     className={`md:w-10 md:h-10 h-5 w-5 rounded-full  
-                                ${filter === category.MaHP ? 'bg-card' : 'bg-cardNumBg'}
+                                ${filter === category ? 'bg-card' : 'bg-cardNumBg'}
                                  group-hover:bg-card p-1
                                  flex items-center justify-center
                                  `}
                                 >
                                     <AiFillCode
                                         className={`${
-                                            filter === category.MaHP ? 'text-textColor' : 'text-white'
+                                            filter === category ? 'text-textColor' : 'text-white'
                                         } group-hover:text-textColor text-lg`}
                                     />
                                 </div>
-                                <p className=" text-sm text-textColor group-hover:text-card">{category?.MaHP}</p>
+                                <p className=" text-sm text-textColor group-hover:text-card">{category}</p>
                             </motion.div>
                         ))}
                 </div>

@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, db, auth } from '../../../firebase.config';
 import { useStateValue } from '../../../context/StateProvider';
+// import data from '../../../data/courses_IT';
+import data from '../../../data/courses';
 import Swal from 'sweetalert2';
 
 import {
@@ -20,13 +22,16 @@ function CreateData() {
     var today = new Date();
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const photo = user && user.photoURL ? user.photoURL : '';
-
     const [value, setValue] = React.useState('');
     const [otitle, setoTitle] = React.useState('');
     const [tag, setTag] = React.useState('');
     const [makeCode, setMakeCode] = useState(makeid(6));
     const [progress, setProgress] = useState(0);
     const [view, setView] = useState(true);
+    const courses = data.filter(function (item) {
+        return item.key === tag.toUpperCase();
+    });
+    // console.log(courses[0]?.name);
     // getAllOCIT_DATA_HOCPHAN();
     const [articles, setArticles] = useState([]);
     // console.log(articles);
@@ -111,7 +116,11 @@ function CreateData() {
         // setIsLoading(true);
         try {
             if (!otitle || !value || !tag) {
-                alert('thieu dư lieu');
+                Swal.fire(
+                    'Thiếu dữ liệu bạn ơi',
+                    'That thing is still around?',
+                    'question'
+                  )
             } else {
                 const data = {
                     makeCode: makeCode.split(' ').join('').toUpperCase(),
@@ -122,6 +131,7 @@ function CreateData() {
                     title: otitle,
                     view: view,
                     description: value,
+                    nametag:courses[0]?.name,
                     tag: tag.toUpperCase(),
                     createdBy: user.displayName,
                     PhoToCreater: user.photoURL,
@@ -141,6 +151,7 @@ function CreateData() {
 
     return (
         <div className="h-full w-full justify-center items-center">
+            <span className="">Tên Môn Học Phần: <span className='text-blue-500'>{courses[0]?.name}</span></span>
             <div className="my-2 flex justify-center items-center ">
                 <span onClick={(e) => setView(!view)} className="text-4xl p-1 mr-1 ">
                     {!view ? (
@@ -162,7 +173,7 @@ function CreateData() {
                 />
                 <input
                     type="text"
-                    className="h-10 w-full bg-primary border text-lg text-blue-400"
+                    className="h-10 w-full bg-primary border text-lg text-blue-400 uppercase"
                     placeholder="Tag"
                     value={tag}
                     onChange={(e) => setTag(e.target.value)}

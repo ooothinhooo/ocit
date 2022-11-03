@@ -18,8 +18,7 @@ export { default as Unfinished } from './Unfinished';
 export { default as HeaderContainer } from './Display/HeaderContainer';
 export { default as Footer } from './Display/Footer';
 export { default as Test } from './Display/Test';
-
-
+export { default as TableCourses } from './Display/TableCourses';
 
 //! children
 export { default as ToggleModal } from './children/ToggleModal';

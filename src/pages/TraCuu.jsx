@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import data from '../data/courses';
-import { AddArticle, Articles } from '../components';
+import { AddArticle, Articles, TableCourses } from '../components';
 
 export default function Test() {
     const [key, setKey] = useState('');
@@ -9,7 +9,9 @@ export default function Test() {
     const [HocKi, setHocKi] = useState('2');
     const [dbCmt, setDbCmt] = useState('');
     const [flag, setFlag] = useState(false);
+
     // const [courses, setCourses] = useState([]);
+
     const courses = data.filter(function (item) {
         return item.key === key.toUpperCase();
     });
@@ -18,7 +20,12 @@ export default function Test() {
     const weight = courses?.length > 0 ? courses[0]?.weight : '';
     const MaHP = courses?.length > 0 ? courses[0]?.key : '';
 
-    const COLDBCMT = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
+    function search() {
+        var curryear = year.split(/[\s-]+/)[0] + year.split(/[\s-]+/)[1];
+        var COLDBCMT = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
+        setFlag(!flag);
+        return curryear, COLDBCMT;
+    }
     return (
         <>
             <div className={`w-full h-full m-auto justify-center items-center `}>
@@ -127,7 +134,10 @@ export default function Test() {
                             onChange={(e) => setKey(e.target.value)}
                             className="md:w-[10%] w-[40%] bg-primary border text-blue-500 uppercase"
                         />
-                        <button class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400">
+                        <button
+                            onClick={search()}
+                            class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400"
+                        >
                             <span className="md:text-xl text-md">Tìm</span>
                         </button>
                     </div>
@@ -139,8 +149,9 @@ export default function Test() {
                     <p className="text-black text-md p-2 shadow-lg mx-2">Tín chỉ: {weight}</p>
                 </div>
                 <div className="h-full w-full ">
-                    {courses.length > 0 && MaHP ? (
+                    {courses.length > 0 && MaHP && HocKi && year && flag ? (
                         <>
+                            <TableCourses MaHP={MaHP.toLocaleUpperCase()} year={curryear} n={HocKi} />
                             <div className="mt-2">
                                 <AddArticle colDB={COLDBCMT} />
                                 <div className="h-full">

@@ -27,7 +27,7 @@ function HocPhan_OCIT() {
     const [articles, setArticles] = useState([]);
     useEffect(() => {
         const articleRef = collection(db, colDB);
-        const q = query(articleRef, orderBy('date', 'desc'));
+        const q = query(articleRef, orderBy('tag', 'desc'));
         onSnapshot(q, (snapshot) => {
             const articles = snapshot.docs.map((doc) => ({
                 id: doc.id,
