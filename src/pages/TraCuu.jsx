@@ -19,12 +19,15 @@ export default function Test() {
     const name = courses?.length > 0 ? courses[0]?.name : '';
     const weight = courses?.length > 0 ? courses[0]?.weight : '';
     const MaHP = courses?.length > 0 ? courses[0]?.key : '';
-
-    function search() {
-        var curryear = year.split(/[\s-]+/)[0] + year.split(/[\s-]+/)[1];
-        var COLDBCMT = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
-        setFlag(!flag);
-        return curryear, COLDBCMT;
+    var curryear = year.split(/[\s-]+/)[0] + year.split(/[\s-]+/)[1];
+    var COLDBCMT = `CMT_[${MaHP}]_[${HocKi}]_[${year}]`;
+    function funsetYear(e) {
+        setYear(e.target.value);
+        setKey('');
+    }
+    function funsetHocKi(e) {
+        setHocKi(e.target.value);
+        setKey('');
     }
     return (
         <>
@@ -71,7 +74,7 @@ export default function Test() {
                                     </g>
                                 </svg>
                                 <select
-                                    onChange={(e) => setHocKi(e.target.value)}
+                                    onChange={(e) => funsetHocKi(e)}
                                     class="md:text-xl text-md font-bold rounded border-2 border-purple-700 text-gray-100 md:h-12 md:w-60 h-10 w-[100px] md:pl-5 md:pr-10 pr-5  bg-primary hover:border-gray-400 focus:outline-none appearance-none"
                                 >
                                     <option>2</option>
@@ -115,7 +118,7 @@ export default function Test() {
                                     </g>
                                 </svg>
                                 <select
-                                    onChange={(e) => setYear(e.target.value)}
+                                    onChange={(e) => funsetYear}
                                     class="md:text-xl text-md font-bold rounded border-2 border-purple-700 text-gray-100 md:h-12 md:w-60 h-10 w-[150px] md:pl-5 md:pr-10 pr-5  bg-primary hover:border-gray-400 focus:outline-none appearance-none"
                                 >
                                     <option>{year}</option>
@@ -131,13 +134,11 @@ export default function Test() {
                             type="text"
                             name="key"
                             maxlength="6"
+                            value={key}
                             onChange={(e) => setKey(e.target.value)}
                             className="md:w-[10%] w-[40%] bg-primary border text-blue-500 uppercase"
                         />
-                        <button
-                            onClick={search()}
-                            class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400"
-                        >
+                        <button class="w-fit h-full border p-2 mx-2 rounded-lg hover:border-blue-400 hover:bg-cardOverlay  hover:text-blue-400">
                             <span className="md:text-xl text-md">Tìm</span>
                         </button>
                     </div>
@@ -149,7 +150,7 @@ export default function Test() {
                     <p className="text-black text-md p-2 shadow-lg mx-2">Tín chỉ: {weight}</p>
                 </div>
                 <div className="h-full w-full ">
-                    {courses.length > 0 && MaHP && HocKi && year && flag ? (
+                    {courses.length > 0 && MaHP && HocKi && year ? (
                         <>
                             <TableCourses MaHP={MaHP.toLocaleUpperCase()} year={curryear} n={HocKi} />
                             <div className="mt-2">
