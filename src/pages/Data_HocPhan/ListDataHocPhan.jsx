@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function ListDataHocPhan({ arr, filter, title }) {
+    // console.log(arr);
     return (
         <AnimatePresence exitBeforeEnter>
             <div className=" py-4 rounded-xl   my-2 md:grid md:gap-x-8 md:gap-y-4 md:grid-cols-3 justify-center items-center">
@@ -13,11 +14,11 @@ function ListDataHocPhan({ arr, filter, title }) {
                                 <motion.div
                                     initial={{ scale: 0 }}
                                     animate={{ rotate: 360, scale: 1 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 180,
-                                        damping: 30,
-                                    }}
+                                    // transition={{
+                                    //     type: 'spring',
+                                    //     stiffness: 180,
+                                    //     damping: 30,
+                                    // }}
                                     whileHover={{ scale: 1.1, rotate: 360 }}
                                     class="w-full h-auto relative my-2"
                                 >
@@ -33,7 +34,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                             </div>
                                             <div class="flex items-center rounded-lg px-1 py-1 cursor-pointer">
                                                 <div class="relative flex flex-shrink-0 items-end">
-                                                    <img class="h-12 w-12 rounded-full" src={item?.PhoToCreater} />
+                                                    <img class="h-12 w-12 rounded-full" src={item?.createrPhotoURL} />
                                                     <span class="absolute h-[10px] w-[10px] bg-green-400 rounded-full bottom-0 right-0 border-2 border-white"></span>
                                                 </div>
                                                 <div class="ml-3">
@@ -41,7 +42,7 @@ function ListDataHocPhan({ arr, filter, title }) {
                                                         Người đăng Tải:{' '}
                                                     </span>
                                                     <span class="font-semibold tracking-tight text-xs">
-                                                        {item?.createdBy}
+                                                        {item?.createrName}
                                                     </span>
                                                     <p class="text-xs leading-4 pt-2 italic opacity-70">
                                                         {item?.description.substring(0, 100)}

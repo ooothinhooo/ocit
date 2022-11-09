@@ -5,6 +5,7 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useStateValue } from '../context/StateProvider';
 
 import { HomeContainer, RowContainer, MenuContainer, CartContainer, Footer, Banner, BannerHome } from '../components';
+import BannerLuanVan from '../components/BannerLuanVan';
 
 function HomePage() {
     const [{ OCIT, cartShow, user }, dispatch] = useStateValue();
@@ -19,6 +20,9 @@ function HomePage() {
                 <BannerHome />
             </div>
             <HomeContainer />
+            <div className="w-full my-6">
+                <BannerLuanVan />
+            </div>
             <div className="w-full my-6">
                 <Banner
                     ImagePhoto={

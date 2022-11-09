@@ -17,7 +17,7 @@ import {
     removeAccents,
     makeid,
 } from '../../../utils/firebaseFunctions';
-const colDB = 'OCIT_DATA_HOCPHAN';
+const colDB = 'OCIT_Term';
 function CreateData() {
     var today = new Date();
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
@@ -25,9 +25,9 @@ function CreateData() {
     const [value, setValue] = React.useState('');
     const [otitle, setoTitle] = React.useState('');
     const [tag, setTag] = React.useState('');
-    const [makeCode, setMakeCode] = useState(makeid(6));
+    const [makeCode, setMakeCode] = useState(makeid(10));
     const [progress, setProgress] = useState(0);
-    const [view, setView] = useState(true);
+    const [viewprivate, setPrivate] = useState(true);
     const courses = data.filter(function (item) {
         return item.key === tag.toUpperCase();
     });
@@ -56,9 +56,8 @@ function CreateData() {
         createdAt: Timestamp.now().toDate(),
     });
     const handlePublish = () => {
-        console.log(otitle);
-        if (!value || !otitle) {
-            alert('Please fill all the fields');
+        if (!otitle || !value || !tag || !courses[0]?.name) {
+            Swal.fire('Thiếu dữ liệu bạn ơi', 'That thing is still around?', 'question');
             return;
         }
 
@@ -83,23 +82,50 @@ function CreateData() {
                     const articleRef = collection(db, colDB);
 
                     addDoc(articleRef, {
-                        // title: formData.title,
-                        userPhotoURL: user.photoURL,
-                        tag: tag,
+                        id: makeCode.split(' ').join(''),
                         description: value,
-                        title: otitle,
-                        imageUrl: url,
-                        createdBy: user.displayName,
-                        userId: user.uid,
-                        render: false,
                         date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
-                        // likes: [],
-                        // dislikes: [],
-                        // comments: [],
+                        title: otitle,
+                        tag: tag.toUpperCase(),
+                        nametag: courses[0]?.name,
+                        private: viewprivate,
+                        view: [],
+                        image: [],
+                        like: [],
+                        // id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                        //     .split(' ')
+                        //     .join('')
+                        //     .toUpperCase()}${user.uid}`,
+                        createrID: user.uid,
+                        createrName: user.displayName,
+                        createrPhotoURL: user.photoURL,
+                        createrEmail: user.email,
                     })
                         .then((articleRef) => {
-                            console.log(articleRef.id);
-                            alert('Article added successfully');
+                            let timerInterval;
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Entire Document has been Upload successfully.',
+                                html: 'I will close in <b></b> milliseconds.',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                    const b = Swal.getHtmlContainer().querySelector('b');
+                                    timerInterval = setInterval(() => {
+                                        b.textContent = Swal.getTimerLeft();
+                                    }, 100);
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval);
+                                },
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    window.location = '/data/hocphan';
+                                }
+                            });
                             setValue('');
                             setoTitle('');
                             setProgress(0);
@@ -115,32 +141,32 @@ function CreateData() {
     const saveDetails = () => {
         // setIsLoading(true);
         try {
-            if (!otitle || !value || !tag) {
-                Swal.fire(
-                    'Thiếu dữ liệu bạn ơi',
-                    'That thing is still around?',
-                    'question'
-                  )
+            if (!otitle || !value || !tag || !courses[0]?.name) {
+                Swal.fire('Thiếu dữ liệu bạn ơi', 'That thing is still around?', 'question');
             } else {
                 const data = {
-                    makeCode: makeCode.split(' ').join('').toUpperCase(),
-                    id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
-                        .split(' ')
-                        .join('')
-                        .toUpperCase()}${user.uid}`,
-                    title: otitle,
-                    view: view,
+                    id: makeCode.split(' ').join(''),
                     description: value,
-                    nametag:courses[0]?.name,
+                    date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                    title: otitle,
                     tag: tag.toUpperCase(),
-                    createdBy: user.displayName,
-                    PhoToCreater: user.photoURL,
+                    nametag: courses[0]?.name,
+                    private: viewprivate,
+                    view: [],
+                    image: [],
+                    like: [],
+                    // id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                    //     .split(' ')
+                    //     .join('')
+                    //     .toUpperCase()}${user.uid}`,
                     createrID: user.uid,
-                    date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
-                    path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
-                        .split(' ')
-                        .join('')
-                        .toUpperCase()}${user.uid}`,
+                    createrName: user.displayName,
+                    createrPhotoURL: user.photoURL,
+                    createrEmail: user.email,
+                    // path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                    //     .split(' ')
+                    //     .join('')
+                    //     .toUpperCase()}${user.uid}`,
                 };
                 Upload_OCIT_DATA_HOCPHAN(data);
             }
@@ -151,10 +177,12 @@ function CreateData() {
 
     return (
         <div className="h-full w-full justify-center items-center">
-            <span className="">Tên Môn Học Phần: <span className='text-blue-500'>{courses[0]?.name}</span></span>
+            <span className="">
+                Tên Môn Học Phần: <span className="text-blue-500">{courses[0]?.name}</span>
+            </span>
             <div className="my-2 flex justify-center items-center ">
-                <span onClick={(e) => setView(!view)} className="text-4xl p-1 mr-1 ">
-                    {!view ? (
+                <span onClick={(e) => setPrivate(!viewprivate)} className="text-4xl p-1 mr-1 ">
+                    {!viewprivate ? (
                         <>
                             <FaLock className="text-blue-700" />
                         </>

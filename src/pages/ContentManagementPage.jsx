@@ -50,7 +50,9 @@ function ContentManagementPage() {
     });
 
     useEffect(() => {
-        const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
+        // const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
+        const articleRef = collection(db, 'OCIT_Term');
+
         const q = query(articleRef, orderBy('date', 'desc'));
         onSnapshot(q, (snapshot) => {
             const articles = snapshot.docs.map((doc) => ({
@@ -140,13 +142,13 @@ function ContentManagementPage() {
                     {blogdb.map((item) => {
                         return (
                             <div className="block justify-start items-start w-full  my-1">
-                                <div class="flex flex-col justify-start ">
+                                <div class="md:flex md:flex-col justify-start ">
                                     <div
-                                        class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-2 
+                                        class="relative md:flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-2 
                                         border border-white bg-white"
                                     >
-                                        <div class="w-full bg-white flex flex-col space-y-2 ">
-                                            <div class="flex justify-between item-center">
+                                        <div class="w-full bg-white block md:flex md:flex-col space-y-2 ">
+                                            <div class="md:flex md:justify-between justify-center item-center">
                                                 {/* <p class="text-gray-500 font-medium block">{item?.createdBy}</p> */}
                                                 <h3 class="font-black text-gray-800 md:text-xl text-xl">
                                                     {item.title.substring(0, 70) + '...'}
@@ -208,9 +210,9 @@ function ContentManagementPage() {
                                 <div class="flex  items-start justify-center px-6 py-8 w-full">
                                     <div id="popover" class="transition duration-150 ease-in-out  w-full">
                                         <div class="w-full bg-white rounded shadow-2xl">
-                                            <div class="w-full h-full px-4 xl:px-8 pt-3 pb-5">
-                                                <div class="flex justify-between items-center">
-                                                    <div class="flex items-center justify-center">
+                                            <div class="w-full h-full px-4 xl:px-8 md:pt-3 md:pb-5 py-2">
+                                                <div class="md:flex justify-between items-center">
+                                                    <div class="flex items-center justify-start">
                                                         <div>
                                                             <h3 class="mb-2 sm:mb-1 text-gray-800 text-base font-normal leading-4">
                                                                 {item.title.substring(0, 50) + '...'}
@@ -223,7 +225,7 @@ function ContentManagementPage() {
                                                             onClick={(e) =>
                                                                 handleView(item.view, item.id, 'OCIT_DATA_HOCPHAN')
                                                             }
-                                                            className="text-4xl p-1 mr-1 "
+                                                            className="md:text-4xl text-2xl p-1 mr-1 "
                                                         >
                                                             {!item?.view ? (
                                                                 <>
@@ -241,19 +243,17 @@ function ContentManagementPage() {
                                                             )}/${item.id}`}
                                                         >
                                                             <span className="border rounded-lg bg-indigo-400 text-white px-2 mx-2 shadow-xl">
-                                                                Can view
+                                                                view
                                                             </span>
                                                         </Link>
-                                                        <Link
-                                                            to={`/data/markdown/hocphan/update/${item.id}/${item?.makeCode}`}
-                                                        >
+                                                        <Link to={`/data/markdown/hocphan/update/${item.id}`}>
                                                             <span className="border rounded-lg bg-indigo-600 text-white px-2 mx-2 shadow-xl">
                                                                 Update
                                                             </span>
                                                         </Link>
                                                         <span
                                                             className="border rounded-lg bg-indigo-900 text-white px-2 mx-2 shadow-xl cursor-pointer hover:bg-green-600"
-                                                            onClick={(e) => deleteFunc('OCIT_DATA_HOCPHAN', item.id)}
+                                                            onClick={(e) => deleteFunc('OCIT_Term', item.id)}
                                                             // onClick={(e) => handleDelete('OCIT_DATA_HOCPHAN', item.id)}
                                                         >
                                                             <span>Delete</span>

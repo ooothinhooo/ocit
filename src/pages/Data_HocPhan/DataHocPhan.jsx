@@ -15,12 +15,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChildrenMenu, AccordionContainer, AddArticle, Articles, Task, ToggleModal } from '../../components';
 import ListDataHocPhan from './ListDataHocPhan';
 
-const colDB = 'OCIT_DATA_HOCPHAN';
+// const colDB = 'OCIT_DATA_HOCPHAN';
+const colDB = 'OCIT_Term';
+
 function Data_HocPhan() {
     const [articles, setArticles] = useState([]);
     const [HP, setHP] = useState([]);
-    const [filter, setFilter] = useState('CT112');
-    // console.log(articles);
+    const [filter, setFilter] = useState();
+    // console.log(unique(HP)[0]);
     // const [user] = useAuthState(auth);
     useEffect(() => {
         const articleRef = collection(db, colDB);
@@ -34,7 +36,7 @@ function Data_HocPhan() {
         });
     }, []);
     useEffect(() => {
-        const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
+        const articleRef = collection(db, colDB);
         const q = query(articleRef, orderBy('date', 'desc'));
         onSnapshot(q, (snapshot) => {
             const HP = snapshot.docs.map((doc) => ({
@@ -48,7 +50,7 @@ function Data_HocPhan() {
         return item.tag === filter;
     });
     const array = arr?.filter((item) => {
-        return item.view === true;
+        return item.private === true;
     });
     const DataHP = articles?.filter((item) => {
         return item.tag === filter;
@@ -67,8 +69,9 @@ function Data_HocPhan() {
         }
         return newArr;
     }
-    console.log(unique(HP));
-    const data = [{ MAHP: 'CT112' }, { MAHP: 'CT287' }, { MAHP: 'CT180' }, { MAHP: 'CT242' }];
+    // console.log(unique(HP)[0]);
+
+    // const data = [{ MAHP: 'CT112' }, { MAHP: 'CT287' }, { MAHP: 'CT180' }, { MAHP: 'CT242' }];
     return (
         <div className="-mt-4">
             {/* <Unfinished data="CT449 - Phát Triển Ứng Dụng Web" /> */}

@@ -10,18 +10,23 @@ import { useStateValue } from '../../../context/StateProvider';
 import { useParams } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {updateItem_OCIT_DATA_HOCPHAN, removeAccents, makeid} from '../../../utils/firebaseFunctions' 
-const colDB = 'OCIT_DATA_HOCPHAN';
+import data from '../../../data/courses';
+
+const colDB = 'OCIT_Term';
 function UpdateData() {
     var today = new Date();
     let { id } = useParams();
-    let { makeCode }  = useParams();
-    console.log(id);
-    console.log(makeCode);
 
     const [{ user, OCIT_HOCPHAN, OCIT, OCIT_ORDER }, dispatch] = useStateValue();
     const photo = user && user.photoURL ? user.photoURL : '';
 
+    const [value, setValue] = React.useState('');
+    const [otitle, setoTitle] = React.useState('');
+    const [tag, setTag] = React.useState('');
+    const [progress, setProgress] = useState(0);
     const [articles, setArticles] = useState([]);
+    const [viewprivate, setPrivate] = useState(true);
+
     // console.log(articles);
     // const [user] = useAuthState(auth);
     useEffect(() => {
@@ -35,40 +40,41 @@ function UpdateData() {
             setArticles(articles);
         });
     }, []);
-
+    console.log(articles);
     const code = articles.filter((item) => {
-        return item.makeCode === makeCode;
+        return item.id === id;
     });
     console.log(code[0]);
-
+    const courses = data.filter(function (item) {
+        return item.key === tag;
+    });
     const [formData, setFormData] = useState({
         title: code[0]?.title,
         description: '' + code[0]?.description,
         tag: 'tag',
     });
-    const [value, setValue] = React.useState('');
-    const [otitle, setoTitle] = React.useState('');
-    const [tag, setTag] = React.useState('');
-    const [progress, setProgress] = useState(0);
+
     const saveDetails = (index) => {
         try {
             const data = {
-                makeCode: makeCode.split(' ').join('').toUpperCase(),
-                id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
-                    .split(' ')
-                    .join('')
-                    .toUpperCase()}`,
-                title: otitle,
+                id: id,
                 description: value,
+                date: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear(),
+                title: otitle,
                 tag: tag.toUpperCase(),
-                createdBy: user.displayName,
-                PhoToCreater: photo,
+                nametag: courses[0]?.name,
+                private: viewprivate,
+                view: [],
+                image: [],
+                like: [],
+                // id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+                //     .split(' ')
+                //     .join('')
+                //     .toUpperCase()}${user.uid}`,
                 createrID: user.uid,
-                date: today.getDate() + '' + (today.getMonth() + 1) + '' + today.getFullYear(),
-                path: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
-                    .split(' ')
-                    .join('')
-                    .toUpperCase()}${user.uid}`,
+                createrName: user.displayName,
+                createrPhotoURL: user.photoURL,
+                createrEmail: user.email,
             };
             // updateItem(subPath, data);
             updateItem_OCIT_DATA_HOCPHAN(id, data);
@@ -95,6 +101,9 @@ function UpdateData() {
     };
     return (
         <div className="h-full w-full justify-center items-center">
+            <span className="">
+                Tên Môn Học Phần: <span className="text-blue-500">{courses[0]?.name}</span>
+            </span>
             <div className="my-2 flex justify-center items-center ">
                 <button
                     className="md:w-14 h-14 rounded-lg justify-center items-center  mr-2

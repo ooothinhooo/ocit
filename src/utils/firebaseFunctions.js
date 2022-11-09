@@ -281,9 +281,12 @@ export const deleteItem_Order = async (index) => {
 // };
 //TODO saving new items
 export const Upload_OCIT_DATA_HOCPHAN = async (data) => {
-    await setDoc(doc(firestore, 'OCIT_DATA_HOCPHAN', `${data.path.split(' ').join('').toUpperCase()}`), data, {
+    await setDoc(doc(firestore, 'OCIT_Term', `${data.id}`), data, {
         merge: true,
     });
+    // await setDoc(doc(firestore, 'OCIT_DATA_HOCPHAN', `${data.id}`), data, {
+    //     merge: true,
+    // });
     // Swal.fire({
     //     position: 'center',
     //     icon: 'success',
@@ -349,22 +352,31 @@ export const updateItem_OCIT_DATA_HOCPHAN = async (oid, updates) => {
     // const doc = await firestore.collection('OCIT').doc('CT240-sach-9999-1mVAA').get();
     const db = getFirestore();
     console.log(oid);
-    const docRef = doc(db, 'OCIT_DATA_HOCPHAN', oid);
+    // const docRef = doc(db, 'OCIT_DATA_HOCPHAN', oid);
+    const docRef = doc(db, 'OCIT_Term', oid);
 
-    const data = {
-        id: oid,
-        makeCode: updates.makeCode,
-        title: updates.title,
-        description: updates.description,
-        tag: updates.tag.toUpperCase(),
-        createdBy: updates.createdBy,
-        PhoToCreater: updates.PhoToCreater,
-        createrID: updates.createrID,
-        date: updates.date,
-        path: updates.path,
-    };
+    // const data = {
+    //     id: oid,
+    //     description: updates.description,
+    //     date: updates.date,
+    //     title: updates.title,
+    //     tag: updates.tag.toUpperCase(),
+    //     nametag: updates.nametag,
+    //     private: viewprivate,
+    //     view: [],
+    //     image: [],
+    //     like: [],
+    //     // id: `${tag.toUpperCase()}${removeAccents(otitle).split(' ').join('').toUpperCase()}${makeCode
+    //     //     .split(' ')
+    //     //     .join('')
+    //     //     .toUpperCase()}${user.uid}`,
+    //     createrID: updates.createrID,
+    //     createrName: updates.createrName,
+    //     createrPhotoURL: updates.createrPhotoURL,
+    //     createrEmail: updates.createrEmail,
+    // };
 
-    setDoc(docRef, data)
+    setDoc(docRef, updates)
         .then((docRef) => {
             Swal.fire({
                 position: 'center',

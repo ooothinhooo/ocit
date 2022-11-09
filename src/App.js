@@ -94,10 +94,7 @@ function App() {
                                             <Route path="/viewproduct" element={<ViewProductsList />} />
                                             <Route path="/update/:uid" element={<UpdateProduct />} />
                                             <Route path="/data/markdown/hocphan/create" element={<CreateData />} />
-                                            <Route
-                                                path="/data/markdown/hocphan/update/:id/:makeCode"
-                                                element={<UpdateData />}
-                                            />
+                                            <Route path="/data/markdown/hocphan/update/:id" element={<UpdateData />} />
 
                                             {/* <Route path="/admin" element={<Admin />} /> */}
                                         </>

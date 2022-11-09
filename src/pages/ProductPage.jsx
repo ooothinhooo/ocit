@@ -7,7 +7,7 @@ import { useStateValue } from '../context/StateProvider';
 function ProductPage() {
     const [{ OCIT, cartShow }, dispatch] = useStateValue();
     useEffect(() => {}, [cartShow]);
-
+    // console.log(OCIT);
     return (
         <>
             <MenuContainer />

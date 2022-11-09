@@ -29,6 +29,7 @@ function UserProfile() {
             setArticlesBlog(articles);
         });
     }, []);
+    // console.log(articlesBlog);
     const blogdb = articlesBlog.filter((item) => {
         return item.createrID === id;
     });
@@ -44,6 +45,7 @@ function UserProfile() {
             setArticlesOrder(articles);
         });
     }, []);
+    // console.log(articlesOrder);
     const Orderdb = articlesOrder.filter((item) => {
         return item.google_id === id;
     });
@@ -59,6 +61,7 @@ function UserProfile() {
             setArticlesDataHocPhan(articles);
         });
     }, []);
+    // console.log(articlesDataHocPhan);
     const DataHocPhandb = articlesDataHocPhan.filter((item) => {
         return item.createrID === id;
     });
