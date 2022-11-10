@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { collection, onSnapshot, orderBy, query,arrayRemove, arrayUnion, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import {
+    collection,
+    onSnapshot,
+    orderBy,
+    query,
+    arrayRemove,
+    arrayUnion,
+    doc,
+    updateDoc,
+    deleteDoc,
+    where,
+} from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { auth, db, storage } from '../firebase.config';
 import { toast } from 'react-toastify';
@@ -16,6 +27,9 @@ import { title } from '@uiw/react-md-editor';
 
 function ContentManagementPage() {
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+    const [filterTag, setfilterTag] = useState('');
+    const [filterDate, setfilterDate] = useState('');
+
     const [articlesBlog, setArticlesBlog] = useState([]);
     const [articlesOrder, setArticlesOrder] = useState([]);
     const [articlesDataHocPhan, setArticlesDataHocPhan] = useState([]);
@@ -52,7 +66,8 @@ function ContentManagementPage() {
     useEffect(() => {
         // const articleRef = collection(db, 'OCIT_DATA_HOCPHAN');
         const articleRef = collection(db, 'OCIT_Term');
-
+        // .collection("OCIT_Term")
+        // .where("date", "==", "9/11/2022")
         const q = query(articleRef, orderBy('date', 'desc'));
         onSnapshot(q, (snapshot) => {
             const articles = snapshot.docs.map((doc) => ({
@@ -129,6 +144,25 @@ function ContentManagementPage() {
             }
         }
     };
+
+    function unique(arr) {
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i].tag) === -1) {
+                newArr.push(arr[i].tag);
+            }
+        }
+        return newArr;
+    }
+    // const filterDataHocPhandb []
+    if (filterTag === '') {
+        var filterDataHocPhandb = DataHocPhandb.filter((item) => item.tag);
+    } else {
+        var filterDataHocPhandb = DataHocPhandb.filter((item) => item.tag == filterTag);
+    }
+
+    // console.log(result);
+    // console.log(filterDataHocPhandb);
     return (
         <AnimatePresence>
             <motion.div
@@ -203,8 +237,34 @@ function ContentManagementPage() {
                 </div>
                 <div className="w-full h-[2px] bg-slate-500 "></div>
                 <h2 className="md:text-3xl text-xl text-red-500 my-2 mb-10">Các Bài Học Bạn Đã Thêm</h2>
-                <div className=" ">
-                    {DataHocPhandb.map((item) => {
+                <div className="my-14 h-10 w-full ">
+                    <div className="flex justify-start items-center">
+                        <span class="flex mx-2 justify-start text-blue-500 items-center">
+                            <label for="date" class="  text-base font-medium text-blue-500 mx-2">
+                                Lọc theo môn
+                            </label>
+                            <select className=" rounded" onChange={(e) => setfilterTag(e.target.value)}>
+                                <option value="">ALL</option>
+                                {unique(DataHocPhandb).map((option) => (
+                                    <option value={option}>{option}</option>
+                                ))}
+                            </select>
+                        </span>
+                        <span class="flex mx-2 justify-end text-blue-500 items-center">
+                            <label for="date" class="  text-base font-medium text-blue-500 mx-2">
+                                Date
+                            </label>
+                            <input
+                                type="date"
+                                name="date"
+                                id="date"
+                                // class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            />
+                        </span>
+                    </div>
+                </div>
+                <div className="mt-10">
+                    {filterDataHocPhandb?.map((item) => {
                         return (
                             <div className="-mt-14">
                                 <div class="flex  items-start justify-center px-6 py-8 w-full">
@@ -217,15 +277,20 @@ function ContentManagementPage() {
                                                             <h3 class="mb-2 sm:mb-1 text-gray-800 text-base font-normal leading-4">
                                                                 {item.title.substring(0, 50) + '...'}
                                                             </h3>
-                                                            <p class="text-gray-600 text-xs leading-3"> {item.tag}</p>
+                                                            <span class="text-gray-600 text-xs leading-3">
+                                                                {' '}
+                                                                {item.tag}
+                                                            </span>
+                                                            <span class="text-gray-600 text-xs leading-3">
+                                                                {' '}
+                                                                {item.nametag}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="relative font-normal text-xs sm:text-sm flex items-center text-gray-600">
                                                         <span
-                                                            onClick={(e) =>
-                                                                handleView(item.view, item.id, 'OCIT_DATA_HOCPHAN')
-                                                            }
-                                                            className="md:text-4xl text-2xl p-1 mr-1 "
+                                                            onClick={(e) => handleView(item.view, item.id, 'OCIT_Term')}
+                                                            className="md:text-4xl text-2xl p-1 mr-1 cursor-pointer "
                                                         >
                                                             {!item?.view ? (
                                                                 <>

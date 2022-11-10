@@ -435,7 +435,11 @@ function HeaderContainer() {
                                     to="/"
                                     className="text-md text-gray-100 block py-2 pr-4 pl-3 md:p-0  font-bold  bg-blue-700 rounded md:bg-transparent  "
                                 >
-                                    <a href="#" class="text-gray-900 active md:text-blue-700" aria-current="page">
+                                    <a
+                                        href="#"
+                                        class="text-gray-900 active md:text-blue-700 md:hover:text-red-700"
+                                        aria-current="page"
+                                    >
                                         Home
                                     </a>
                                 </Link>
@@ -445,7 +449,7 @@ function HeaderContainer() {
                                     to="/collections"
                                     className="text-md text-gray-100 block py-1 pr-2 pl-2  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700  md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    <a href="#" class=" md:text-blue-700">
+                                    <a href="#" class=" md:text-blue-700 md:hover:text-red-700">
                                         Sản Phẩm
                                     </a>
                                 </Link>
@@ -453,10 +457,10 @@ function HeaderContainer() {
                             <li>
                                 <Link
                                     to="/data/hocphan"
-                                    className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="text-md text-gray-100 block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    <a href="#" class=" md:text-blue-700">
-                                        Học Phần
+                                    <a href="#" class=" md:text-blue-700 md:hover:text-red-700">
+                                        Tài Liệu
                                     </a>
                                 </Link>
                             </li>
@@ -475,8 +479,8 @@ function HeaderContainer() {
                                     to="/tracuu"
                                     className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    <a href="#" class=" md:text-blue-700">
-                                        Tra Cứu
+                                    <a href="#" class=" md:text-blue-700 md:hover:text-red-700">
+                                        Chat
                                     </a>
                                 </Link>
                             </li>
@@ -485,7 +489,7 @@ function HeaderContainer() {
                                     to="/blog"
                                     className="block py-2 pr-4 pl-3 text-md text-gray-100 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
-                                    <a href="#" class=" md:text-blue-700">
+                                    <a href="#" class=" md:text-blue-700 md:hover:text-red-700">
                                         Blog
                                     </a>
                                 </Link>
